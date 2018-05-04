@@ -1,18 +1,18 @@
 package exam.ps;
 
 public class Parent {
-    String firstName;
-    String lastName;
-    String address;
-    String telefonNumber;
-    int id;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String telephoneNumber;
+    private int id;
 
     public Parent(int id, String firstName, String lastName, String address, String telefonNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.telefonNumber = telefonNumber;
+        this.telephoneNumber = telefonNumber;
 
     }
 
@@ -28,9 +28,9 @@ public class Parent {
 
     public void setAddress(String address) { address = address; }
 
-    public String getTelefoneNumber() { return telefonNumber; }
+    public String getTelefoneNumber() { return telephoneNumber; }
 
-    public void setTelefoneNumber(String telefoneNumber) { this.telefonNumber = telefoneNumber; }
+    public void setTelefoneNumber(String telefoneNumber) { this.telephoneNumber = telefoneNumber; }
 
     public int getId() { return id; }
 
