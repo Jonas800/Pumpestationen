@@ -16,43 +16,23 @@ public class Parent {
 
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() { return firstName; }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    public String getLastName() { return lastName; }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public String getAddress() {
-        return address;
-    }
+    public String getAddress() { return address; }
 
-    public void setAddress(String address) {
-        address = address;
-    }
+    public void setAddress(String address) { address = address; }
 
-    public String getTelefoneNumber() {
-        return telefonNumber;
-    }
+    public String getTelefoneNumber() { return telefonNumber; }
 
-    public void setTelefoneNumber(String telefoneNumber) {
-        this.telefonNumber = telefoneNumber;
-    }
+    public void setTelefoneNumber(String telefoneNumber) { this.telefonNumber = telefoneNumber; }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 }
