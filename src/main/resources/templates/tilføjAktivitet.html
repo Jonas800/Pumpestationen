@@ -7,17 +7,17 @@
 </head>
 </head>
     <body>
-        <h1>Creating new activity</h1>
+        <h1>Du er nu igang med at oprette en ny aktivitet</h1>
         <form method="Post" th:action="@{/createActivity}">
-            <label>Name of Activity: </label>
+            <label>Navn på Aktivitet: </label>
             <input type="text" th:field="${Activity.name}" required="true"/>
-            <label>Description of Activity: </label>
+            <label>Beskrivelse af Aktivitet: </label>
             <input type="text" th:field="${Activity.description}" required="true"/>
-            <label>Date of Activity: </label>
+            <label>Dato på Aktivitet: </label>
             <input type="date" th:field="${Activity.date}" required="true"/>
-            <label>Start time of Activity: </label>
+            <label>Starttidspunkt på Aktivitet: </label>
             <input type="text" th:field="${Activity.startTime}" required="true"/>
-            <label>End time of Activity: </label>
+            <label>Sluttidspunkt på Aktivitet: </label>
             <input type="number" th:field="${Activity.endTime}" required="true"/>
             <input type="submit" value="Send">
         </form>

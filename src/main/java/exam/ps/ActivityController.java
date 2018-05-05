@@ -20,14 +20,14 @@ public class ActivityController {
     ArrayList<Activity> activitiesArray = getActivitiesArray();
     int activityID = 0;
 
-    @GetMapping("/createActivity")
+    @GetMapping("/tiløjAktivitet")
     public String createActivity(Model model) {
         model.addAttribute("Activity", new Activity());
 
-        return "createActivity";
+        return "tiløjAktivitet";
     }
 
-    @PostMapping("/createActivity")
+    @PostMapping("/tiløjAktivitet")
     public String createActivity(@ModelAttribute Activity activity) throws IOException {
         int id = activitiesArray.size() + 1;
 
@@ -35,10 +35,10 @@ public class ActivityController {
         activitiesArray.add(activity);
         saveToFile(activitiesArray);
 
-        return "redirect:/createActivity";
+        return "redirect:/visAktivitet";
     }
 
-    @GetMapping("/editActivity")
+    @GetMapping("/redigerAktivitet")
     public String editActivity(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
         if (model != null) {
             for (Activity activity : activitiesArray) {
@@ -47,10 +47,10 @@ public class ActivityController {
             }
         }
         activityID = id;
-        return "editActivity";
+        return "redigerAktivitet";
     }
 
-    @PostMapping("/editActivity")
+    @PostMapping("/redigerAktivitet")
     public String editActivity(@ModelAttribute Activity activity) throws FileNotFoundException {
         activitiesArray.get(activityID -1);
         activitiesArray.set(activityID-1,activity);
@@ -59,7 +59,7 @@ public class ActivityController {
         return "redirect:/";
     }
 
-    @GetMapping("/deleteActivity")
+    @GetMapping("/sletAktivitet")
     public String deleteActivity(@RequestParam(value = "id", defaultValue = "0") int id) throws FileNotFoundException {
         for (int i = 0; i < activitiesArray.size(); i++) {
             if (activitiesArray.get(i).getId() == id) {
@@ -67,18 +67,14 @@ public class ActivityController {
             }
         }
         saveToFile(activitiesArray);
-        return "redirect:/ShowActivities";
+        return "redirect:/visAktivitet";
     }
 
-    @GetMapping("/ShowActivities")
+    @GetMapping("/visAktivitet")
     public String ShowActivities(Model model) {
         for (int i = 0; i <activitiesArray.size() ; i++) {
-            if (i <= 30) {
-                model.addAttribute("activitiesArray", activitiesArray.subList(0, activitiesArray.size()));
-            } else
-                model.addAttribute("activitiesArray", activitiesArray.subList(0,30));
-        }
-        return"ShowActivities";
+
+        return"visAktivitet";
     }
 
 
