@@ -71,23 +71,14 @@ public class ActivityController {
     }
 
     @GetMapping("/visAktivitet")
-    public String ShowActivities(@RequestParam(value = "activityID", defaultValue = "1") int id, Model model) {
-        getActivitiesArray(activitiesArray);
-        if (model!=null){
-            model.addAttribute("Activity",activitiesArray.get(id-1));
+    public String ShowActivities(Model model) {
+        for (int i = 0; i <activitiesArray.size();i++) {
+            if (i <= 30) {
+                model.addAttribute("activitiesArray", activitiesArray.subList(0, activitiesArray.size()));
+            } else
+                model.addAttribute("activitiesArray", activitiesArray.subList(0,30));
         }
-        activityID=id;
         return "visAktivitet";
-    }
-
-
-    @PostMapping("/visAktivitet")
-    public String ShowActivities(@ModelAttribute Activity activity) throws FileNotFoundException{
-        activity.setId(activityID);
-        activitiesArray.set(activityID-1,activity);
-        saveToFile(activitiesArray);
-
-        return "redirect";
     }
 
     public ArrayList<Activity> getActivitiesArray() {
