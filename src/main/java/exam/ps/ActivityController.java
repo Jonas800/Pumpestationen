@@ -71,14 +71,26 @@ public class ActivityController {
     }
 
     @GetMapping("/visAktivitet")
-    public String ShowActivities(Model model) {
-        for (int i = 0; i <activitiesArray.size() ; i++) {
-
-        return"visAktivitet";
+    public String ShowActivities(@RequestParam(value = "activityID", defaultValue = "1") int id, Model model) {
+        getActivitiesArray(activitiesArray);
+        if (model!=null){
+            model.addAttribute("Activity",activitiesArray.get(id-1));
+        }
+        activityID=id;
+        return "visAktivitet";
     }
 
 
-    public ArrayList<Activity> getActivitiesArray() {
+    @PostMapping("/visAktivitet")
+    public String ShowActivities(@ModelAttribute Activity activity) throws FileNotFoundException{
+        activity.setId(activityID);
+        activitiesArray.set(activityID-1,activity);
+        saveToFile(activitiesArray);
+
+        return "redirect";
+    }
+
+    public ArrayList<Activity> getActivitiesArray(ArrayList<Activity> activitiesArray) {
         ArrayList<Activity> activitiesArraylist = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(new File("src/main/resources/Activity.txt"));
