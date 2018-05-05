@@ -56,6 +56,19 @@ public class MemberController {
 
         return "deleteMember";
     }
+    @GetMapping("showMember")
+    public String showMember(Model model){
+
+        return "showMember";
+    }
+
+    @PostMapping("showMember")
+    public String showMember(@ModelAttribute Member member){
+        for (int i = 0; i <memberArray.size() ; i++) {
+
+        }
 
 
+        return "showMember";
+    }
 }
