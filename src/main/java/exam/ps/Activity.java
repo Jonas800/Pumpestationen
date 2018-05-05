@@ -13,6 +13,9 @@ public class Activity {
     private double startTime;
     private double endTime;
 
+    public Activity() {
+    }
+
     public Activity(int id, String name, String description, Date date, double startTime, double endTime) {
         this.id = id;
         this.name = name;
