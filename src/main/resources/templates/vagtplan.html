@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!--<div class="calendarNavigation">
+    <a th:each="weekNavigation, iterStat:${weekNavigation}"
+       th:href="@{/vagtplan/(year=${weekNavigation.year},weekNumber=${weekNavigation.weekNumber})}"
+       th:text="${iterStat.index} > 0 ? 'Næste' : 'Forrige'"></a>
+</div>-->
+<a th:href="@{/vagtplan/(year=${weekNavigation[0].year},weekNumber=${weekNavigation[0].weekNumber})}">Forrige</a>
+<div th:text="'Uge ' + ${currentWeek.weekNumber} + ' ' + ${currentWeek.year}"></div>
+<a th:href="@{/vagtplan/(year=${weekNavigation[1].year},weekNumber=${weekNavigation[1].weekNumber})}">Næste</a>
+
+<div class="day" th:each="weekDay : ${weekDays}">
+    <h4>dag</h4>
+    <div th:text="${weekDay.nameOfMonth}"></div>
+    <div th:text="${weekDay.dayOfWeek}"></div>
+    <div th:text="${weekDay.nameOfDay}"></div>
+    <div th:text="${weekDay.date.toString()}"></div>
+    <br></br>
+    <h4>Ansatte</h4>
+    <div th:each="eaj:${weekDay.getEmployeeAndJobs()}">
+        <div th:text="${eaj.name}"></div>
+        <div th:text="${eaj.date.toString()}"></div>
+
+    </div>
+</div>
+<!----<div th:text="${iterStat.index} > 0 ? '' : ${weekNavigation.year}"></div>--->
+
+</body>
+</html>

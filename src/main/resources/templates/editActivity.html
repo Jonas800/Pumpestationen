@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit Activity</title>
+</head>
+<body>
+    <h1>Edit Activity</h1>
+    <form method="post" th:action="@{/editActivity}">
+        <label>Name of Activity: </label>
+        <input type="text" th:field="${Activity.name}"/>
+        <label>Description of Activity: </label>
+        <input type="text" th:field="${Activity.description}"/>
+        <label>Date of Activity: </label>
+        <input type="date" th:field="${Activity.date}"/>
+        <label>Start time of Activity: </label>
+        <input type="text" th:field="${Activity.startTime}"/>
+        <label>End time of Activity: </label>
+        <input type="number" th:field="${Activity.endTime}"/>
+    </form>
+</body>
+</html>
+

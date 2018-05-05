@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title> Creating new activity</title>
+    <link rel="Stylesheet" type="text/css" href="Activity.css"/>
+</head>
+</head>
+    <body>
+        <h1>Creating new activity</h1>
+        <form method="Post" th:action="@{/createActivity}">
+            <label>Name of Activity: </label>
+            <input type="text" th:field="${Activity.name}" required="true"/>
+            <label>Description of Activity: </label>
+            <input type="text" th:field="${Activity.description}" required="true"/>
+            <label>Date of Activity: </label>
+            <input type="date" th:field="${Activity.date}" required="true"/>
+            <label>Start time of Activity: </label>
+            <input type="text" th:field="${Activity.startTime}" required="true"/>
+            <label>End time of Activity: </label>
+            <input type="number" th:field="${Activity.endTime}" required="true"/>
+            <input type="submit" value="Send">
+        </form>
+    </body>
+</html>
