@@ -47,6 +47,10 @@ public class Member {
         this.id = id;
     }
 
+    public Member(){
+
+    }
+
     public Member(String firstName, String lastName, int age, String CPR, int id){
         this.firstName = firstName;
         this.lastName = lastName;
