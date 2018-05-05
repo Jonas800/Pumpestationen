@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8"/>
     <title> Creating new activity</title>
+    <link rel="Stylesheet" type="text/css" href="Activity.css"/>
+</head>
 </head>
     <body>
         <h1>Creating new activity</h1>
@@ -17,6 +19,7 @@
             <input type="text" th:field="${Activity.startTime}" required="true"/>
             <label>End time of Activity: </label>
             <input type="number" th:field="${Activity.endTime}" required="true"/>
+            <input type="submit" value="Send">
         </form>
     </body>
 </html>
