@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>View over activities</title>
+</head>
+<body>
+<div class="wrap">
+    <h2>Activities</h2>
+    <table>
+        <thead>
+        <tr>
+
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Start time</th>
+            <th>End time</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="barn: ${activitiesArray}">
+            <td th:text="${Activity.id}"/>
+            <td th:text="${Activity.name}"/>
+            <td th:text="${Activity.description}"/>
+            <td th:text="${#dates.format(Activity.date, 'dd-MM-yyyy')}"/>
+            <td th:text="${Activity.startTime}"/>
+            <td th:text="${Activity.endTime}"/>
+            <td>
+                <a th:href="@{'/editActivity?id='+${Activity.id}}" class="knap">Edit</a>
+                <a th:href="@{'/deleteActivity?id='+${Activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Delete</a>
+
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
