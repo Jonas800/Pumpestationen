@@ -90,7 +90,7 @@ public class ActivityController {
         return "redirect";
     }
 
-    public ArrayList<Activity> getActivitiesArray(ArrayList<Activity> activitiesArray) {
+    public ArrayList<Activity> getActivitiesArray() {
         ArrayList<Activity> activitiesArraylist = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(new File("src/main/resources/Activity.txt"));
