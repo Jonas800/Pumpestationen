@@ -1,0 +1,33 @@
+body{
+    background-color:silver;
+}
+.calendarNavigation{
+    border-bottom:1px solid black;
+    width:20%;
+    margin:0 auto;
+}
+.calendarNavigation a{
+    font-size:30px;
+    text-decoration: none;
+}
+.calendarNavigation a:nth-of-type(2){
+    float: right;
+}
+.day{
+    width:14.4%;
+    display:inline-block;
+    border-collapse: collapse;
+    border-right:1px solid black;
+    box-sizing: border-box;
+    margin:-3px;
+    vertical-align: top;
+    padding:5px;
+    height:100vh;
+}
+.day:nth-of-type(7){
+    border:none;
+}
+.day div{
+    font-size: 12pt;
+}
+
