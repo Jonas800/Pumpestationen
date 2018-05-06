@@ -5,18 +5,18 @@
     <title>View over activities</title>
 </head>
 <body>
-<div class="wrap">
-    <h2>Activities</h2>
+<div>
+    <h2>Oversigt over aktiviteter</h2>
     <table>
         <thead>
         <tr>
 
             <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Start time</th>
-            <th>End time</th>
+            <th>Navn</th>
+            <th>Beskrivelse</th>
+            <th>Dato</th>
+            <th>Starttidspunkt</th>
+            <th>Starttidspunkt</th>
         </tr>
         </thead>
         <tbody>
@@ -29,8 +29,8 @@
             <td th:text="${Activity.startTime}"/>
             <td th:text="${Activity.endTime}"/>
             <td>
-                <a th:href="@{'/editActivity?id='+${Activity.id}}" class="knap">Edit</a>
-                <a th:href="@{'/deleteActivity?id='+${Activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Delete</a>
+                <a th:href="@{'/redigerAktivitet?id='+${Activity.id}}" class="knap">Rediger</a>
+                <a th:href="@{'/sletAktivitet?id='+${Activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
 
 
             </td>

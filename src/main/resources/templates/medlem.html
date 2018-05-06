@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Tilføj Medlem</title>
+    <link rel="stylesheet" type="text/css" href="Style.css"/>
+</head>
+<body>
+    <form method="Post" th:action="@{/createMember"}/>
+        <label> Fornavn på medlem: </label>
+        <input type="text" th:field="${member.firstName}"required="true"/>
+        <label>Efternavn på medlem</label>
+        <input type="text" th:field="${member.lastName}"required="true"/>
+        <label>Alder på medlem</label>
+        <input type="text" th:field="${member.age}"required="true"/>
+        <label>CPR på medlem</label>
+        <input type="text" th:field="${member.CPR}" required="true"/>
+        <input type="text" th:field="${member.id}" required="true"/>
+</body>
+</html>
