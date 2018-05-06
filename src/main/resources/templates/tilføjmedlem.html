@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="Style.css"/>
 </head>
 <body>
-    <form method="Post" th:action="@{/createMember"}/>
+    <form method="Post" th:action="@{/tilføjmedlem"}/>
         <label> Fornavn på medlem: </label>
         <input type="text" th:field="${member.firstName}"required="true"/>
         <label>Efternavn på medlem</label>
@@ -15,6 +15,7 @@
         <input type="text" th:field="${member.age}"required="true"/>
         <label>CPR på medlem</label>
         <input type="text" th:field="${member.CPR}" required="true"/>
-        <input type="text" th:field="${member.id}" required="true"/>
+        <label>ID på medlem</label>
+    <input type="text" th:field="${member.id}" required="true"/>
 </body>
 </html>

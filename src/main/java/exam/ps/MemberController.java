@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.*;
 @Controller
 public class MemberController {
-    ArrayList<Member> memberArray = getMemberArray();
+    ArrayList<Member> memberArray = new ArrayList<>();
     int memberID = 0;
 
     public MemberController() throws FileNotFoundException {
 
     }
 
-    @GetMapping("/tilføjMedlem")
+    @GetMapping("/")
     public String Member(Model model) {
         model.addAttribute("member", new Member());
-        return "tilføjMedlem";
+        return "redirect/tilføjmedlem";
     }
 
-    @PostMapping("createMember")
+    @PostMapping("/tilføjmedlem")
     public String createMember(@ModelAttribute Member member) {
         int ID = memberArray.size() + 1;
         member.setId(ID);
         memberArray.add(member);
-        return "createMember";
+        return "redirect/vismedlem";
     }
 
     @GetMapping("/editMember")
@@ -42,14 +42,14 @@ public class MemberController {
         return "editMember";
     }
 
-    @PostMapping("editMember")
+    @PostMapping("/editMember")
     public String editMember(@ModelAttribute Member member) {
         member.setId(memberID);
         memberArray.set(memberID - 1, member);
         return "editMember";
     }
 
-    @GetMapping("deleteMember")
+    @GetMapping("/deleteMember")
     public String deleteMember(@RequestParam(value = "ID", defaultValue = "0") int ID) throws FileNotFoundException {
         memberArray.remove(ID - 1);
         saveMemberToFile(memberArray);
@@ -57,24 +57,24 @@ public class MemberController {
 
     }
 
-    @PostMapping("deleteMember")
+    @PostMapping("/deleteMember")
     public String deleteMember(@ModelAttribute Member member) {
 
         return "deleteMember";
     }
 
-    @GetMapping("showMember")
+    @GetMapping("/vismedlem")
     public String showMember(Model model) {
         for (int i = 0; i < memberArray.size(); i++) {
             model.addAttribute(memberArray.size());
 
         }
-        return "showMember";
+        return "redirect/vismedlem";
     }
 
 
     public static void saveMemberToFile(ArrayList<Member> memberArray) throws FileNotFoundException {
-        PrintStream ps = new PrintStream(new File("src/main/resources/Member.txt"));
+        PrintStream ps = new PrintStream(new File("src/main/resources/templates/Member.txt"));
         String s = "";
         for (Member m : memberArray) {
             s += m.toString();
@@ -87,7 +87,7 @@ public class MemberController {
     public ArrayList<Member> getMemberArray() throws FileNotFoundException {
         ArrayList<Member> ArrayMember = new ArrayList<>();
 
-        Scanner readFile = new Scanner(new File("src/main.resources/Member.txt"));
+        Scanner readFile = new Scanner(new File("src/main.resources/templates/Member.txt"));
         while (readFile.hasNextLine()) {
             String line = readFile.nextLine();
             Scanner readLine = new Scanner(line).useDelimiter("#");
