@@ -65,10 +65,7 @@ public class MemberController {
 
     @GetMapping("/vismedlem")
     public String showMember(Model model) {
-        for (int i = 0; i < memberArray.size(); i++) {
-            model.addAttribute(memberArray.size());
-
-        }
+        model.addAttribute("memberArray", memberArray);
         return "redirect:/vismedlem";
     }
 

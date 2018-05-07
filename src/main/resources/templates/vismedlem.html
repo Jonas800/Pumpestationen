@@ -1,53 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head>
-    <link rel="stylesheet" type="text/css" href="Style.css"/>
-    <link rel="stylesheet" href="Custom.css">
-
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Vis Medlem</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-<header>
-    <nav>
-        <a href="TilmeldBarn">Tilmeld barn</a>
-        <a href="Visbarn">Vis børn</a>
-    </nav>
-</header>
-<div class="wrap">
-    <h2>Børn i Børnehaven</h2>
-    <a href="tilføjmedlem" class=".btn">
-        <button style="color:chartreuse"> Create</button>
-    </a>
-
-    <table>
-        <thead>
-        <tr>
-
-            <th>ID</th>
-            <th>Fornavn</th>
-            <th>Efternavn</th>
-            <th>Options</th>
-
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr th:each="member: ${memberArray}">
-            <td th:text="${member.firstName}"/>
-            <td th:text="${member.lastName}"/>
-            <td th:text="${member.age}"/>
-            <td th:text="${member.CPR}"/>
-            <td th:text="${member.id}"/>
-
-            <td>
-                <a th:href="@{'/edit?id='+${member.id}}" class="knap">Rediger</a>
-                <a th:href="@{'/SletBarn?id='+${barn.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
-                <a href="Visforældre" class="knap"> vis forældre info</a>
-
-
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
+<form method="Post" th:action="@{/Member"}/>
+    <label> Fornavn på medlem: </label>
+    <input type="text" th:field="${member.firstName}"required="true"/>
+    <label>Efternavn på medlem</label>
+    <input type="text" th:field="${member.lastName}"required="true"/>
+    <label>Alder på medlem</label>
+    <input type="text" th:field="${member.age}"required="true"/>
+    <label>CPR på medlem</label>
+    <input type="text" th:field="${member.CPR}" required="true"/>
+    <label>ID på medlem</label>
+    <input type="text" th:field="${member.id}" required="true"/>
 </body>
 </html>
