@@ -155,5 +155,6 @@ public class CalendarController {
             secondArray.add(eaj);
             //}
         }
+        return secondArray;
     }
 }
