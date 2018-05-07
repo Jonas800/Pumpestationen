@@ -31,6 +31,8 @@ public class Activity {
 
     public void setStartTime(double startTime) { this.startTime = startTime; }
 
+    public double getStartTime() { return startTime; }
+
     public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }

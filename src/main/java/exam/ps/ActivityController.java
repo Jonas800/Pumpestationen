@@ -1,5 +1,6 @@
 package exam.ps;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,27 +9,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
+@Controller
 public class ActivityController {
     ArrayList<Activity> activitiesArray = getActivitiesArray();
     int activityID = 0;
 
-    @GetMapping("/tiløjAktivitet")
-    public String createActivity(Model model) {
-        model.addAttribute("Activity", new Activity());
-
-        return "tiløjAktivitet";
+    @GetMapping("/visAktivitet")
+    public String ShowActivities(Model model) {
+        model.addAttribute("activitiesArray", activitiesArray);
+        return "visAktivitet";
     }
 
-    @PostMapping("/tiløjAktivitet")
-    public String createActivity(@ModelAttribute Activity activity) throws IOException {
+    @GetMapping("/tilføjAktivitet")
+    public String createActivity(Model model) {
+        model.addAttribute("activity", new Activity());
+
+        return "tilføjAktivitet";
+    }
+
+    @PostMapping("/tilføjAktivitet")
+    public String createActivity(@ModelAttribute Activity activity) throws FileNotFoundException {
         int id = activitiesArray.size() + 1;
 
         activity.setId(id);
@@ -41,10 +47,7 @@ public class ActivityController {
     @GetMapping("/redigerAktivitet")
     public String editActivity(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
         if (model != null) {
-            for (Activity activity : activitiesArray) {
-                if (activity.getId() == id)
-                    model.addAttribute("activity", activity);
-            }
+            model.addAttribute("activity", activitiesArray.get((id) - 1));
         }
         activityID = id;
         return "redigerAktivitet";
@@ -52,11 +55,9 @@ public class ActivityController {
 
     @PostMapping("/redigerAktivitet")
     public String editActivity(@ModelAttribute Activity activity) throws FileNotFoundException {
-        activitiesArray.get(activityID -1);
-        activitiesArray.set(activityID-1,activity);
-
-        saveToFile(activitiesArray);
-        return "redirect:/";
+        activity.setId(activityID);
+        activitiesArray.set(activityID-1, activity);
+        return "redirect:/visAktivitet";
     }
 
     @GetMapping("/sletAktivitet")
@@ -67,18 +68,7 @@ public class ActivityController {
             }
         }
         saveToFile(activitiesArray);
-        return "redirect:/visAktivitet";
-    }
-
-    @GetMapping("/visAktivitet")
-    public String ShowActivities(Model model) {
-        for (int i = 0; i <activitiesArray.size();i++) {
-            if (i <= 30) {
-                model.addAttribute("activitiesArray", activitiesArray.subList(0, activitiesArray.size()));
-            } else
-                model.addAttribute("activitiesArray", activitiesArray.subList(0,30));
-        }
-        return "visAktivitet";
+        return "sletAktivitet";
     }
 
     public ArrayList<Activity> getActivitiesArray() {
@@ -104,6 +94,7 @@ public class ActivityController {
             return activitiesArraylist;
         }
     }
+
 
     public static void saveToFile(ArrayList<Activity> activitiesArray) throws FileNotFoundException {
         PrintStream ps = new PrintStream(new File("src/main/resources/Activity.txt"));

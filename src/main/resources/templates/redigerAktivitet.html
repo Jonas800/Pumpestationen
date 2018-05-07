@@ -6,17 +6,17 @@
 </head>
 <body>
     <h1>Du er nu igang med at redigere en aktivitet</h1>
-    <form method="post" th:action="@{/editActivity}">
+    <form method="post" th:action="@{/redigerAktivitet}">
         <label>Navn på Aktivitet: </label><br/>
-        <input type="text" size="50" th:field="${Activity.name}"/><br/><br/>
+        <input type="text" th:field="${activity.name}"/><br/><br/>
         <label>Beskrivelse af Aktivitet: </label><br/>
-        <textarea name="description" th:field="${Activity.description}"></textarea><br/><br/>
+        <textarea name="description" th:field="${activity.description}"></textarea><br/><br/>
         <label>Dato på Aktivitet: </label><br/>
-        <input type="date" th:field="${Activity.date}"/><br/><br/>
+        <input type="date" th:field="${activity.date}"/><br/><br/>
         <label>Starttidspunkt på Aktivitet: </label><br/>
-        <input type="text" size="50" th:field="${Activity.startTime}"/><br/><br/>
+        <input type="text" th:field="${activity.startTime}"/><br/><br/>
         <label>Sluttidspunkt på Aktivitet: </label><br/>
-        <input type="text" size="50" th:field="${Activity.endTime}"/><br/><br/>
+        <input type="text" th:field="${activity.endTime}"/><br/><br/>
         <input type="submit" value="Send">
     </form>
 
