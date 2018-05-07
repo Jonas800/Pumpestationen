@@ -1,23 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Vis Medlem</title>
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <a href="tilføjmedlem">tilføj medlem</a>
 
+    <a href="tilføjmedlem">Tilføj medlem </a>
 </head>
 <body>
-<tr th:each="member: ${memberArray}">
-    <label> Fornavn på medlem: </label>
-    <input type="text" th:field="${member.firstName}"required="true"/>
-    <label>Efternavn på medlem</label>
-    <input type="text" th:field="${member.lastName}"required="true"/>
-    <label>Alder på medlem</label>
-    <input type="text" th:field="${member.age}"required="true"/>
-    <label>CPR på medlem</label>
-    <input type="text" th:field="${member.CPR}" required="true"/>
-    <label>ID på medlem</label>
-    <input type="text" th:field="${member.id}" required="true"/>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Fornavn</th>
+        <th>Efternavn</th>
+        <th>alder</th>
+        <th>cpr</th>
+        <th>id</th>
+
+
+
+
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr th:each="member: ${memberarray}">
+        <td th:text="${member.firstName}"/>
+        <td th:text="${member.lastName}"/>
+        <td th:text="${member.age}"/>
+        <td th:text="${member.cpr}"/>
+        <td th:text="${member.id}"/>
+
+
+        <td>
+            <a th:href="@{'/editEMP?ID='+${employee.ID}}" class="knap">Rediger</a>
+            <a th:href="@{'/Sletansat?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')"></a>
+
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+</div>
+
 </body>
 </html>

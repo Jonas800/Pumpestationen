@@ -31,11 +31,12 @@ public class MemberController {
     }
 
     @PostMapping("/tilføjmedlem")
-    public String tilføjmedlem(@ModelAttribute Member member) {
+    public String tilføjmedlem(@ModelAttribute Member member) throws FileNotFoundException {
         int ID = memberArray.size() + 1;
         member.setId(ID);
         memberArray.add(member);
-        return "vismedlem";
+        saveMemberToFile(memberArray);
+        return "redirect:/vismedlem";
     }
 
     @GetMapping("/redigermedlem")
@@ -68,11 +69,10 @@ public class MemberController {
 
 
     public static void saveMemberToFile(ArrayList<Member> memberArray) throws FileNotFoundException {
-        PrintStream ps = new PrintStream(new File("src/main/resources/templates/Member.txt"));
+        PrintStream ps = new PrintStream("/src/main/resources/Member.txt");
         String s = "";
         for (Member m : memberArray) {
             s += m.toString();
-
         }
         ps.print(s);
         ps.close();
