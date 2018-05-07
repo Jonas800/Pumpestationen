@@ -36,7 +36,7 @@ public class MemberController {
         member.setId(ID);
         memberArray.add(member);
         saveMemberToFile(memberArray);
-        return "redirect:/tilføjmedlem";
+        return "redirect:/vismedlem";
     }
 
     @GetMapping("/redigermedlem")
@@ -60,23 +60,23 @@ public class MemberController {
     @GetMapping("/sletmedlem")
     public String deleteMember(@RequestParam(value = "ID", defaultValue = "0") int ID) throws FileNotFoundException {
         memberArray.remove(ID - 1);
-        saveMemberToFile(memberArray);
+        //saveMemberToFile(memberArray);
         return "sletmedlem";
 
     }
 
 
     public static void saveMemberToFile(ArrayList<Member> memberArray) throws FileNotFoundException {
-        PrintStream ps = new PrintStream("/src/main/resources/Member.txt");
+        PrintStream ps = new PrintStream(new File("src/main/resources/templates/Member.txt"));
         String s = "";
         for (Member m : memberArray) {
-            s += m.toString();
-
+            s+=m.toString();
+        }
             ps.print(s);
             ps.close();
         }
-
-       /* public ArrayList<Member> getMemberArray () throws FileNotFoundException {
+    }
+      /* public ArrayList<Member> getMemberArray () throws FileNotFoundException {
             ArrayList<Member> ArrayMember = new ArrayList<>();
 
             Scanner readFile = new Scanner(new File("src/main.resources/templates/Member.txt"));
@@ -96,7 +96,6 @@ public class MemberController {
 
             }
             return ArrayMember;
+*/
 
 
-        */}
-    }

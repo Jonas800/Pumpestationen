@@ -6,12 +6,12 @@ public class Member {
     private int age;
     private String CPR;
     private int id;
-    private double kontingent;
+    private int kontingent;
     public Member(){
 
     }
 
-    public Member(String firstName, String lastName, int age, String CPR, int id, double kontingent){
+    public Member(String firstName, String lastName, int age, String CPR, int id, int kontingent){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -61,11 +61,24 @@ public class Member {
         this.id = id;
     }
 
-    public double getKontingent(){
+    public int getKontingent(){
         return kontingent;
     }
 
-    public void setKontingent(double kontingent){
+    public void setKontingent(int kontingent){
         this.kontingent = kontingent;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", CPR='" + CPR + '\'' +
+                ", id=" + id +
+                ", kontingent=" + kontingent +
+                '}';
     }
 }
