@@ -19,7 +19,7 @@ int employeid=0;
 
 @GetMapping("/VisMedarbejdere")
 public String VisMedarbejdere(Model model) {
-    model.addAttribute("EmployeeArrayList", employeeArrayList);
+    model.addAttribute("employeeArrayList", employeeArrayList);
 
 
     return "VisMedarbejdere";
