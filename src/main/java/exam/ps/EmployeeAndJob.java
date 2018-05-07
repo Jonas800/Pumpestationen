@@ -9,55 +9,21 @@ import java.util.Date;
 
 public class EmployeeAndJob {
 
-    private String name;
-    private int employeeID;
-    private int jobID;
-    private String jobName;
+    private Job job;
+    private Employee employee;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date = new Date();
+    private String timeOfDay;
 
 
     public EmployeeAndJob() {
     }
 
-    public EmployeeAndJob(int employeeID, String name, int jobID, String jobName, String dateString) {
-        this.name = name;
-        this.employeeID = employeeID;
-        this.jobID = jobID;
-        this.jobName = jobName;
+    public EmployeeAndJob(Job job, Employee employee, String dateString, String timeOfDay) {
+        this.job = job;
+        this.employee = employee;
+        this.timeOfDay = timeOfDay;
         setDateWithString(dateString);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getEmployeeID() {
-        return employeeID;
-    }
-
-    public void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
-    }
-
-    public int getJobID() {
-        return jobID;
-    }
-
-    public void setJobID(int jobID) {
-        this.jobID = jobID;
-    }
-
-    public String getJobName() {
-        return jobName;
-    }
-
-    public void setJobName(String jobName) {
-        this.jobName = jobName;
     }
 
     public Date getDate() {
@@ -81,4 +47,27 @@ public class EmployeeAndJob {
 
     }
 
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public String getTimeOfDay() {
+        return timeOfDay;
+    }
+
+    public void setTimeOfDay(String timeOfDay) {
+        this.timeOfDay = timeOfDay;
+    }
 }

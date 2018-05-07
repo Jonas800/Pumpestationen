@@ -2,18 +2,24 @@ package exam.ps;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
 public class CalendarController {
+
+
     //TO DO: IMPLEMENT secondary Model from DB //Week navigation//
     @GetMapping("/vagtplan")
-    public static String vagtplan(@RequestParam(value = "year", defaultValue = "-1") int year, @RequestParam(value = "weekNumber", defaultValue = "-1") int weekNumber,  Model model, Model model2, Model model3, Model model4) {
-        ArrayList<Day> weekDays = new ArrayList<>();
+    public static String vagtplan(@RequestParam(value = "year", defaultValue = "-1") int year, @RequestParam(value = "weekNumber", defaultValue = "-1") int weekNumber,  Model model, Model model2, Model model3, Model model4, Model model5) {
+        ArrayList<Day> days = new ArrayList<>();
         ArrayList<Day> weekNavigation = new ArrayList<>();
         Day currentWeek = new Day();
         Calendar cal = getCal(year, weekNumber);
@@ -40,27 +46,59 @@ public class CalendarController {
         currentWeek.setWeekNumber(cal.get(Calendar.WEEK_OF_YEAR));
 
         //Weekly schedule
-        for (int i = 0; i < 14; i++) {
+        for (int i = 0; i < 7; i++) {
             Day week = new Day();
             week.setDayOfWeek(cal.get(Calendar.DAY_OF_MONTH));
             week.setNameOfMonth(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.forLanguageTag("da-DK")));
             week.setNameOfDay(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.forLanguageTag("da-DK")));
             week.setYear(cal.getWeekYear());
             week.setWeekNumber(cal.get(Calendar.WEEK_OF_YEAR));
-
+            week.setHourOfDay(cal.get(Calendar.HOUR_OF_DAY));
+            week.setMonthNumber(cal.get(Calendar.MONTH));
             //NEW
             week.setDate(cal.getTime());
-            week.setEmployeeAndJobs(dummyEmployeeAndJob());
+            //week.setEmployeeAndJobs(dummyEmployeeAndJob());
 
             //OLD
-            weekDays.add(week);
+            days.add(week);
 
-            cal.add(Calendar.HOUR_OF_DAY, 12);
+            cal.add(Calendar.DAY_OF_WEEK, 1);
         }
-        model.addAttribute("weekDays", weekDays);
+        model.addAttribute("weekDays", days);
         model2.addAttribute("weekNavigation", weekNavigation);
         model3.addAttribute("currentWeek", currentWeek);
-        model4.addAttribute("jobs", dummyJobs());
+        //model4.addAttribute("jobs", dummyJobs());
+        //model5.addAttribute("employees", dummyEmployees());
+        return "vagtplan";
+    }
+
+    @GetMapping("/tilføjVagtplan")
+    public String tilføjVagtplan(
+            @RequestParam(value = "år", defaultValue = "-1") int year,
+            @RequestParam(value = "måned", defaultValue = "-1") int month,
+            @RequestParam(value = "dag", defaultValue = "-1") int day,
+            @RequestParam(value = "tid", defaultValue = "") String time,
+            Model model){
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        try {
+            date = df.parse(year + "-" + month + "-" + day);
+        }
+        catch(ParseException pe){
+
+        }
+
+        ArrayList<EmployeeAndJob> eaj = dummyEmployees(date, time);
+
+        model.addAttribute("employeeAndJobs", eaj);
+        return "tilføjVagtplan";
+    }
+
+    @PostMapping("/createDaySchedule")
+    public String createDaySchedule(){
+
+
         return "vagtplan";
     }
 
@@ -71,27 +109,29 @@ public class CalendarController {
             cal.setTime(new Date());
         }
         else{
-            cal.set(Calendar.HOUR_OF_DAY, 0);
-            cal.set(Calendar.MINUTE, 0);
             cal.set(Calendar.YEAR, year);
             cal.set(Calendar.WEEK_OF_YEAR, weekNumber);
         }
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
         cal.setFirstDayOfWeek(Calendar.MONDAY);
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
 
         return cal;
     }
+/*
     public static ArrayList<EmployeeAndJob> dummyEmployeeAndJob(){
         ArrayList<EmployeeAndJob> eaj = new ArrayList<>();
 
-        eaj.add(new EmployeeAndJob(1, "Hans", 1, "Kok", "2018-04-30"));
-        eaj.add(new EmployeeAndJob(2, "Bent", 6, "Vagt", "2018-04-29"));
-        eaj.add(new EmployeeAndJob(3, "Kim", 7, "Yakuza", "2018-05-02"));
-        eaj.add(new EmployeeAndJob(4, "Henrik", 8, "Batman", "2018-04-30"));
+        eaj.add(new EmployeeAndJob(new Job(1, "Kok"),new Employee(1, "Jens", "Jensen"), "2018-04-30"));
+        eaj.add(new EmployeeAndJob(new Job(2, "Vagt"),new Employee(5, "Hans", "Jensen"), "2018-04-29"));
+        eaj.add(new EmployeeAndJob(new Job(3, "Vagt3"),new Employee(2, "Bent", "Jensen"), "2018-05-02"));
+        eaj.add(new EmployeeAndJob(new Job(4, "Vagt4"),new Employee(3, "Ole", "Jensen"), "2018-04-30"));
 
 
         return eaj;
     }
+*/
 
     public static ArrayList<Job> dummyJobs(){
         ArrayList<Job> jobs = new ArrayList<>();
@@ -103,13 +143,21 @@ public class CalendarController {
         return jobs;
     }
 
-    public static ArrayList<Job> dummyEmployees(){
-        ArrayList<Employee> employees = new ArrayList<>();
+    public static ArrayList<EmployeeAndJob> dummyEmployees(Date date, String timeOfDay){
+        ArrayList<EmployeeAndJob> firstArray = new ArrayList<>();
+        ArrayList<EmployeeAndJob> secondArray = new ArrayList<>();
 
-        employees.add(new Employee(1, "Jens", "Jensen"));
-        employees.add(new Employee(2, "Bent", "Hansen"));
-        employees.add(new Employee(3, "Kim", "Olsen"));
+        firstArray.add(new EmployeeAndJob(new Job(1, "Kok"),new Employee(1, "Jens", "Jensen"), "2018-04-30", "Formiddag"));
+        firstArray.add(new EmployeeAndJob(new Job(2, "Vagt"),new Employee(5, "Hans", "Jensen"), "2018-04-29", "Eftermiddag"));
+        firstArray.add(new EmployeeAndJob(new Job(3, "Vagt3"),new Employee(2, "Bent", "Jensen"), "2018-05-02", "Formiddag"));
 
-        return employees;
+        for (EmployeeAndJob eaj : firstArray) {
+            //if(commonMethods.dateEquals(eaj.getDate(), date) && eaj.getTimeOfDay().equals(timeOfDay)){
+                secondArray.add(eaj);
+            //}
+        }
+
+
+        return secondArray;
     }
 }
