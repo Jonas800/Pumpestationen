@@ -7,17 +7,19 @@
 <body>
     <h1>Du er nu igang med at redigere en aktivitet</h1>
     <form method="post" th:action="@{/editActivity}">
-        <label>Navn på Aktivitet: </label>
-        <input type="text" th:field="${Activity.name}"/>
-        <label>Beskrivelse af Aktivitet: </label>
-        <input type="text" th:field="${Activity.description}"/>
-        <label>Dato på Aktivitet: </label>
-        <input type="date" th:field="${Activity.date}"/>
-        <label>Starttidspunkt på Aktivitet: </label>
-        <input type="text" th:field="${Activity.startTime}"/>
-        <label>Sluttidspunkt på Aktivitet: </label>
-        <input type="number" th:field="${Activity.endTime}"/>
+        <label>Navn på Aktivitet: </label><br/>
+        <input type="text" size="50" th:field="${Activity.name}"/><br/><br/>
+        <label>Beskrivelse af Aktivitet: </label><br/>
+        <textarea name="description" th:field="${Activity.description}"></textarea><br/><br/>
+        <label>Dato på Aktivitet: </label><br/>
+        <input type="date" th:field="${Activity.date}"/><br/><br/>
+        <label>Starttidspunkt på Aktivitet: </label><br/>
+        <input type="text" size="50" th:field="${Activity.startTime}"/><br/><br/>
+        <label>Sluttidspunkt på Aktivitet: </label><br/>
+        <input type="text" size="50" th:field="${Activity.endTime}"/><br/><br/>
+        <input type="submit" value="Send">
     </form>
+
 </body>
 </html>
 
