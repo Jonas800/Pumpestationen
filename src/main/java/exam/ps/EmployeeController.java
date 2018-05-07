@@ -17,7 +17,7 @@ public class EmployeeController {
 ArrayList<Employee> employeeArrayList = new ArrayList<>();
 int employeid=0;
 
-@GetMapping("/")
+@GetMapping("/VisMedarbejdere")
 public String VisMedarbejdere(Model model) {
     model.addAttribute("EmployeeArrayList", employeeArrayList);
 
@@ -40,7 +40,7 @@ public String VisMedarbejdere(Model model) {
     employee.setID(id);
      employeeArrayList.add(employee);
      saveEmployee(employeeArrayList);
-     return "redirect:/Opretmedarbejdere";
+     return "redirect:/VisMedarbejdere";
 
 
 }
@@ -49,13 +49,18 @@ public String VisMedarbejdere(Model model) {
 public String redigerAnsat(@RequestParam( value = "ID", defaultValue = "1") int ID, Model model){
     employeid = ID;
     if (model != null) {
-        model.addAttribute("employeeArrayList", employeeArrayList.get(ID - 1));
+        model.addAttribute("EmployeeArrayList", employeeArrayList.get(ID - 1));
     }
 
 
     return "redigerAnsat";
 }
 
+@PostMapping("/redigerAnsat")
+public String redigerAnsat () {
+
+    return "redirect:/VisMedarbjedere";
+}
 @PostMapping("/editEMP")
 public String SletMedarbejder(@ModelAttribute Employee employee) {
         employee.setID(employeid);
