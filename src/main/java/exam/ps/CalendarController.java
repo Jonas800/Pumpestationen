@@ -142,32 +142,18 @@ public class CalendarController {
 
         return jobs;
     }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public static ArrayList<EmployeeAndJob> dummyEmployees(Date date, String timeOfDay){
+    public static ArrayList<EmployeeAndJob> dummyEmployees(Date date, String timeOfDay) {
         ArrayList<EmployeeAndJob> firstArray = new ArrayList<>();
         ArrayList<EmployeeAndJob> secondArray = new ArrayList<>();
 
-        firstArray.add(new EmployeeAndJob(new Job(1, "Kok"),new Employee(1, "Jens", "Jensen"), "2018-04-30", "Formiddag"));
-        firstArray.add(new EmployeeAndJob(new Job(2, "Vagt"),new Employee(5, "Hans", "Jensen"), "2018-04-29", "Eftermiddag"));
-        firstArray.add(new EmployeeAndJob(new Job(3, "Vagt3"),new Employee(2, "Bent", "Jensen"), "2018-05-02", "Formiddag"));
+        firstArray.add(new EmployeeAndJob(new Job(1, "Kok"), new Employee(1, "Jens", "Jensen"), "2018-04-30", "Formiddag"));
+        firstArray.add(new EmployeeAndJob(new Job(2, "Vagt"), new Employee(5, "Hans", "Jensen"), "2018-04-29", "Eftermiddag"));
+        firstArray.add(new EmployeeAndJob(new Job(3, "Vagt3"), new Employee(2, "Bent", "Jensen"), "2018-05-02", "Formiddag"));
 
         for (EmployeeAndJob eaj : firstArray) {
             //if(commonMethods.dateEquals(eaj.getDate(), date) && eaj.getTimeOfDay().equals(timeOfDay)){
-                secondArray.add(eaj);
+            secondArray.add(eaj);
             //}
         }
-=======
-    /*public static ArrayList<Job> dummyEmployees(){
-=======
-    public static ArrayList<Job> dummyEmployees(){
->>>>>>> 2385da19f55f09fb3ed62d24c02fb4985fab9ce3
-        ArrayList<Employee> employees = new ArrayList<>();
->>>>>>> 03568efa5baaff9953b17bf88e2930e67ae29bbc
-
-
-        return secondArray;
     }
-
 }
