@@ -14,7 +14,7 @@ body{
     float: right;
 }
 .day{
-    width:14.4%;
+    width:13%;
     display:inline-block;
     border-collapse: collapse;
     border-right:1px solid black;
@@ -24,9 +24,10 @@ body{
     padding:5px;
     height:100vh;
 }
-.day:nth-of-type(7){
+.day:nth-of-type(8){
     border:none;
 }
+.day span{}
 .day div{
     font-size: 12pt;
 }

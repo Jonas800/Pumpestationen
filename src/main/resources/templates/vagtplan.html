@@ -15,7 +15,7 @@
 <div th:text="'Uge ' + ${currentWeek.weekNumber} + ' ' + ${currentWeek.year}"></div>
 <a th:href="@{/vagtplan/(year=${weekNavigation[1].year},weekNumber=${weekNavigation[1].weekNumber})}">Næste</a>
 
-<div class="day" th:each="weekDay : ${weekDays}">
+<!--<div class="day" th:each="weekDay : ${weekDays}">
     <h4>dag</h4>
     <div th:text="${weekDay.nameOfMonth}"></div>
     <div th:text="${weekDay.dayOfWeek}"></div>
@@ -28,6 +28,33 @@
         <div th:text="${eaj.date.toString()}"></div>
 
     </div>
+</div>-->
+
+<div class="day" th:each="day, row: ${weekDays}" th:with="numList=${#strings.listSplit('1,0', ',')}"
+     th:if="${row.count} % 2 == 0">
+    <span th:each="num : ${numList}" th:with="dayIndex=(${row.index} - ${num})">
+
+    <h5 th:text="${dayIndex} % 2 == 0 ? 'Formiddig' : 'Eftermiddag'"></h5>
+    <div th:text="${day.nameOfMonth}"></div>
+    <div th:text="${day.dayOfWeek}"></div>
+    <div th:text="${day.nameOfDay}"></div>
+    <div th:text="${day.date.toString()}"></div>
+    <br></br>
+    <h4>Ansatte</h4>
+
+        <ul name="eaj" id="">
+            <li th:each="job: ${jobs}" th:value="${job.id}" th:text="${job.title}"></li>
+            <select th:each="job:${jobs}" th:value="${job.id}">
+                <option th:each="employee:${employees}" th:value="${employee.id}" th:text="${employee.firstName}"></option>
+            </select>
+        </ul>
+<!-- <div th:each="eaj:${day.getEmployeeAndJobs()}">
+        <div th:text="${eaj.name}"></div>
+        <div th:text="${eaj.date.toString()}"></div>
+
+    </div>-->
+</span>
+
 </div>
 <!----<div th:text="${iterStat.index} > 0 ? '' : ${weekNavigation.year}"></div>--->
 

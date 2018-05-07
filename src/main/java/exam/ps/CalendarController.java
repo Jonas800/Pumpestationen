@@ -12,7 +12,7 @@ import java.util.*;
 public class CalendarController {
     //TO DO: IMPLEMENT secondary Model from DB //Week navigation//
     @GetMapping("/vagtplan")
-    public static String vagtplan(@RequestParam(value = "year", defaultValue = "-1") int year, @RequestParam(value = "weekNumber", defaultValue = "-1") int weekNumber,  Model model, Model model2, Model model3) {
+    public static String vagtplan(@RequestParam(value = "year", defaultValue = "-1") int year, @RequestParam(value = "weekNumber", defaultValue = "-1") int weekNumber,  Model model, Model model2, Model model3, Model model4) {
         ArrayList<Day> weekDays = new ArrayList<>();
         ArrayList<Day> weekNavigation = new ArrayList<>();
         Day currentWeek = new Day();
@@ -40,7 +40,7 @@ public class CalendarController {
         currentWeek.setWeekNumber(cal.get(Calendar.WEEK_OF_YEAR));
 
         //Weekly schedule
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 14; i++) {
             Day week = new Day();
             week.setDayOfWeek(cal.get(Calendar.DAY_OF_MONTH));
             week.setNameOfMonth(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.forLanguageTag("da-DK")));
@@ -55,11 +55,12 @@ public class CalendarController {
             //OLD
             weekDays.add(week);
 
-            cal.add(Calendar.DAY_OF_YEAR, 1);
+            cal.add(Calendar.HOUR_OF_DAY, 12);
         }
         model.addAttribute("weekDays", weekDays);
         model2.addAttribute("weekNavigation", weekNavigation);
         model3.addAttribute("currentWeek", currentWeek);
+        model4.addAttribute("jobs", dummyJobs());
         return "vagtplan";
     }
 
@@ -70,6 +71,8 @@ public class CalendarController {
             cal.setTime(new Date());
         }
         else{
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
             cal.set(Calendar.YEAR, year);
             cal.set(Calendar.WEEK_OF_YEAR, weekNumber);
         }
@@ -88,5 +91,25 @@ public class CalendarController {
 
 
         return eaj;
+    }
+
+    public static ArrayList<Job> dummyJobs(){
+        ArrayList<Job> jobs = new ArrayList<>();
+
+        jobs.add(new Job(1, "Kok"));
+        jobs.add(new Job(2, "Vagt"));
+        jobs.add(new Job(3, "Job3"));
+
+        return jobs;
+    }
+
+    public static ArrayList<Job> dummyEmployees(){
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        employees.add(new Job(1, "Kok"));
+        employees.add(new Job(2, "Vagt"));
+        employees.add(new Job(3, "Job3"));
+
+        return employees;
     }
 }

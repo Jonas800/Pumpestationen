@@ -2,16 +2,22 @@ package exam.ps;
 
 public class Employee {
 
-        private int ID;
-        private String firstName;
-        private String lastName;
-        private String cpr;
-        private String address;
-        private int phoneNumber;
-        private String jobPosition;
-        public Employee () {
+    private int ID;
+    private String firstName;
+    private String lastName;
+    private String cpr;
+    private String address;
+    private int phoneNumber;
+    private String jobPosition;
 
-        }
+    public Employee() {
+
+    }
+    public Employee{
+        this.ID = ID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Employee(int ID, String firstName, String lastName, String cpr, String address, int phoneNumber, String jobPosition) {
         this.ID = ID;
