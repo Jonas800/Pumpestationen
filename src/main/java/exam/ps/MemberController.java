@@ -1,7 +1,6 @@
 package exam.ps;
 import java.util.*;
 
-import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,27 +38,29 @@ public class MemberController {
         return "redirect:/vismedlem";
     }
 
-    @GetMapping("/redigermedlem")
-    public String editMember(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model) {
-        if (model != null) {
-            model.addAttribute("medlem", memberArray.get((ID) - 1));
+    @GetMapping("/redigerMedlem")
+    public String redigerMedlem(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
+        for (Member member : memberArray) {
+            if (member.getId() == memberID)
+                model.addAttribute("member",member);
 
+            }
+            memberID = id;
+            return "redigerMedlem";
         }
-        memberID = ID;
-        return "redigermedlem";
-    }
 
-    @PostMapping("/redigermedlem")
-    public String editMember(@ModelAttribute Member member) {
+        @PostMapping("/redigerMedlem")
+        public String redigerMedlem(@ModelAttribute Member member) throws FileNotFoundException {
         member.setId(memberID);
         memberArray.set(memberID - 1, member);
-        return "redirect:/redigermedlem";
+        saveMemberToFile(memberArray);
+        return "redirect:/vismedlem";
     }
 
 
     @GetMapping("/sletmedlem")
-    public String deleteMember(@RequestParam(value = "ID", defaultValue = "0") int ID) throws FileNotFoundException {
-        memberArray.remove(ID - 1);
+    public String deleteMember(@RequestParam(value = "id", defaultValue = "1") int id) throws FileNotFoundException {
+        memberArray.remove(id - 1);
         //saveMemberToFile(memberArray);
         return "sletmedlem";
 

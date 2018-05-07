@@ -45,14 +45,15 @@ public String VisMedarbejdere(Model model) {
 
 }
 
+
+
 @GetMapping("/redigerMedarbejdere")
 public String redigerAnsat(@RequestParam( value = "ID", defaultValue = "1") int ID, Model model){
-    employeid = ID;
-    if (model != null) {
-        model.addAttribute("employeeArrayList", employeeArrayList.get(ID - 1));
+    for (Employee employee:employeeArrayList) {
+        if (employee.getID()==ID)
+            model.addAttribute("employee",employee);
     }
-
-
+    employeid=ID;
     return "redigerMedarbejdere";
 }
 
@@ -62,13 +63,14 @@ public String redigerAnsat (Employee employee) throws FileNotFoundException {
     employeeArrayList.set(employeid-1,employee);
     saveEmployee(employeeArrayList);
 
-    return "redirect:/VisMedarbjedere";
+    return "redirect:/VisMedarbejdere";
 }
 
 @GetMapping("/SletMedarbejder")
-    public String SletMedarbejder(@RequestParam(value = "ID",defaultValue = "1")  int id){
+    public String SletMedarbejder(@RequestParam(value = "ID",defaultValue = "1")  int id) throws FileNotFoundException {
     employeeArrayList.remove(id-1);
-    return"SletMedarbejder";
+    saveEmployee(employeeArrayList);
+    return"redirect:/VisMedarbejdere";
 }
     public static void saveEmployee(ArrayList<Employee> employeeArrayList) throws FileNotFoundException {
         PrintStream ps = new PrintStream("src/main/resources/templates/Employee.txt");

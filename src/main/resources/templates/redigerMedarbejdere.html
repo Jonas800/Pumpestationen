@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Rediger ansat</title>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="../static/style.css"/>
 
 </head>
 <body>
@@ -11,7 +11,7 @@
 
 <hr/>
 <form method="post" th:action="@{/redigerMedarbejdere}">
-    <label>id</label>
+    <label>ID</label>
     <input type="text" th:field="${employee.ID}"/><br/><br/>
     <label>Fornavn: </label>
     <input type="text" th:field="${employee.firstName}"/><br/><br/>
@@ -21,7 +21,7 @@
     <input type="text" th:field="${employee.cpr}"/>
     <label>adresse: </label>
     <input type="date" th:field="${employee.address}"/><br/><br/>
-    <label>Stilling: </label>
+    <label>Mobil: </label>
     <input type="text" th:field="${employee.phoneNumber}"/><br/><br/>
     <label>Stilling: </label>
     <input type="text" th:field="${employee.jobPosition}"/><br/><br/>

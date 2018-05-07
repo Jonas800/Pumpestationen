@@ -5,8 +5,9 @@
     <title>Rediger Medlem</title>
     <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
-<form>
-<form method="Post" th:action="@{/Member"}/>
+<hr/>
+
+<form method="Post" th:action="@{/redigerMedlem}">
     <label> Fornavn på medlem: </label>
     <input type="text" th:field="${member.firstName}"required="true"/>
     <label>Efternavn på medlem</label>
@@ -19,7 +20,8 @@
     <input type="text" th:field="${member.id}" required="true"/>
     <label>Kontingent</label>
     <input type="text" th:field="${member.kontingent}" required="true"/>
-    <input type="submit" value="send"/>
+    <input type="submit" value="send">
+    <hr/>
 </form>
 </body>
 </html>
