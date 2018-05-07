@@ -11,8 +11,10 @@ public class Day {
     private int dayOfWeek;
     private String nameOfDay;
     private String nameOfMonth;
+    private int monthNumber;
     private int year;
     private int weekNumber;
+    private int hourOfDay;
     private Date date = new Date();
     private ArrayList<EmployeeAndJob> employeeAndJobs = new ArrayList<>();
 
@@ -56,6 +58,22 @@ public class Day {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public int getHourOfDay() {
+        return hourOfDay;
+    }
+
+    public void setHourOfDay(int hourOfDay) {
+        this.hourOfDay = hourOfDay;
+    }
+
+    public int getMonthNumber() {
+        return monthNumber;
+    }
+
+    public void setMonthNumber(int monthNumber) {
+        this.monthNumber = monthNumber;
     }
 
     public ArrayList<EmployeeAndJob> getEmployeeAndJobs() {

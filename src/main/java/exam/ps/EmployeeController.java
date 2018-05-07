@@ -45,42 +45,39 @@ public String VisMedarbejdere(Model model) {
 
 }
 
-@GetMapping("/redigerAnsat")
+@GetMapping("/redigerMedarbejdere")
 public String redigerAnsat(@RequestParam( value = "ID", defaultValue = "1") int ID, Model model){
     employeid = ID;
     if (model != null) {
-        model.addAttribute("EmployeeArrayList", employeeArrayList.get(ID - 1));
+        model.addAttribute("employeeArrayList", employeeArrayList.get(ID - 1));
     }
 
 
-    return "redigerAnsat";
+    return "redigerMedarbejdere";
 }
 
-@PostMapping("/redigerAnsat")
-public String redigerAnsat () {
+@PostMapping("/redigerMedarbejdere")
+public String redigerAnsat (Employee employee) throws FileNotFoundException {
+    employee.setID(employeid);
+    employeeArrayList.set(employeid-1,employee);
+    saveEmployee(employeeArrayList);
 
     return "redirect:/VisMedarbjedere";
 }
-@PostMapping("/editEMP")
-public String SletMedarbejder(@ModelAttribute Employee employee) {
-        employee.setID(employeid);
-        employeeArrayList.set(employeid-1,employee);
-        return "redirect:/Medarbejdere";
 
-    }
 @GetMapping("/SletMedarbejder")
-    public String SletMedarbejder(@RequestParam(value = "id",defaultValue = "1")  int id){
+    public String SletMedarbejder(@RequestParam(value = "ID",defaultValue = "1")  int id){
     employeeArrayList.remove(id-1);
     return"SletMedarbejder";
 }
     public static void saveEmployee(ArrayList<Employee> employeeArrayList) throws FileNotFoundException {
-        PrintStream ps = new PrintStream(new File("src/main/resources/templates/Employee.txt"));
+        PrintStream ps = new PrintStream("src/main/resources/templates/Employee.txt");
         String s = "";
         for (Employee E : employeeArrayList) {
-            s += E.toString();
+            s += E.toString() + "\r\n";
 
         }
-        ps.print(s);
+        ps.print(s );
         ps.close();
     }
 

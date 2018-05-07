@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Tilføj til vagtplan</title>
+</head>
+<body>
+<form method="post" th:action="@{/vagtplan}">
+
+    <ul name="eaj" th:each="eaj : ${employeeAndJobs}" id="">
+
+        <li th:value="${eaj.getJob().id}" th:text="${eaj.job.title}"></li>
+        <select th:value="${eaj.job.id}">
+            <option selected disabled hidden>Vælg job</option>
+            <option th:each="employee:${eaj.getEmployee()}" th:value="${employee.ID}"
+                    th:text="${employee.firstName}"></option>
+        </select>
+    </ul>
+
+    <input type="submit" value="Gem"/>
+</form>
+
+</body>
+</html>

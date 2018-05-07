@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Rediger ansat</title>
+    <link rel="stylesheet" href="style.css"/>
+
+</head>
+<body>
+
+
+<hr/>
+<form method="post" th:action="@{/redigerMedarbejdere}">
+    <label>id</label>
+    <input type="text" th:field="${employee.ID}"/><br/><br/>
+    <label>Fornavn: </label>
+    <input type="text" th:field="${employee.firstName}"/><br/><br/>
+    <label>Efternavn: </label>
+    <input type="text" th:field="${employee.lastName}"/><br/><br/>
+    <label>telefon.nr: </label>
+    <input type="text" th:field="${employee.cpr}"/>
+    <label>adresse: </label>
+    <input type="date" th:field="${employee.address}"/><br/><br/>
+    <label>Stilling: </label>
+    <input type="text" th:field="${employee.phoneNumber}"/><br/><br/>
+    <label>Stilling: </label>
+    <input type="text" th:field="${employee.jobPosition}"/><br/><br/>
+    <input type="submit" value="opdater">
+    <hr/>
+
+</form>
+</body>
+</html>
