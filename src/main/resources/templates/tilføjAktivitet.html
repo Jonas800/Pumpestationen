@@ -17,9 +17,15 @@
             <label>Dato på Aktivitet: </label><br/>
             <input type="date" th:field="${activity.date}" required="true"/><br/><br/>
             <label>Starttidspunkt på Aktivitet:</label><br/>
-            <input type="double" th:field="${activity.startTime}" required="true"/><br/><br/>
+            <input type="double" th:field="${activity.startTime}" /><br/><br/>
             <label>Sluttidspunkt på Aktivitet: </label><br/>
-            <input type="double" th:field="${activity.endTime}" required="true"/><br/><br/>
+            <input type="double" th:field="${activity.endTime}"/><br/><br/>
+            <hr/>
+            <h6>Tilføj nu Ansatte til aktivitenten</h6>
+            <label>Ansatte</label>
+            <h6>Tilføj nu Medlemmer til aktivitenten</h6>
+            <label>Medlemmer</label>
+            <br/><br/>
             <input type="submit" value="Send">
         </form>
     </body>

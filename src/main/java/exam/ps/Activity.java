@@ -50,7 +50,8 @@ public class Activity {
     public void setEndTime(double endTime) { this.endTime = endTime; }
 
     public String toString() {
-        return name + "#" + description + "#" + date + "#" + startTime + "#" + endTime;
+        return
+            "ID = " + id + ", " + "Aktivitet = " + name + ", " + "Beskrivelse = " + description + ", " + "Startstidspunkt = " + startTime + ", " + "Sluttidspunkt = " + endTime;
     }
 
 }

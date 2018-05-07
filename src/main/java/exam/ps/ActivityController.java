@@ -18,10 +18,13 @@ import java.util.Scanner;
 @Controller
 public class ActivityController {
     ArrayList<Activity> activitiesArray = getActivitiesArray();
+    ArrayList<Employee> employeeArray = new ArrayList<>();
+    ArrayList<Member> memberArray = new ArrayList<>();
     int activityID = 0;
 
     @GetMapping("/visAktivitet")
     public String ShowActivities(Model model) {
+        getActivitiesArray();
         model.addAttribute("activitiesArray", activitiesArray);
         return "visAktivitet";
     }
@@ -57,6 +60,7 @@ public class ActivityController {
     public String editActivity(@ModelAttribute Activity activity) throws FileNotFoundException {
         activity.setId(activityID);
         activitiesArray.set(activityID-1, activity);
+        saveToFile(activitiesArray);
         return "redirect:/visAktivitet";
     }
 
@@ -74,7 +78,7 @@ public class ActivityController {
     public ArrayList<Activity> getActivitiesArray() {
         ArrayList<Activity> activitiesArraylist = new ArrayList<>();
         try {
-            Scanner scanner = new Scanner(new File("src/main/resources/Activity.txt"));
+            Scanner scanner = new Scanner(new File("src/main/resources/templates/Activity.txt"));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Scanner readLine = new Scanner(line).useDelimiter("#");
@@ -97,7 +101,7 @@ public class ActivityController {
 
 
     public static void saveToFile(ArrayList<Activity> activitiesArray) throws FileNotFoundException {
-        PrintStream ps = new PrintStream(new File("src/main/resources/Activity.txt"));
+        PrintStream ps = new PrintStream(new File("src/main/resources/templates/Activity.txt"));
 
         String s = "";
         for (Activity c :activitiesArray) {

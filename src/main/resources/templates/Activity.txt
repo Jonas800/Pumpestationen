@@ -1,0 +1,5 @@
+ID = 1, Aktivitet = Fodbold, Beskrivelse = Indendørs fodbold. Husk indendørs sko , Startstidspunkt = 1300.0, Sluttidspunkt = 1400.0
+ID = 2, Aktivitet = Håndbold, Beskrivelse = Indendørs Hånolddb. Husk indendørs sko , Startstidspunkt = 1300.0, Sluttidspunkt = 1400.0
+ID = 3, Aktivitet = Svømning, Beskrivelse = husk svømmetøj , Startstidspunkt = 1300.0, Sluttidspunkt = 1400.0
+ID = 4, Aktivitet = Jagt, Beskrivelse = Det skal nok blive fedt , Startstidspunkt = 1300.0, Sluttidspunkt = 1400.0
+ID = 5, Aktivitet = Fitness, Beskrivelse = Vi skal træne i centeret , Startstidspunkt = 1300.0, Sluttidspunkt = 1400.0
