@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/style.css"/>
 
 <a href="Opretmedarbejdere">Tilføj ansat </a>
 </head>
@@ -15,6 +15,7 @@
 <table>
     <thead>
     <tr>
+        <th>id</th>
         <th>Fornavn</th>
         <th>Efternavn</th>
         <th>Cpr</th>
@@ -41,7 +42,7 @@
 
         <td>
             <a th:href="@{'/redigerMedarbejdere?ID='+${employee.ID}}" class="knap">Rediger</a>
-            <a th:href="@{'/Sletansat?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')"></a>
+            <a th:href="@{'/SletMedarbejder?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')">Slet</a>
 
         </td>
 

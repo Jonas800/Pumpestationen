@@ -34,8 +34,8 @@
         <td th:text="${member.kontingent}"/>
 
         <td>
-            <a th:href="@{'/redigermedlem?ID='+${member.id}}" class="knap">Rediger</a>
-            <a th:href="@{'/sletmedlem?ID='+${member.id}}" onclick="return confirm('Bekræft sletning')"></a>
+            <a th:href="@{'/redigerMedlem?id='+${member.id}}" class="knap">Rediger</a>
+            <a th:href="@{'/sletmedlem?id='+${member.id}}" onclick="return confirm('sletmedlem?id=')"></a>
 
         </td>
 
@@ -45,4 +45,3 @@
 </div>
 
 </body>
-</html>
