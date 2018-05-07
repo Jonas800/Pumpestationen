@@ -29,38 +29,46 @@ public class MemberController {
         int ID = memberArray.size() + 1;
         member.setId(ID);
         memberArray.add(member);
-        return "vismedlem";
+        return "redirect:/vismedlem";
     }
 
-    @GetMapping("/editMember")
+    @GetMapping("/redigermedlem")
     public String editMember(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model) {
         if (model != null) {
             model.addAttribute("medlem", memberArray.get((ID) - 1));
 
         }
         memberID = ID;
-        return "editMember";
+        return "redirect:/editMember";
     }
 
-    @PostMapping("/editMember")
+    @PostMapping("/redigermedlem")
     public String editMember(@ModelAttribute Member member) {
         member.setId(memberID);
         memberArray.set(memberID - 1, member);
-        return "editMember";
+        return "redirect:/editMember";
     }
 
-    @GetMapping("/deleteMember")
+    @GetMapping("/redigermedlem")
     public String deleteMember(@RequestParam(value = "ID", defaultValue = "0") int ID) throws FileNotFoundException {
         memberArray.remove(ID - 1);
         saveMemberToFile(memberArray);
-        return "deleteMember";
+        return "redirect:/sletmedlem";
 
     }
 
-    @PostMapping("/deleteMember")
+    @GetMapping("/sletmedlem")
+    public String deleteMember(Model model){
+    model.addAttribute("member", memberArray);
+        return "sletmedlem";
+    }
+
+
+
+    @PostMapping("/sletmedlem")
     public String deleteMember(@ModelAttribute Member member) {
 
-        return "deleteMember";
+        return "redirect:/vismedlem";
     }
 
     @GetMapping("/vismedlem")
@@ -97,7 +105,7 @@ public class MemberController {
             member.setId(readLine.nextInt());
             ArrayMember.add(member);
 
-            ArrayMember.add(member);
+
 
         }
         return ArrayMember;
