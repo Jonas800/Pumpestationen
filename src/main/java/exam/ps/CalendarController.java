@@ -144,6 +144,7 @@ public class CalendarController {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static ArrayList<EmployeeAndJob> dummyEmployees(Date date, String timeOfDay){
         ArrayList<EmployeeAndJob> firstArray = new ArrayList<>();
         ArrayList<EmployeeAndJob> secondArray = new ArrayList<>();
@@ -159,11 +160,14 @@ public class CalendarController {
         }
 =======
     /*public static ArrayList<Job> dummyEmployees(){
+=======
+    public static ArrayList<Job> dummyEmployees(){
+>>>>>>> 2385da19f55f09fb3ed62d24c02fb4985fab9ce3
         ArrayList<Employee> employees = new ArrayList<>();
 >>>>>>> 03568efa5baaff9953b17bf88e2930e67ae29bbc
 
 
         return secondArray;
     }
-    */
+
 }
