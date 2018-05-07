@@ -14,7 +14,7 @@ public class MemberController {
     ArrayList<Member> memberArray = new ArrayList<>();
     int memberID = 0;
 
-    public MemberController() throws FileNotFoundException {
+    public MemberController() {
 
     }
 
@@ -66,40 +66,37 @@ public class MemberController {
     }
 
 
-
-
     public static void saveMemberToFile(ArrayList<Member> memberArray) throws FileNotFoundException {
         PrintStream ps = new PrintStream("/src/main/resources/Member.txt");
         String s = "";
         for (Member m : memberArray) {
             s += m.toString();
+
+            ps.print(s);
+            ps.close();
         }
-        ps.print(s);
-        ps.close();
+
+       /* public ArrayList<Member> getMemberArray () throws FileNotFoundException {
+            ArrayList<Member> ArrayMember = new ArrayList<>();
+
+            Scanner readFile = new Scanner(new File("src/main.resources/templates/Member.txt"));
+            while (readFile.hasNextLine()) {
+                String line = readFile.nextLine();
+                Scanner readLine = new Scanner(line).useDelimiter("#");
+
+                Member member = new Member();
+                member.setFirstName(readLine.next());
+                member.setLastName(readLine.next());
+                member.setAge(readLine.nextInt());
+                member.setCPR(readLine.next());
+                member.setId(readLine.nextInt());
+                member.setKontingent(readLine.nextDouble());
+                ArrayMember.add(member);
+
+
+            }
+            return ArrayMember;
+
+
+        */}
     }
-
-    public ArrayList<Member> getMemberArray() throws FileNotFoundException {
-        ArrayList<Member> ArrayMember = new ArrayList<>();
-
-        Scanner readFile = new Scanner(new File("src/main.resources/templates/Member.txt"));
-        while (readFile.hasNextLine()) {
-            String line = readFile.nextLine();
-            Scanner readLine = new Scanner(line).useDelimiter("#");
-
-            Member member = new Member();
-            member.setFirstName(readLine.next());
-            member.setLastName(readLine.next());
-            member.setAge(readLine.nextInt());
-            member.setCPR(readLine.next());
-            member.setId(readLine.nextInt());
-            member.setKontingent(readLine.nextDouble());
-            ArrayMember.add(member);
-
-
-
-        }
-        return ArrayMember;
-
-
-    }
-}
