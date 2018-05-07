@@ -106,9 +106,9 @@ public class CalendarController {
     public static ArrayList<Job> dummyEmployees(){
         ArrayList<Employee> employees = new ArrayList<>();
 
-        employees.add(new Job(1, "Kok"));
-        employees.add(new Job(2, "Vagt"));
-        employees.add(new Job(3, "Job3"));
+        employees.add(new Employee(1, "Jens", "Jensen"));
+        employees.add(new Employee(2, "Bent", "Hansen"));
+        employees.add(new Employee(3, "Kim", "Olsen"));
 
         return employees;
     }
