@@ -1,1 +1,1 @@
-exam.ps.Employee@53a1e423
+Employee{ID=1, firstName='welknr', lastName='lknwer', cpr='lknwer', address='lknwer', phoneNumber=21321, jobPosition='nlweknr'}
