@@ -1,1 +1,0 @@
-Member{firstName='lnwekr', lastName='lknwelkrn', age=12312, CPR='123123', id=1, kontingent=123123}

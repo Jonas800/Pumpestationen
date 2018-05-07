@@ -3,21 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Slet Medlem</title>
-    <link rel="stylesheet" type="text/css" href="../static/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../statstyle.css"/>
 </head>
 <body>
-<form method="Post" th:action="@{/Member"}/>
-<label> Fornavn på medlem: </label>
-<input type="text" th:field="${member.firstName}"required="true"/>
-<label>Efternavn på medlem</label>
-<input type="text" th:field="${member.lastName}"required="true"/>
-<label>Alder på medlem</label>
-<input type="text" th:field="${member.age}"required="true"/>
-<label>CPR på medlem</label>
-<input type="text" th:field="${member.CPR}" required="true"/>
-<label>ID på medlem</label>
-<input type="text" th:field="${member.id}" required="true"/>
-<label>Kontingent</label>
-<input type="text" th:field="${member.kontingent}" required="true"/>
+<form method="Post" th:action="@{/sletmedlem"}/>
+
 </body>
 </html>

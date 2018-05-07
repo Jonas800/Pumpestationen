@@ -41,7 +41,7 @@ public class MemberController {
     @GetMapping("/redigerMedlem")
     public String redigerMedlem(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
         for (Member member : memberArray) {
-            if (member.getId() == memberID)
+            if (member.getId()== id)
                 model.addAttribute("member",member);
 
             }
@@ -61,17 +61,18 @@ public class MemberController {
     @GetMapping("/sletmedlem")
     public String deleteMember(@RequestParam(value = "id", defaultValue = "1") int id) throws FileNotFoundException {
         memberArray.remove(id - 1);
-        //saveMemberToFile(memberArray);
-        return "sletmedlem";
+        saveMemberToFile(memberArray);
+        return "redirect:/vismedlem";
 
     }
 
 
     public static void saveMemberToFile(ArrayList<Member> memberArray) throws FileNotFoundException {
-        PrintStream ps = new PrintStream(new File("src/main/resources/templates/Member.txt"));
+        PrintStream ps = new PrintStream("src/main/resources/templates/Member.txt");
         String s = "";
         for (Member m : memberArray) {
-            s+=m.toString();
+            s+=m.toString() + "\r\n";
+
         }
             ps.print(s);
             ps.close();
