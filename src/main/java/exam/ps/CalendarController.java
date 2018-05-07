@@ -103,7 +103,7 @@ public class CalendarController {
         return jobs;
     }
 
-    /*public static ArrayList<Job> dummyEmployees(){
+    public static ArrayList<Job> dummyEmployees(){
         ArrayList<Employee> employees = new ArrayList<>();
 
         employees.add(new Employee(1, "Jens", "Jensen"));
@@ -112,5 +112,5 @@ public class CalendarController {
 
         return employees;
     }
-    */
+
 }
