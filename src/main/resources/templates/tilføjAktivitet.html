@@ -3,24 +3,33 @@
 <head>
     <meta charset="UTF-8"/>
     <title> Creating new activity</title>
-    <link rel="Stylesheet" type="text/css" href="Activity.css"/>
-</head>
-
+    <link rel="stylesheet" type="text/css" href=Activity.css/>
 </head>
     <body>
+        <div class="scrollmenu">
+            <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
+            <a><img src="logo.png" alt="Pumpestationen"></a>
+            <a href="vagtplan">Vagtplan</a>
+            <a href="vismedlem">Medlemmer</a>
+            <a href="VisMedarbejdere">Ansatte</a>
+            <a href="visAktivitet">Aktiviteter</a>
+            <a href="tilføjAktivitet">Tilføj ny aktivitet</a>
+            <a>Login</a>
+            <a style="float: right">Tilbage</a>
+        </div>
+
         <h1>Du er nu igang med at oprette en ny aktivitet</h1>
-        <form method="Post" th:action="@{/tilføjAktivitet}">
+        <form method="Post" th:action="@{/tilføjAktivitet}" class="Firkant">
             <label>Navn på Aktivitet: </label><br/>
             <input type="text" th:field="${activity.name}" required="true"/><br/><br/>
             <label>Beskrivelse af Aktivitet: </label><br/>
-            <input type="text" th:field="${activity.description}" required="true"/><br/><br/>
+            <textarea type="text" th:field="${activity.description}" required="true"></textarea><br/><br/>
             <label>Dato på Aktivitet: </label><br/>
             <input type="date" th:field="${activity.date}" required="true"/><br/><br/>
             <label>Starttidspunkt på Aktivitet:</label><br/>
-            <input type="double" th:field="${activity.startTime}" /><br/><br/>
+            <input type="text" th:field="${activity.startTime}" /><br/><br/>
             <label>Sluttidspunkt på Aktivitet: </label><br/>
-            <input type="double" th:field="${activity.endTime}"/><br/><br/>
-            <hr/>
+            <input type="text" th:field="${activity.endTime}"/><br/><br/>
             <h6>Tilføj nu Ansatte til aktivitenten</h6>
             <label>Ansatte</label>
             <h6>Tilføj nu Medlemmer til aktivitenten</h6>
@@ -28,5 +37,6 @@
             <br/><br/>
             <input type="submit" value="Send">
         </form>
+
     </body>
 </html>

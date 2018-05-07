@@ -1,0 +1,62 @@
+/*Menu i toppen*/
+div.scrollmenu {
+    background-color: #0a0500;
+    overflow: auto;
+    white-space: nowrap;
+    margin-top: 130px;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: #fffefd;
+    text-align: center;
+    padding: 14px;
+    text-decoration: dimgrey;
+}
+
+div.scrollmenu a:hover {
+    background-color: #d1d1d1;
+}
+
+div.scrollmenu h1 {
+    background-color: #fffefd;
+}
+
+body {
+    margin: 70px;
+    text-align: center;
+}
+
+form.Firkant{
+    border-style: solid;
+    color: #0a0500;
+    margin-top: 10px;
+}
+
+div.table {
+    text-align: center;
+    border-style: solid;
+    margin-top: 10px; 
+}
+/*VisAktivitets table style */
+table.tableLook {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 5px 8px 5px 8px;
+}
+
+/*Knapper til table*/
+a.knap1 {
+    border-style: double;
+    background-color: #00dc0b;
+}
+
+a.knap2 {
+    border-style: double;
+    background-color:red;
+}
