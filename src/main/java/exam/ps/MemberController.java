@@ -14,8 +14,14 @@ public class MemberController {
     ArrayList<Member> memberArray = new ArrayList<>();
     int memberID = 0;
 
-    public MemberController() throws FileNotFoundException {
+    public MemberController() {
 
+    }
+
+    @GetMapping("/vismedlem")
+    public String showMember(Model model) {
+        model.addAttribute("memberArray", memberArray);
+        return "vismedlem";
     }
 
     @GetMapping("/tilføjmedlem")
@@ -25,48 +31,38 @@ public class MemberController {
     }
 
     @PostMapping("/tilføjmedlem")
-    public String tilføjmedlem(@ModelAttribute Member member) {
+    public String tilføjmedlem(@ModelAttribute Member member) throws FileNotFoundException {
         int ID = memberArray.size() + 1;
         member.setId(ID);
         memberArray.add(member);
-        return "vismedlem";
+        saveMemberToFile(memberArray);
+        return "redirect:/vismedlem";
     }
 
-    @GetMapping("/editMember")
+    @GetMapping("/redigermedlem")
     public String editMember(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model) {
         if (model != null) {
             model.addAttribute("medlem", memberArray.get((ID) - 1));
 
         }
         memberID = ID;
-        return "editMember";
+        return "redigermedlem";
     }
 
-    @PostMapping("/editMember")
+    @PostMapping("/redigermedlem")
     public String editMember(@ModelAttribute Member member) {
         member.setId(memberID);
         memberArray.set(memberID - 1, member);
-        return "editMember";
+        return "redirect:/redigermedlem";
     }
 
-    @GetMapping("/deleteMember")
+
+    @GetMapping("/sletmedlem")
     public String deleteMember(@RequestParam(value = "ID", defaultValue = "0") int ID) throws FileNotFoundException {
         memberArray.remove(ID - 1);
-        saveMemberToFile(memberArray);
-        return "deleteMember";
+        //saveMemberToFile(memberArray);
+        return "sletmedlem";
 
-    }
-
-    @PostMapping("/deleteMember")
-    public String deleteMember(@ModelAttribute Member member) {
-
-        return "deleteMember";
-    }
-
-    @GetMapping("/vismedlem")
-    public String showMember(Model model) {
-        model.addAttribute("memberArray", memberArray);
-        return "vismedlem";
     }
 
 
@@ -74,34 +70,32 @@ public class MemberController {
         PrintStream ps = new PrintStream(new File("src/main/resources/templates/Member.txt"));
         String s = "";
         for (Member m : memberArray) {
-            s += m.toString();
-
+            s+=m.toString();
         }
-        ps.print(s);
-        ps.close();
-    }
-
-    public ArrayList<Member> getMemberArray() throws FileNotFoundException {
-        ArrayList<Member> ArrayMember = new ArrayList<>();
-
-        Scanner readFile = new Scanner(new File("src/main.resources/templates/Member.txt"));
-        while (readFile.hasNextLine()) {
-            String line = readFile.nextLine();
-            Scanner readLine = new Scanner(line).useDelimiter("#");
-
-            Member member = new Member();
-            member.setFirstName(readLine.next());
-            member.setLastName(readLine.next());
-            member.setAge(readLine.nextInt());
-            member.setCPR(readLine.next());
-            member.setId(readLine.nextInt());
-            ArrayMember.add(member);
-
-            ArrayMember.add(member);
-
+            ps.print(s);
+            ps.close();
         }
-        return ArrayMember;
-
-
     }
-}
+      /* public ArrayList<Member> getMemberArray () throws FileNotFoundException {
+            ArrayList<Member> ArrayMember = new ArrayList<>();
+
+            Scanner readFile = new Scanner(new File("src/main.resources/templates/Member.txt"));
+            while (readFile.hasNextLine()) {
+                String line = readFile.nextLine();
+                Scanner readLine = new Scanner(line).useDelimiter("#");
+
+                Member member = new Member();
+                member.setFirstName(readLine.next());
+                member.setLastName(readLine.next());
+                member.setAge(readLine.nextInt());
+                member.setCPR(readLine.next());
+                member.setId(readLine.nextInt());
+                member.setKontingent(readLine.nextDouble());
+                ArrayMember.add(member);
+
+
+            }
+            return ArrayMember;
+*/
+
+

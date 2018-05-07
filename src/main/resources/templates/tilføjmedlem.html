@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Tilføj Medlem</title>
     <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
-<body>
-    <form method="Post" th:action="@{/tilføjmedlem"}/>
+    <form method="Post" th:action="@{/tilføjmedlem}">
         <label> Fornavn på medlem: </label>
-        <input type="text" th:field="${member.firstName}"required="true"/>
+        <input type="text" th:field="${member.firstName}" required="true"/>
         <label>Efternavn på medlem</label>
-        <input type="text" th:field="${member.lastName}"required="true"/>
+        <input type="text" th:field="${member.lastName}" required="true"/>
         <label>Alder på medlem</label>
-        <input type="text" th:field="${member.age}"required="true"/>
+        <input type="text" th:field="${member.age}" required="true"/>
         <label>CPR på medlem</label>
         <input type="text" th:field="${member.CPR}" required="true"/>
-        <label>ID på medlem</label>
-    <input type="text" th:field="${member.id}" required="true"/>
+        <label>kontigent</label>
+        <input type="text" th:field="${member.kontingent}" required="true"/>
+
+        <input type="submit" value="Send"/>
+
+</form>
 </body>
 </html>

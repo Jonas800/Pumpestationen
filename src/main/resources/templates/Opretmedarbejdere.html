@@ -8,7 +8,7 @@
 
 <body>
 <h1> Tilmeld ansat</h1>
-<form method="Post" th:action="@{/Opretmedarbjedere}">
+<form method="Post" th:action="@{/Opretmedarbejdere}">
     <label>Fornavn: </label>
     <input type="text" th:field="${employee.firstName}" required="true"/>
     <label>Efternavn: </label>
@@ -21,7 +21,7 @@
     <input type="text" th:field="${employee.phoneNumber}" required="true"/>
     <label>Stilling: </label>
     <input type="text" th:field="${employee.jobPosition}" required="true"/>
-    <input type="submit" value="Send"/>
+    <input type="submit" value="send"/>
 
 
 </form>

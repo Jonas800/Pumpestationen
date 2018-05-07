@@ -1,0 +1,1 @@
+Member{firstName='fjfj', lastName='fjfj', age=2, CPR='fjfjjf', id=1, kontingent=2}

@@ -24,13 +24,12 @@
 
 
 
-
     </tr>
     </thead>
     <tbody>
 
 
-    <tr th:each="employee: ${EmployeeArrayList}">
+    <tr th:each="employee: ${employeeArrayList}">
         <td th:text="${employee.ID}"/>
         <td th:text="${employee.firstName}"/>
         <td th:text="${employee.lastName}"/>
