@@ -9,16 +9,16 @@
     <body>
         <h1>Du er nu igang med at oprette en ny aktivitet</h1>
         <form method="Post" th:action="@{/createActivity}">
-            <label>Navn på Aktivitet: </label>
-            <input type="text" th:field="${Activity.name}" required="true"/>
-            <label>Beskrivelse af Aktivitet: </label>
-            <input type="text" th:field="${Activity.description}" required="true"/>
-            <label>Dato på Aktivitet: </label>
-            <input type="date" th:field="${Activity.date}" required="true"/>
-            <label>Starttidspunkt på Aktivitet: </label>
-            <input type="text" th:field="${Activity.startTime}" required="true"/>
-            <label>Sluttidspunkt på Aktivitet: </label>
-            <input type="number" th:field="${Activity.endTime}" required="true"/>
+            <label>Navn på Aktivitet: </label><br/>
+            <input type="text" size="50" th:field="${Activity.name}" required="true"/><br/><br/>
+            <label>Beskrivelse af Aktivitet: </label><br/>
+            <textarea th:field="${Activity.description}" required="true"/></textarea><br/><br/>
+            <label>Dato på Aktivitet: </label><br/>
+            <input type="date" size="50" th:field="${Activity.date}" required="true"/><br/><br/>
+            <label>Starttidspunkt på Aktivitet: </label><br/>
+            <input type="text" size="50" th:field="${Activity.startTime}" required="true"/><br/><br/>
+            <label>Sluttidspunkt på Aktivitet: </label><br/>
+            <input type="text" size="50" th:field="${Activity.endTime}" required="true"/><br/><br/>
             <input type="submit" value="Send">
         </form>
     </body>
