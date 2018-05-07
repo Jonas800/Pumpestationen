@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="style.css"/>
 
-    <a href="tilføjmedlem">Tilføj medlem </a>
+    <a href="vismedlem.html">Tilføj medlem </a>
 </head>
 <body>
 
@@ -31,11 +31,11 @@
         <td th:text="${member.age}"/>
         <td th:text="${member.cpr}"/>
         <td th:text="${member.id}"/>
-
+        <td th:text="${member.kontingent}"/>
 
         <td>
-            <a th:href="@{'/editEMP?ID='+${employee.ID}}" class="knap">Rediger</a>
-            <a th:href="@{'/Sletansat?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')"></a>
+            <a th:href="@{'/redigermedlem?ID='+${member.id}}" class="knap">Rediger</a>
+            <a th:href="@{'/sletmedlem?ID='+${member.id}}" onclick="return confirm('Bekræft sletning')"></a>
 
         </td>
 

@@ -36,7 +36,7 @@ public class MemberController {
         member.setId(ID);
         memberArray.add(member);
         saveMemberToFile(memberArray);
-        return "redirect:/vismedlem";
+        return "redirect:/tilføjmedlem";
     }
 
     @GetMapping("/redigermedlem")
@@ -46,14 +46,14 @@ public class MemberController {
 
         }
         memberID = ID;
-        return "redirect:/editMember";
+        return "redigermedlem";
     }
 
     @PostMapping("/redigermedlem")
     public String editMember(@ModelAttribute Member member) {
         member.setId(memberID);
         memberArray.set(memberID - 1, member);
-        return "redirect:/editMember";
+        return "redirect:/redigermedlem";
     }
 
 
@@ -61,7 +61,7 @@ public class MemberController {
     public String deleteMember(@RequestParam(value = "ID", defaultValue = "0") int ID) throws FileNotFoundException {
         memberArray.remove(ID - 1);
         saveMemberToFile(memberArray);
-        return "redirect:/vismedlem";
+        return "sletmedlem";
 
     }
 
@@ -92,6 +92,7 @@ public class MemberController {
             member.setAge(readLine.nextInt());
             member.setCPR(readLine.next());
             member.setId(readLine.nextInt());
+            member.setKontingent(readLine.nextDouble());
             ArrayMember.add(member);
 
 

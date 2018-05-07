@@ -6,18 +6,18 @@ public class Member {
     private int age;
     private String CPR;
     private int id;
-
+    private double kontingent;
     public Member(){
 
     }
 
-    public Member(String firstName, String lastName, int age, String CPR, int id){
+    public Member(String firstName, String lastName, int age, String CPR, int id, double kontingent){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.CPR = CPR;
         this.id = id;
-
+        this.kontingent = kontingent;
 
     }
 
@@ -61,5 +61,11 @@ public class Member {
         this.id = id;
     }
 
+    public double getKontingent(){
+        return kontingent;
+    }
 
+    public void setKontingent(double kontingent){
+        this.kontingent = kontingent;
+    }
 }
