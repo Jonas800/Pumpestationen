@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-    <form method="Post" th:action="@{/Member"}/>
+    <form method="Post" th:action="@{/tilføjmedlem"}/>
         <label> Fornavn på medlem: </label>
         <input type="text" th:field="${member.firstName}"required="true"/>
         <label>Efternavn på medlem</label>

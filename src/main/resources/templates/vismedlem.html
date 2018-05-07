@@ -4,9 +4,11 @@
     <meta charset="UTF-8"/>
     <title>Vis Medlem</title>
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <a href="tilføjmedlem">tilføj medlem</a>
+
 </head>
 <body>
-<form method="Post" th:action="@{/Member"}/>
+<tr th:each="member: ${memberArray}">
     <label> Fornavn på medlem: </label>
     <input type="text" th:field="${member.firstName}"required="true"/>
     <label>Efternavn på medlem</label>

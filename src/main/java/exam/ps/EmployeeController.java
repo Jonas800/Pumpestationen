@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 @Controller
@@ -32,11 +35,12 @@ public String VisMedarbejdere(Model model) {
      return "Opretmedarbejdere";
 }
 @PostMapping("/Opretmedarbejdere")
-    public String Opretmedarbjedere (@ModelAttribute Employee employee) {
+    public String Opretmedarbjedere (@ModelAttribute Employee employee) throws FileNotFoundException {
     int id=employeeArrayList.size()+1;
     employee.setID(id);
      employeeArrayList.add(employee);
-            return "redirect:/Opretmedarbejdere";
+     saveEmployee(employeeArrayList);
+     return "redirect:/Opretmedarbejdere";
 
 
 }
@@ -64,6 +68,15 @@ public String SletMedarbejder(@ModelAttribute Employee employee) {
     employeeArrayList.remove(id-1);
     return"SletMedarbejder";
 }
+    public static void saveEmployee(ArrayList<Employee> employeeArrayList) throws FileNotFoundException {
+        PrintStream ps = new PrintStream(new File("src/main/resources/templates/Employee.txt"));
+        String s = "";
+        for (Employee E : employeeArrayList) {
+            s += E.toString();
 
+        }
+        ps.print(s);
+        ps.close();
+    }
 
 }

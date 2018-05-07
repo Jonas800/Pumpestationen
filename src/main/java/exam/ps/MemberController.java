@@ -19,17 +19,17 @@ public class MemberController {
     }
 
     @GetMapping("/tilføjmedlem")
-    public String Member(Model model) {
+    public String tilføjmedlem(Model model) {
         model.addAttribute("member", new Member());
         return "tilføjmedlem";
     }
 
     @PostMapping("/tilføjmedlem")
-    public String createMember(@ModelAttribute Member member) {
+    public String tilføjmedlem(@ModelAttribute Member member) {
         int ID = memberArray.size() + 1;
         member.setId(ID);
         memberArray.add(member);
-        return "redirect:/vismedlem";
+        return "vismedlem";
     }
 
     @GetMapping("/editMember")
@@ -46,7 +46,7 @@ public class MemberController {
     public String editMember(@ModelAttribute Member member) {
         member.setId(memberID);
         memberArray.set(memberID - 1, member);
-        return "redirect:/editMember";
+        return "editMember";
     }
 
     @GetMapping("/deleteMember")
@@ -60,13 +60,13 @@ public class MemberController {
     @PostMapping("/deleteMember")
     public String deleteMember(@ModelAttribute Member member) {
 
-        return "redirect:/deleteMember";
+        return "deleteMember";
     }
 
     @GetMapping("/vismedlem")
     public String showMember(Model model) {
         model.addAttribute("memberArray", memberArray);
-        return "redirect:/vismedlem";
+        return "vismedlem";
     }
 
 
