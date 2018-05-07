@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>tilføj ansat</title>
+    <link rel="stylesheet" type="text/css" href="Style.css" />
+
+</head>
+
+<body>
+<h1> Tilmeld ansat</h1>
+<form method="Post" th:action="@{/Opretmedarbjedere}">
+    <label>Fornavn: </label>
+    <input type="text" th:field="${employee.firstName}" required="true"/>
+    <label>Efternavn: </label>
+    <input type="text" th:field="${employee.lastName}" required="true"/>
+    <label>cpr: </label>
+    <input type="text" th:field="${employee.cpr}" required="true"/>
+    <label>adresse: </label>
+    <input type="text" th:field="${employee.address}" required="true"/>
+    <label>Telefon nr.: </label>
+    <input type="text" th:field="${employee.phoneNumber}" required="true"/>
+    <label>Stilling: </label>
+    <input type="text" th:field="${employee.jobPosition}" required="true"/>
+    <input type="submit" value="Send"/>
+
+
+</form>
+<hr/>
+
+</form>
+</body>
+</html>

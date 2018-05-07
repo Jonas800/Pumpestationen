@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Tilføj Medlem</title>
-    <link rel="stylesheet" type="text/css" href="Style.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-    <form method="Post" th:action="@{/tilføjmedlem"}/>
+    <form method="Post" th:action="@{/Member"}/>
         <label> Fornavn på medlem: </label>
         <input type="text" th:field="${member.firstName}"required="true"/>
         <label>Efternavn på medlem</label>

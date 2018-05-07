@@ -5,45 +5,65 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
 @Controller
 public class EmployeeController {
 ArrayList<Employee> employeeArrayList = new ArrayList<>();
+int employeid=0;
 
-@GetMapping("/showEMP")
-public String showEmp() {
+@GetMapping("/")
+public String VisMedarbejdere(Model model) {
+    model.addAttribute("EmployeeArrayList", employeeArrayList);
 
 
-    return "redirect/showEMP";
+    return "VisMedarbejdere";
 
 }
 
-@GetMapping("/CreateEmployes")
-    public String createEmpl (Model model) {
-    model.addAttribute("Employee",new Employee());
-    employeeArrayList.add(new Employee());
+@GetMapping("/Opretmedarbejdere")
+    public String Opretmedarbjedere (Model model) {
+    model.addAttribute("employee",new Employee());
 
-    return "CreateEmployes";
+
+
+     return "Opretmedarbejdere";
 }
-@PostMapping("/CreateEmployes")
-    public String createEmpl (@ModelAttribute Employee employee) {
+@PostMapping("/Opretmedarbejdere")
+    public String Opretmedarbjedere (@ModelAttribute Employee employee) {
+    int id=employeeArrayList.size()+1;
+    employee.setID(id);
+     employeeArrayList.add(employee);
+            return "redirect:/Opretmedarbejdere";
 
 
-    return "redirect/Employes";
 }
 
-@GetMapping("/editEMPl")
-public String editEmpl(){
+@GetMapping("/redigerAnsat")
+public String redigerAnsat(@RequestParam( value = "ID", defaultValue = "1") int ID, Model model){
+    employeid = ID;
+    if (model != null) {
+        model.addAttribute("employeeArrayList", employeeArrayList.get(ID - 1));
+    }
 
 
-    return "redirect/editEMPl";
+    return "redigerAnsat";
 }
-@GetMapping("/delEmp")
-    public String delEMP(){
 
-    return"redirect/delEM";
+@PostMapping("/editEMP")
+public String SletMedarbejder(@ModelAttribute Employee employee) {
+        employee.setID(employeid);
+        employeeArrayList.set(employeid-1,employee);
+        return "redirect:/Medarbejdere";
+
+    }
+@GetMapping("/SletMedarbejder")
+    public String SletMedarbejder(@RequestParam(value = "id",defaultValue = "1")  int id){
+    employeeArrayList.remove(id-1);
+    return"SletMedarbejder";
 }
+
 
 }
