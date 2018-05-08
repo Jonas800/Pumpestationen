@@ -107,6 +107,29 @@ public class dbConn {
         }
 
     }
+    public void updateJob(Job job){
+        createConnection();
+        PreparedStatement ps = null;
+        try{
+            ps = con.prepareStatement("UPDATE jobs SET job_title = ? WHERE job_id = ?");
+            ps.setString(1, job.getTitle());
+            ps.setInt(2, job.getId());
+            ps.executeUpdate();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void deleteJob(Job job){
+        createConnection();
+        PreparedStatement ps = null;
+        try{
+            ps = con.prepareStatement("DELETE FROM jobs WHERE job_id = ?");
+            ps.setInt(1, job.getId());
+            ps.executeUpdate();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     //Eksempel
     /*public ArrayList<Vendors> executeStamementVendorList() {

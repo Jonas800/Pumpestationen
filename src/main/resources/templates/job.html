@@ -10,7 +10,7 @@
     <label>Navn</label>
     <input type="hidden" th:field="${job.id}">
     <input type="text" th:field="${job.title}">
-    <input type="submit" value="Tilføj">
+    <input type="submit" value="Gem">
 </form>
 <table>
     <tr>
@@ -20,6 +20,10 @@
     <tr th:each="job : ${jobs}">
         <td th:text="${job.id}"></td>
         <td th:text="${job.title}"></td>
+        <td>
+            <a th:href="@{'/job?ret=true&id='+${job.id}}">Ret</a>
+            <a th:href="@{'/job?slet=true&id='+${job.id}}">Slet</a>
+        </td>
     </tr>
 </table>
 
