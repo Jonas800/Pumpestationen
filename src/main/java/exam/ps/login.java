@@ -6,7 +6,7 @@ private String passWord;
     public login() {
 
     }
-    public login(String username, String password) {
+    public login(String userName, String passWord) {
         this.userName = userName;
         this.passWord = passWord;
     }
