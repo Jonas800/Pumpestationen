@@ -3,7 +3,6 @@ div.scrollmenu {
     background-color: #0a0500;
     overflow: auto;
     white-space: nowrap;
-    margin-top: 130px;
 }
 
 div.scrollmenu a {
@@ -27,26 +26,27 @@ body {
     text-align: center;
 }
 
+/*tilføj aktivitet firkant */
 form.Firkant{
     border-style: solid;
     color: #0a0500;
     margin-top: 10px;
 }
 
+/*visAktivitet firkant rundt om tabellen */
 div.table {
     text-align: center;
     border-style: solid;
     margin-top: 10px; 
 }
-/*VisAktivitets table style */
+/*selve tabbelen*/
 table.tableLook {
     border-collapse: collapse;
     width: 100%;
 }
-
 td, th {
     border: 1px solid #dddddd;
-    text-align: left;
+    text-align: center;
     padding: 5px 8px 5px 8px;
 }
 
