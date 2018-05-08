@@ -2,38 +2,29 @@ package exam.ps;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
 
 public class Activity {
     private int id;
     private String name;
     private String description;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
-    private double startTime;
-    private double endTime;
+    @DateTimeFormat(pattern = "EEE MMM dd kk:mm:ss z yyyy")
+    private DateTimeFormat startDateTime;
+    private DateTimeFormat endDateTime;
 
     public Activity() {
     }
 
-    public Activity(int id, String name, String description, Date date, double startTime, double endTime) {
+    public Activity(int id, String name, String description, DateTimeFormat startDateTime, DateTimeFormat endDateTime) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
-
-    public void setStartTime(double startTime) { this.startTime = startTime; }
-
-    public double getStartTime() { return startTime; }
-
-    public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }
 
@@ -41,17 +32,18 @@ public class Activity {
 
     public void setDescription(String description) { this.description = description; }
 
-    public Date getDate() { return date; }
+    public String getName() { return name; }
 
-    public void setDate(Date date) { this.date = date; }
+    public DateTimeFormat getStartDateTime() { return startDateTime; }
 
-    public double getEndTime() { return endTime; }
+    public void setStartDateTime(DateTimeFormat startDateTime) { this.startDateTime = startDateTime; }
 
-    public void setEndTime(double endTime) { this.endTime = endTime; }
+    public DateTimeFormat getEndDateTime() { return endDateTime; }
+
+    public void setEndDateTime(DateTimeFormat endDateTime) { this.endDateTime = endDateTime; }
+
 
     public String toString() {
-        return
-            "ID = " + id + ", " + "Aktivitet = " + name + ", " + "Beskrivelse = " + description + ", " + "Startstidspunkt = " + startTime + ", " + "Sluttidspunkt = " + endTime;
+        return id + "#" + name + "#" + description + "#" + startDateTime + "#" + endDateTime;
     }
-
 }

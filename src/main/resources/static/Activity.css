@@ -1,31 +1,3 @@
-/*Menu i toppen*/
-div.scrollmenu {
-    background-color: #0a0500;
-    overflow: auto;
-    white-space: nowrap;
-}
-
-div.scrollmenu a {
-    display: inline-block;
-    color: #fffefd;
-    text-align: center;
-    padding: 14px;
-    text-decoration: dimgrey;
-}
-
-div.scrollmenu a:hover {
-    background-color: #d1d1d1;
-}
-
-div.scrollmenu h1 {
-    background-color: #fffefd;
-}
-
-body {
-    margin: 70px;
-    text-align: center;
-}
-
 /*tilføj aktivitet firkant */
 form.Firkant{
     border-style: solid;
