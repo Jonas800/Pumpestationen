@@ -1,47 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-
-    <a href="tilføjmedlem">Tilføj medlem </a>
+    <link rel="stylesheet" type="text/css" href=Format.css/>
+    <link rel="stylesheet" type="text/css" href=Member.css/>
 </head>
 <body>
 
+<div class="menuTop">
+    <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
+    <a><img src="logo.png" alt="Pumpestationen"></a>
+    <a href="vagtplan">Vagtplan</a>
+    <a href="vismedlem">Medlemmer</a>
+    <a href="tilføjmedlem">Tilføj medlem </a>
+    <a href="VisMedarbejdere">Ansatte</a>
+    <a href="visAktivitet">Aktiviteter</a>
+    <a>Login</a>
+    <a style="float: right">Tilbage</a>
+</div>
 
-<table>
-    <thead>
-    <tr>
-        <th>Fornavn</th>
-        <th>Efternavn</th>
-        <th>alder</th>
-        <th>cpr</th>
-        <th>id</th>
+<div class="firkantrundtomtabel">
+    <h2>Oversigt over medlemmerr</h2>
+    <table class="tableLook">
+        <thead>
+        <tr>
+            <th>Fornavn</th>
+            <th>Efternavn</th>
+            <th>Alder</th>
+            <th>Cpr nummer</th>
+            <th>Id</th>
+            <th>Kontingent</th>
+            <th></th>
 
+        </tr>
+        </thead>
+        <tbody>
 
+        <tr th:each="member: ${memberArray}">
+            <td th:text="${member.firstName}"/>
+            <td th:text="${member.lastName}"/>
+            <td th:text="${member.age}"/>
+            <td th:text="${member.CPR}"/>
+            <td th:text="${member.id}"/>
+            <td th:text="${member.kontingent}"/>
 
+            <td>
+                <a th:href="@{'/redigerMedlem?id='+${member.id}}" class="knap">Rediger</a>
+                <a th:href="@{'/sletmedlem?id='+${member.id}}" onclick="return confirm('sletmedlem?id=')">Slet</a>
 
-    </tr>
-    </thead>
-    <tbody>
+            </td>
 
-
-    <tr th:each="member: ${memberArray}">
-        <td th:text="${member.firstName}"/>
-        <td th:text="${member.lastName}"/>
-        <td th:text="${member.age}"/>
-        <td th:text="${member.CPR}"/>
-        <td th:text="${member.id}"/>
-        <td th:text="${member.kontingent}"/>
-
-        <td>
-            <a th:href="@{'/redigerMedlem?id='+${member.id}}" class="knap">Rediger</a>
-            <a th:href="@{'/sletmedlem?id='+${member.id}}" onclick="return confirm('sletmedlem?id=')">Slet</a>
-
-        </td>
-
-    </tr>
-    </tbody>
-</table>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 </body>

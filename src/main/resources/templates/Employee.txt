@@ -1,1 +1,1 @@
-Employee{ID=1, firstName='wlker', lastName='kmwlekmr', cpr='lkmwelkrm', address='lkwemlrkm$', phoneNumber=1231, jobPosition='klsdfn'}
+Employee{ID=1, firstName='Handhd', lastName='dhfh', cpr='null', address='djdhdhd', phoneNumber=0, jobPosition='hshshd'}

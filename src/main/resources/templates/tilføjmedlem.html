@@ -3,22 +3,37 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Tilføj Medlem</title>
-    <link rel="stylesheet" type="text/css" href="../static/style.css"/>
+    <link rel="stylesheet" type="text/css" href=Format.css/>
+    <link rel="stylesheet" type="text/css" href=Member.css />
+
 </head>
+<div class="menuTop">
+    <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
+    <a><img src="logo.png" alt="Pumpestationen"></a>
+    <a href="vagtplan">Vagtplan</a>
+    <a href="vismedlem">Medlemmer</a>
+    <a href="VisMedarbejdere">Ansatte</a>
+    <a href="visAktivitet">Aktiviteter</a>
+    <a href="tilføjAktivitet">Tilføj ny aktivitet</a>
+    <a>Login</a>
+    <a style="float: right">Tilbage</a>
+</div>
+
+<h1>Tilføj nyt medlem</h1>
+<div class="firkantrundtomtabel">
     <form method="Post" th:action="@{/tilføjmedlem}">
-        <label> Fornavn på medlem: </label>
-        <input type="text" th:field="${member.firstName}" required="true"/>
-        <label>Efternavn på medlem</label>
-        <input type="text" th:field="${member.lastName}" required="true"/>
-        <label>Alder på medlem</label>
-        <input type="text" th:field="${member.age}" required="true"/>
-        <label>CPR på medlem</label>
-        <input type="text" th:field="${member.CPR}" required="true"/>
-        <label>kontigent</label>
-        <input type="text" th:field="${member.kontingent}" required="true"/>
-
+        <label> Fornavn på medlem: </label><br/>
+        <input type="text" th:field="${member.firstName}" required="true"/><br/><br/>
+        <label>Efternavn på medlem</label><br/>
+        <input type="text" th:field="${member.lastName}" required="true"/><br/><br/>
+        <label>Alder på medlem</label><br/>
+        <input type="text" th:field="${member.age}" required="true"/><br/><br/>
+        <label>cpr nummer på medlem</label><br/>
+        <input type="text" th:field="${member.CPR}" required="true"/><br/><br/>
+        <label>Kontingent</label><br/>
+        <input type="text" th:field="${member.kontingent}"/><br/><br/>
         <input type="submit" value="Send"/>
-
-</form>
+    </form>
+</div>
 </body>
 </html>
