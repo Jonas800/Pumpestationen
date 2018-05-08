@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="login.css" />
+    <title>login</title>
+
+</head>
+
+<body>
+
+<form method="Post" th:action="@{/loginside}">
+    <div class="imgcontainer">
+        <img src="loginfoto.jpg" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+        <input type="text" placeholder="Enter Username" name="username" required>
+        <input type="password" placeholder="Enter password" name="password" required>
+        <input type="submit" value="login" class="button">
+
+
+        <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+        <a type="button" class="cancelbtn" href="forside.html">Cancel</a>
+    </div>
+</form>
+
+
+
+
+</body>
+</html>
