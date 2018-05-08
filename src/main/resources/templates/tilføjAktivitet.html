@@ -18,8 +18,9 @@
             <a style="float: right">Tilbage</a>
         </div>
 
-        <h1>Du er nu igang med at oprette en ny aktivitet</h1>
+
         <form method="Post" th:action="@{/tilføjAktivitet}" class="Firkant">
+            <h1>Du er nu igang med at oprette en ny aktivitet</h1>
             <label>Navn på Aktivitet: </label><br/>
             <input type="text" th:field="${activity.name}" required="true"/><br/><br/>
             <label>Beskrivelse af Aktivitet: </label><br/>

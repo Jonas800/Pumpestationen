@@ -19,8 +19,9 @@
     <a style="float: right">Tilbage</a>
 </div>
 
-<h1> Tilmeld ansat</h1>
+
 <div class="firkantrundtomtabel">
+    <h1> Tilmeld ansat</h1>
     <form method="Post" th:action="@{/Opretmedarbejdere}">
         <label>Fornavn: </label><br/>
         <input type="text" th:field="${employee.firstName}" required="true"/><br/><br/>
