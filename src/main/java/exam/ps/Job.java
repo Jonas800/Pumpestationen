@@ -1,6 +1,7 @@
 package exam.ps;
 
 public class Job {
+
     private int id;
     private String title;
 
