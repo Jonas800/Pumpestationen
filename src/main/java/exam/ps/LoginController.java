@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 @Controller
 public class LoginController {
-    ArrayList<login> loginArrayList = new ArrayList<>();
+    ArrayList<login> loginArrayList = getlogins();
 
     @GetMapping("/loginside")
     public String login(Model model) {
@@ -26,7 +26,7 @@ public class LoginController {
     @PostMapping("/loginside")
     public String usernamepassword(@RequestParam("username") String username, @RequestParam("password") String password) throws FileNotFoundException {
 
-        PrintStream w = new PrintStream(new File("src/main/resources/templates/password.txt"));
+        PrintStream w = new PrintStream("src/main/resources/templates/password.txt");
 
         for (login login : loginArrayList) {
 
@@ -54,15 +54,15 @@ public class LoginController {
 
     @PostMapping("/opretbruger")
     public String opretbruger(@ModelAttribute login login) throws FileNotFoundException {
-        loginArrayList.add(new login());
+        loginArrayList.add(login);
         writelogin(loginArrayList);
         return "redirect:/loginside";
     }
 
     public static void writelogin(ArrayList<login> loginArrayList) throws FileNotFoundException {
-        PrintStream ps = new PrintStream(new File("src/main/resources/templates/login.txt"));
+        PrintStream ps = new PrintStream("src/main/resources/templates/password.txt");
         for (login login : loginArrayList) {
-            ps.print(login.toString());
+            ps.print(login.toString() +"\n");
         }
 
     }
