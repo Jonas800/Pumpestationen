@@ -66,9 +66,13 @@ public class Member {
     }
 
     public void setKontingent(int kontingent){
+        if(age < 14){
+            kontingent = 508;
+        } else {
+            kontingent = 0;
+        }
         this.kontingent = kontingent;
     }
-
 
     @Override
     public String toString() {
