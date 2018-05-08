@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8"/>
     <title> Creating new activity</title>
-    <link rel="stylesheet" type="text/css" href=Activity.css/>
+    <link rel="stylesheet" type="text/css" href=Activity.css />
+    <link rel="stylesheet" type="text/css" href=Format.css/>
 </head>
     <body>
-        <div class="scrollmenu">
+        <div class="menuTop">
             <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
             <a><img src="logo.png" alt="Pumpestationen"></a>
             <a href="vagtplan">Vagtplan</a>
             <a href="vismedlem">Medlemmer</a>
             <a href="VisMedarbejdere">Ansatte</a>
             <a href="visAktivitet">Aktiviteter</a>
-            <a href="tilføjAktivitet">Tilføj ny aktivitet</a>
             <a>Login</a>
             <a style="float: right">Tilbage</a>
         </div>
@@ -24,12 +24,10 @@
             <input type="text" th:field="${activity.name}" required="true"/><br/><br/>
             <label>Beskrivelse af Aktivitet: </label><br/>
             <textarea type="text" th:field="${activity.description}" required="true"></textarea><br/><br/>
-            <label>Dato på Aktivitet: </label><br/>
-            <input type="date" th:field="${activity.date}" required="true"/><br/><br/>
-            <label>Starttidspunkt på Aktivitet:</label><br/>
-            <input type="text" th:field="${activity.startTime}" /><br/><br/>
+            <label>Start dato og tid på aktivitet :</label><br/>
+            <input type="datetime-local" th:field="${activity.startDateTime}" required="true"/><br/><br/>
             <label>Sluttidspunkt på Aktivitet: </label><br/>
-            <input type="text" th:field="${activity.endTime}"/><br/><br/>
+            <input type="datetime-local" th:field="${activity.endDateTime}" required="true"/><br/><br/>
             <h6>Tilføj nu Ansatte til aktivitenten</h6>
             <label>Ansatte</label>
             <h6>Tilføj nu Medlemmer til aktivitenten</h6>
