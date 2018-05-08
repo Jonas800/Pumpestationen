@@ -17,9 +17,25 @@ import java.util.Scanner;
 public class LoginController {
     ArrayList<login> loginArrayList = getlogins();
 
-    @GetMapping("/loginside")
+    public LoginController() throws FileNotFoundException {
+    }
+
+    @GetMapping("/opretbruger")
     public String login(Model model) {
         model.addAttribute("login", new login());
+        return "opretbruger";
+    }
+
+    @PostMapping("/opretbruger")
+    public String opretbruger(@ModelAttribute login login) throws FileNotFoundException {
+        loginArrayList.add(login);
+        writelogin(loginArrayList);
+        return "redirect:/loginside";
+    }
+
+    @GetMapping("/loginside")
+    public String usernamepassword (){
+
         return "loginside";
     }
 
@@ -33,7 +49,7 @@ public class LoginController {
 
             if (username.equals(login.getUserName()) && password.equals(login.getPassWord())) {
 
-                return "/forside";
+                return "/loginside";
 
             }
 
@@ -43,21 +59,9 @@ public class LoginController {
 
     }
 
-    @GetMapping("/opretbruger")
-    public String opretbruger(Model model) {
-     model.addAttribute("login",new login());
-
-        return "opretbruger";
 
 
-    }
 
-    @PostMapping("/opretbruger")
-    public String opretbruger(@ModelAttribute login login) throws FileNotFoundException {
-        loginArrayList.add(login);
-        writelogin(loginArrayList);
-        return "redirect:/loginside";
-    }
 
     public static void writelogin(ArrayList<login> loginArrayList) throws FileNotFoundException {
         PrintStream ps = new PrintStream("src/main/resources/templates/password.txt");
@@ -67,9 +71,9 @@ public class LoginController {
 
     }
 
-    public ArrayList<login> getlogins() {
+    public ArrayList<login> getlogins() throws FileNotFoundException {
         ArrayList<login> loginArrayList = new ArrayList<>();
-        Scanner scan = new Scanner("src/main/resources/templates/login.txt");
+        Scanner scan = new Scanner(new File("src/main/resources/templates/password.txt"));
 
         while(scan.hasNextLine()) {
             String line = scan.nextLine();
