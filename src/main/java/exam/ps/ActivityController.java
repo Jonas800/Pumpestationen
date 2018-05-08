@@ -18,8 +18,6 @@ import java.util.Scanner;
 @Controller
 public class ActivityController {
     ArrayList<Activity> activitiesArray = getActivitiesArray();
-    ArrayList<Employee> employeeArray = new ArrayList<>();
-    ArrayList<Member> memberArray = new ArrayList<>();
     int activityID = 0;
 
     @GetMapping("/visAktivitet")
@@ -87,9 +85,8 @@ public class ActivityController {
                 activity.setId(readLine.nextInt());
                 activity.setName(readLine.next());
                 activity.setDescription(readLine.next());
-                DateFormat df = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy");
-                activity.setStartTime(readLine.nextDouble());
-                activity.setEndTime(readLine.nextDouble());
+                DateFormat ssdt = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy");
+                DateFormat sedt = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy");
 
                 activitiesArraylist.add(activity);
             }

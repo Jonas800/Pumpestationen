@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>View over activities</title>
     <link rel="stylesheet" type="text/css" href=Activity.css/>
+    <link rel="stylesheet" type="text/css" href=Format.css/>
 </head>
 <body>
 
@@ -40,9 +41,8 @@
                 <td th:text="${activity.id}"/>
                 <td th:text="${activity.name}"/>
                 <td th:text="${activity.description}"/>
-                <td th:text="${#dates.format(activity.date, 'dd-MM-yyyy')}"/>
-                <td th:text="${activity.startTime}"/>
-                <td th:text="${activity.endTime}"/>
+                <td th:text="${#dates.format(activity.startDateTime}"/>
+                <td th:text="${#dates.format(activity.endDateTime}"/>
                 <td/>
                 <td/>
                 <td>
