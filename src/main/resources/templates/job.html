@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Job</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -22,7 +23,7 @@
         <td th:text="${job.title}"></td>
         <td>
             <a th:href="@{'/job?ret=true&id='+${job.id}}">Ret</a>
-            <a th:href="@{'/job?slet=true&id='+${job.id}}">Slet</a>
+            <a th:href="@{'/job?slet=true&id='+${job.id}}" onclick="return confirm('Dette er permanent. Er du sikker på du vil slette?')">Slet</a>
         </td>
     </tr>
 </table>
