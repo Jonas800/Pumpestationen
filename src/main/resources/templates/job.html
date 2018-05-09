@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Job</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<form th:action="@{/job}" method="post">
+    <label>Navn</label>
+    <input type="hidden" th:field="${job.id}">
+    <input type="text" th:field="${job.title}">
+    <input type="submit" value="Gem">
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Titel</th>
+    </tr>
+    <tr th:each="job : ${jobs}">
+        <td th:text="${job.id}"></td>
+        <td th:text="${job.title}"></td>
+        <td>
+            <a th:href="@{'/job?ret=true&id='+${job.id}}">Ret</a>
+            <a th:href="@{'/job?slet=true&id='+${job.id}}" onclick="return confirm('Dette er permanent. Er du sikker på du vil slette?')">Slet</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

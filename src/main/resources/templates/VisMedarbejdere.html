@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" type="text/css" href="../static/style.css"/>
     <link rel="stylesheet" type="text/css" href=Format.css/>
+    <link rel="stylesheet" type="text/css" href=Employee.css/>
 </head>
 <body>
 
@@ -18,48 +18,38 @@
     <a style="float: right">Tilbage</a>
 </div>
 
-<header>
+<div class="firkantrundtomtabel">
+    <h3>Oversigt over ansatte</h3>
+    <table class="tableLook">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fornavn</th>
+            <th>Efternavn</th>
+            <th>Cpr</th>
+            <th>Adresse</th>
+            <th>Mobil</th>
+            <th>Stilling</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee: ${employeeArrayList}">
+            <td th:text="${employee.ID}"/>
+            <td th:text="${employee.firstName}"/>
+            <td th:text="${employee.lastName}"/>
+            <td th:text="${employee.cpr}"/>
+            <td th:text="${employee.address}"/>
+            <td th:text="${employee.phoneNumber}"/>
+            <td th:text="${employee.jobPosition}"/>
+            <td>
+                <a th:href="@{'/redigerMedarbejdere?ID='+${employee.ID}}" class="knap">Rediger</a>
+                <a th:href="@{'/SletMedarbejder?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')">Slet</a>
+            </td>
 
-</header>
-
-
-<table>
-    <thead>
-    <tr>
-        <th>id</th>
-        <th>Fornavn</th>
-        <th>Efternavn</th>
-        <th>Cpr</th>
-        <th>Adresse</th>
-        <th>Mobil</th>
-        <th>Stilling</th>
-
-
-
-    </tr>
-    </thead>
-    <tbody>
-
-
-    <tr th:each="employee: ${employeeArrayList}">
-        <td th:text="${employee.ID}"/>
-        <td th:text="${employee.firstName}"/>
-        <td th:text="${employee.lastName}"/>
-        <td th:text="${employee.cpr}"/>
-        <td th:text="${employee.address}"/>
-        <td th:text="${employee.phoneNumber}"/>
-        <td th:text="${employee.jobPosition}"/>
-
-
-        <td>
-            <a th:href="@{'/redigerMedarbejdere?ID='+${employee.ID}}" class="knap">Rediger</a>
-            <a th:href="@{'/SletMedarbejder?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')">Slet</a>
-
-        </td>
-
-    </tr>
-    </tbody>
-</table>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 </body>

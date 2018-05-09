@@ -7,6 +7,7 @@ public class Member {
     private String CPR;
     private int id;
     private int kontingent;
+
     public Member(){
 
     }
