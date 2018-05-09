@@ -15,12 +15,11 @@ import java.util.ArrayList;
 
 @Controller
 public class EmployeeController {
-    ArrayList<Employee> employeeArrayList = new ArrayList<>();
     int employeid = 0;
 
     @GetMapping("/VisMedarbejdere")
     public String VisMedarbejdere(Model model) {
-        model.addAttribute("employeeArrayList", employeeArrayList);
+        model.addAttribute("employeeArrayList", selectAllEmployees());
 
 
         return "VisMedarbejdere";
@@ -43,6 +42,34 @@ public class EmployeeController {
 
         return "redirect:/visMedarbejder";
     }
+
+
+//    @GetMapping("/redigerMedarbejdere")
+//    public String redigerAnsat(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model) {
+//        // for (Employee employee : employeeArrayList) {
+//        if (employee.getID() == ID)
+//            model.addAttribute("employee", employee);
+//    }
+//
+//    employeid =ID;
+//        return"redigerMedarbejdere";
+//}
+//
+//    @PostMapping("/redigerMedarbejdere")
+//    public String redigerAnsat(Employee employee) throws FileNotFoundException {
+//        employee.setID(employeid);
+//        //employeeArrayList.set(employeid - 1, employee);
+//
+//        return "redirect:/VisMedarbejdere";
+//    }
+
+    @GetMapping("/SletMedarbejder")
+    public String SletMedarbejder(@RequestParam(value = "ID", defaultValue = "1") int id, Employee employee) throws FileNotFoundException {
+        deleteemployee(employee);
+        return "redirect:/VisMedarbejdere";
+    }
+
+
 
     private void insertEmployee(Employee employee) {
         dbConn db = dbConn.getInstance();
@@ -78,43 +105,47 @@ public class EmployeeController {
             e.printStackTrace();
         }
     }
-
-
-    @GetMapping("/redigerMedarbejdere")
-    public String redigerAnsat(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model) {
-        for (Employee employee : employeeArrayList) {
-            if (employee.getID() == ID)
-                model.addAttribute("employee", employee);
+    public void deleteemployee(Employee employee) {
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement("DELETE FROM employees WHERE employee_id = ?");
+            ps.setInt(1, employee.getID());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        employeid = ID;
-        return "redigerMedarbejdere";
     }
-
-    @PostMapping("/redigerMedarbejdere")
-    public String redigerAnsat(Employee employee) throws FileNotFoundException {
-        employee.setID(employeid);
-        employeeArrayList.set(employeid - 1, employee);
-        saveEmployee(employeeArrayList);
-
-        return "redirect:/VisMedarbejdere";
-    }
-
-    @GetMapping("/SletMedarbejder")
-    public String SletMedarbejder(@RequestParam(value = "ID", defaultValue = "1") int id) throws FileNotFoundException {
-        employeeArrayList.remove(id - 1);
-        saveEmployee(employeeArrayList);
-        return "redirect:/VisMedarbejdere";
-    }
-
-    public static void saveEmployee(ArrayList<Employee> employeeArrayList) throws FileNotFoundException {
-        PrintStream ps = new PrintStream("src/main/resources/templates/Employee.txt");
-        String s = "";
-        for (Employee E : employeeArrayList) {
-            s += E.toString() + "\r\n";
-
+    public ArrayList<Employee> selectAllEmployees(){
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        Statement s = null;
+        ArrayList<Employee> allEmployees = new ArrayList<>();
+        try{
+            s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT *  FROM employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
+            while(rs.next()){
+                try{
+                    Employee employee = new Employee();
+                    employee.setID(rs.getInt("employee_id"));
+                    employee.setFirstName(rs.getString("employee_firstName"));
+                    employee.setLastName(rs.getString("employee_lastName"));
+                    employee.setAddress(rs.getString("employee_address"));
+                    employee.setPhoneNumber(rs.getString("employee_phone"));
+                    employee.setCpr(rs.getString("employee_cpr"));
+                    employee.setZipcode(rs.getInt("zipcodes_zipcode"));
+                    employee.setCity(rs.getString("zipcode_city"));
+                    employee.setJobPosition(rs.getString("employee_jobPosition"));
+                    allEmployees.add(employee);
+                } catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
         }
-        ps.print(s);
-        ps.close();
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return allEmployees;
     }
-
 }
