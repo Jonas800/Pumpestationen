@@ -46,14 +46,14 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `pumpestationen`.`employees`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pumpestationen`.`employees` (
-  `employee_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `employee_firstName` VARCHAR(12) NOT NULL,
-  `employee_lastName` VARCHAR(12) NOT NULL,
-  `employee_address` VARCHAR(30) NOT NULL,
-  `employee_phone` VARCHAR(11) NOT NULL,
-  `employee_cpr` VARCHAR(11) NOT NULL,
-  `zipcodes_zipcode` INT(11) NOT NULL,
-  `employee_jobposition` varchar (30) NOT NULL,
+	`employee_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`employee_firstName` VARCHAR(12) NOT NULL,
+	`employee_lastName` VARCHAR(12) NOT NULL,
+	`employee_address` VARCHAR(30) NOT NULL,
+	`employee_phone` VARCHAR(11) NOT NULL,
+	`employee_cpr` VARCHAR(11) NOT NULL,
+	`zipcodes_zipcode` INT(11) NOT NULL,
+	`employee_jobposition` varchar (30) NOT NULL,
   PRIMARY KEY (`employee_id`),
   INDEX `fk_employees_zipcodes1_idx` (`zipcodes_zipcode` ASC),
   CONSTRAINT `fk_employees_zipcodes1`
