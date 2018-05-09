@@ -21,19 +21,18 @@
 
         <form method="Post" th:action="@{/tilføjAktivitet}" class="Firkant">
             <h1>opret nyt aktivitet</h1>
-            <label>Navn på Aktivitet: </label><br/>
-            <input type="text" th:field="${activity.name}" required="true"/><br/><br/>
-            <label>Beskrivelse af aktivitet: </label><br/>
-            <textarea type="text" th:field="${activity.description}" required="true"></textarea><br/><br/>
-            <label>Start dato og tid på aktivitet:</label><br/>
-            <input type="date" th:field="${activity.startDate}" required="true"/><input type="time" th:field="${activity.startTime}" required="true"/><br/><br/>
-            <label>Slut dato og tid på aktivitet: </label><br/>
-            <input type="date" th:field="${activity.endDate}" required="true"/><input type="time" th:field="${activity.endTime}" required="true"/><br/><br/>
+            <label>Navn på Aktivitet: </label>
+            <input type="text" th:field="${activity.name}" required="true"/>
+            <label>Beskrivelse af aktivitet: </label>
+            <textarea type="text" th:field="${activity.description}" required="true"></textarea>
+            <label>Start dato og tid på aktivitet:</label>
+            <input type="date" th:field="${activity.startDate}" required="true"/><input type="time" th:field="${activity.startTime}" required="true"/>
+            <label>Slut dato og tid på aktivitet: </label>
+            <input type="date" th:field="${activity.endDate}" required="true"/><input type="time" th:field="${activity.endTime}" required="true"/>
             <h6>Tilføj nu Ansatte til aktivitenten</h6>
             <label>Ansatte</label>
             <h6>Tilføj nu Medlemmer til aktivitenten</h6>
             <label>Medlemmer</label>
-            <br/><br/>
             <input type="submit" value="Send">
         </form>
 

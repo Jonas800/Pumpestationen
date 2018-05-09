@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,12 +18,11 @@ import java.util.Scanner;
 
 @Controller
 public class ActivityController {
-    ArrayList<Activity> activitiesArray = getActivitiesArray();
+    ArrayList<Activity> activitiesArray = new ArrayList<>();
     int activityID = 0;
 
     @GetMapping("/visAktivitet")
     public String ShowActivities(Model model) {
-        getActivitiesArray();
         model.addAttribute("activitiesArray", activitiesArray);
         return "visAktivitet";
     }
@@ -36,11 +36,9 @@ public class ActivityController {
 
     @PostMapping("/tilføjAktivitet")
     public String createActivity(@ModelAttribute Activity activity) throws FileNotFoundException {
-        int id = activitiesArray.size() + 1;
+        dbConn db = dbConn.getInstance();
 
-        activity.setId(id);
-        activitiesArray.add(activity);
-        saveToFile(activitiesArray);
+        insertActivity(activity);
 
         return "redirect:/visAktivitet";
     }
@@ -73,30 +71,23 @@ public class ActivityController {
         return "redirect:/visAktivitet";
     }
 
-    public ArrayList<Activity> getActivitiesArray() {
-        ArrayList<Activity> activitiesArraylist = new ArrayList<>();
+    public void insertActivity(Activity activity) {
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
         try {
-            Scanner scanner = new Scanner(new File("src/main/resources/templates/Activity.txt"));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                Scanner readLine = new Scanner(line).useDelimiter("#");
+            ps = con.prepareStatement("INSERT INTO activities (activity_name, activity_description, activity_startDatetime, activity_endDatetime) VALUES(?, ?, ?, ?)");
+            ps.setString(1, activity.getName());
+            ps.setString(2, activity.getDescription());
+            ps.setDate(3, new java.sql.Date(activity.getStartDateTime().getTime()));
+            ps.setDate(4, new java.sql.Date(activity.getEndDateTime().getTime()));
 
-                Activity activity = new Activity();
-                activity.setId(readLine.nextInt());
-                activity.setName(readLine.next());
-                activity.setDescription(readLine.next());
-                activity.setStartDate(readLine.next());
-                activity.setEndDate(readLine.next());
-                activity.setStartTime(readLine.next());
-                activity.setEndTime(readLine.next());
-
-                activitiesArraylist.add(activity);
-            }
-        } catch (FileNotFoundException e) {
-        } finally {
-            return activitiesArraylist;
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+
 
 
     public static void saveToFile(ArrayList<Activity> activitiesArray) throws FileNotFoundException {

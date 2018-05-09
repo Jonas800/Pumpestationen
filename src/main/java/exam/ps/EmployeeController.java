@@ -55,7 +55,6 @@ public class EmployeeController {
             ps.setInt(1, employee.getZipcode());
 
             ResultSet rs = ps.executeQuery();
-
             rs.next();
             if(rs.getInt("count") == 0){
                 ps = con.prepareStatement("INSERT INTO zipcodes(zipcode, zipcode_city) VALUES(?,?)");
