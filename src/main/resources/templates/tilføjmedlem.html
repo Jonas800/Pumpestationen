@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Tilføj Medlem</title>
+<<<<<<< HEAD
+    <link rel="stylesheet" type="text/css" href="tilføjmedlem.css"/>
+</head>
+    <form method="Post" th:action="@{/tilføjmedlem}">
+        <label> Fornavn på medlem: </label>
+        <input type="text" th:field="${member.firstName}" required="true"/>
+        <label>Efternavn på medlem</label>
+        <input type="text" th:field="${member.lastName}" required="true"/>
+        <label>Alder på medlem</label>
+        <input type="text" th:field="${member.age}" required="true"/>
+        <label>CPR på medlem</label>
+        <input type="text" th:field="${member.CPR}" required="true"/>
+        <label>kontingent</label>
+        <input type="text" th:field="${member.kontingent}" required="true"/>
+=======
     <link rel="stylesheet" type="text/css" href=Format.css/>
     <link rel="stylesheet" type="text/css" href=Member.css />
 
@@ -18,6 +33,7 @@
     <a>Login</a>
     <a style="float: right">Tilbage</a>
 </div>
+>>>>>>> dd7b9ba100bbd7acb0ed980cc475c396435820fc
 
 
 <div class="firkantrundtomtabel">
