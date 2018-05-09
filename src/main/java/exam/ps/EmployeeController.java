@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -44,24 +42,23 @@ public class EmployeeController {
     }
 
 
-//    @GetMapping("/redigerMedarbejdere")
-//    public String redigerAnsat(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model) {
-//        // for (Employee employee : employeeArrayList) {
-//        if (employee.getID() == ID)
-//            model.addAttribute("employee", employee);
-//    }
-//
-//    employeid =ID;
-//        return"redigerMedarbejdere";
-//}
-//
-//    @PostMapping("/redigerMedarbejdere")
-//    public String redigerAnsat(Employee employee) throws FileNotFoundException {
-//        employee.setID(employeid);
-//        //employeeArrayList.set(employeid - 1, employee);
-//
-//        return "redirect:/VisMedarbejdere";
-//    }
+    @GetMapping("/redigerMedarbejdere")
+    public String redigerAnsat(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model,ArrayList<Employee> allEmployees) {
+
+        for (Employee employee : allEmployees) {
+            if (employee.getID() == ID)
+                model.addAttribute("employee", employee);
+
+        }
+          employeid =ID;
+        return"redigerMedarbejdere";
+}
+
+    @PostMapping("/redigerMedarbejdere")
+    public String redigerAnsat(Employee employee) throws FileNotFoundException {
+         updateployee(employee);
+        return "redirect:/VisMedarbejdere";
+   }
 
     @GetMapping("/SletMedarbejder")
     public String SletMedarbejder(@RequestParam(value = "ID", defaultValue = "1") int id, Employee employee) throws FileNotFoundException {
@@ -148,4 +145,37 @@ public class EmployeeController {
         }
         return allEmployees;
     }
+
+    public void updateployee(Employee employee) {
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement("UPDATE employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode SET employee_id,employee_firstName,employee_lastName,employee_cpr,employee_address,employee_phone,employee_jobPosition,employee_zipcode,employee_city = ?,?,?,?,?,?,?,?,? WHERE employee_id = ?");
+            ps.setInt(1, employee.getID());
+            ps.setString(2, employee.getFirstName());
+            ps.setString(3, employee.getLastName());
+            ps.setString(4, employee.getCpr());
+            ps.setString(5, employee.getAddress());
+            ps.setString(6, employee.getPhoneNumber());
+            ps.setString(7,employee.getJobPosition());
+            ps.setString(8,employee.getCity());
+            ps.setInt(9,employee.getZipcode());
+
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private int ID;
+    private String firstName;
+    private String lastName;
+    private String cpr;
+    private String address;
+    private String phoneNumber;
+    private String jobPosition;
+    private String city;
+    private int zipcode;
 }
