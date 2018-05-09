@@ -7,19 +7,22 @@ public class Activity {
     private int id;
     private String name;
     private String description;
-    @DateTimeFormat(pattern = "EEE MMM dd kk:mm:ss z yyyy")
-    private DateTimeFormat startDateTime;
-    private DateTimeFormat endDateTime;
+    private String startDate;
+    private String endDate;
+    private String startTime;
+    private String endTime;
 
     public Activity() {
     }
 
-    public Activity(int id, String name, String description, DateTimeFormat startDateTime, DateTimeFormat endDateTime) {
+    public Activity(int id, String name, String description, String startDate, String endDate, String startTime, String endTime) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public int getId() { return id; }
@@ -34,16 +37,25 @@ public class Activity {
 
     public String getName() { return name; }
 
-    public DateTimeFormat getStartDateTime() { return startDateTime; }
+    public String getStartDate() { return startDate; }
 
-    public void setStartDateTime(DateTimeFormat startDateTime) { this.startDateTime = startDateTime; }
+    public void setStartDate(String startDate) { this.startDate = startDate; }
 
-    public DateTimeFormat getEndDateTime() { return endDateTime; }
+    public String getEndDate() { return endDate; }
 
-    public void setEndDateTime(DateTimeFormat endDateTime) { this.endDateTime = endDateTime; }
+    public void setEndDate(String endDate) { this.endDate = endDate; }
 
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) { this.startTime = startTime; }
+
+    public String getEndTime() { return endTime; }
+
+    public void setEndTime(String endTime) { this.endTime = endTime; }
 
     public String toString() {
-        return id + "#" + name + "#" + description + "#" + startDateTime + "#" + endDateTime;
+        return id + "#" + name + "#" + description + "#" + startDate+ "#" + startTime + "#" + endDate+ "#" + endTime;
     }
 }

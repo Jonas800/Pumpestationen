@@ -20,15 +20,15 @@
 
 
         <form method="Post" th:action="@{/tilføjAktivitet}" class="Firkant">
-            <h1>Du er nu igang med at oprette en ny aktivitet</h1>
+            <h1>opret nyt aktivitet</h1>
             <label>Navn på Aktivitet: </label><br/>
             <input type="text" th:field="${activity.name}" required="true"/><br/><br/>
-            <label>Beskrivelse af Aktivitet: </label><br/>
+            <label>Beskrivelse af aktivitet: </label><br/>
             <textarea type="text" th:field="${activity.description}" required="true"></textarea><br/><br/>
-            <label>Start dato og tid på aktivitet :</label><br/>
-            <input type="datetime-local" th:field="${activity.startDateTime}" required="true"/><br/><br/>
-            <label>Sluttidspunkt på Aktivitet: </label><br/>
-            <input type="datetime-local" th:field="${activity.endDateTime}" required="true"/><br/><br/>
+            <label>Start dato og tid på aktivitet:</label><br/>
+            <input type="date" th:field="${activity.startDate}" required="true"/><input type="time" th:field="${activity.startTime}" required="true"/><br/><br/>
+            <label>Slut dato og tid på aktivitet: </label><br/>
+            <input type="date" th:field="${activity.endDate}" required="true"/><input type="time" th:field="${activity.endTime}" required="true"/><br/><br/>
             <h6>Tilføj nu Ansatte til aktivitenten</h6>
             <label>Ansatte</label>
             <h6>Tilføj nu Medlemmer til aktivitenten</h6>
