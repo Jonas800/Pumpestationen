@@ -1,3 +1,4 @@
+
 package exam.ps;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -12,3 +13,9 @@ public class HomeController {
         return "forside";
     }
 }
+
+
+
+
+
+

@@ -3,20 +3,33 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Edit Activity</title>
+    <link rel="stylesheet" type="text/css" href=Activity.css />
+    <link rel="stylesheet" type="text/css" href=Format.css/>
 </head>
 <body>
-    <h1>Du er nu igang med at redigere en aktivitet</h1>
-    <form method="post" th:action="@{/redigerAktivitet}">
+
+<div class="menuTop">
+    <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
+    <a><img src="logo.png" alt="Pumpestationen"></a>
+    <a href="vagtplan">Vagtplan</a>
+    <a href="vismedlem">Medlemmer</a>
+    <a href="VisMedarbejdere">Ansatte</a>
+    <a href="visAktivitet">Aktiviteter</a>
+    <a>Login</a>
+    <a style="float: right">Tilbage</a>
+</div>
+
+
+    <form method="post" th:action="@{/redigerAktivitet}" class="Firkant">
+        <h1>redigere en aktivitet</h1>
         <label>Navn på Aktivitet: </label><br/>
-        <input type="text" th:field="${activity.name}"/><br/><br/>
-        <label>Beskrivelse af Aktivitet: </label><br/>
-        <textarea name="description" th:field="${activity.description}"></textarea><br/><br/>
-        <label>Dato på Aktivitet: </label><br/>
-        <input type="date" th:field="${activity.date}"/><br/><br/>
-        <label>Starttidspunkt på Aktivitet: </label><br/>
-        <input type="text" th:field="${activity.startTime}"/><br/><br/>
-        <label>Sluttidspunkt på Aktivitet: </label><br/>
-        <input type="text" th:field="${activity.endTime}"/><br/><br/>
+        <input type="text" th:field="${activity.name}" required="true"/><br/><br/>
+        <label>Beskrivelse af aktivitet: </label><br/>
+        <textarea type="text" th:field="${activity.description}" required="true"></textarea><br/><br/>
+        <label>Start dato og tid på aktivitet:</label><br/>
+        <input type="date" th:field="${activity.startDate}" required="true"/><input type="time" th:field="${activity.startTime}" required="true"/><br/><br/>
+        <label>Slut dato og tid på aktivitet: </label><br/>
+        <input type="date" th:field="${activity.endDate}" required="true"/><input type="time" th:field="${activity.endTime}" required="true"/><br/><br/>
         <input type="submit" value="Send">
     </form>
 

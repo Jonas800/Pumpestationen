@@ -70,7 +70,7 @@ public class ActivityController {
             }
         }
         saveToFile(activitiesArray);
-        return "sletAktivitet";
+        return "redirect:/visAktivitet";
     }
 
     public ArrayList<Activity> getActivitiesArray() {
@@ -85,8 +85,10 @@ public class ActivityController {
                 activity.setId(readLine.nextInt());
                 activity.setName(readLine.next());
                 activity.setDescription(readLine.next());
-                DateFormat ssdt = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy");
-                DateFormat sedt = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy");
+                activity.setStartDate(readLine.next());
+                activity.setEndDate(readLine.next());
+                activity.setStartTime(readLine.next());
+                activity.setEndTime(readLine.next());
 
                 activitiesArraylist.add(activity);
             }

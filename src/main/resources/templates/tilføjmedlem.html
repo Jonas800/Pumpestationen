@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Tilføj Medlem</title>
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="tilføjmedlem.css"/>
 </head>
     <form method="Post" th:action="@{/tilføjmedlem}">
@@ -16,9 +17,40 @@
         <input type="text" th:field="${member.CPR}" required="true"/>
         <label>kontingent</label>
         <input type="text" th:field="${member.kontingent}" required="true"/>
+=======
+    <link rel="stylesheet" type="text/css" href=Format.css/>
+    <link rel="stylesheet" type="text/css" href=Member.css />
 
+</head>
+<div class="menuTop">
+    <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
+    <a><img src="logo.png" alt="Pumpestationen"></a>
+    <a href="vagtplan">Vagtplan</a>
+    <a href="vismedlem">Medlemmer</a>
+    <a href="VisMedarbejdere">Ansatte</a>
+    <a href="visAktivitet">Aktiviteter</a>
+    <a href="tilføjAktivitet">Tilføj ny aktivitet</a>
+    <a>Login</a>
+    <a style="float: right">Tilbage</a>
+</div>
+>>>>>>> dd7b9ba100bbd7acb0ed980cc475c396435820fc
+
+
+<div class="firkantrundtomtabel">
+    <h3>Tilføj nyt medlem</h3>
+    <form method="Post" th:action="@{/tilføjmedlem}">
+        <label> Fornavn på medlem: </label><br/>
+        <input type="text" th:field="${member.firstName}" required="true"/><br/><br/>
+        <label>Efternavn på medlem</label><br/>
+        <input type="text" th:field="${member.lastName}" required="true"/><br/><br/>
+        <label>Alder på medlem</label><br/>
+        <input type="text" th:field="${member.age}" required="true"/><br/><br/>
+        <label>cpr nummer på medlem</label><br/>
+        <input type="text" th:field="${member.CPR}" required="true"/><br/><br/>
+        <label>Kontingent</label><br/>
+        <input type="text" th:field="${member.kontingent}"/><br/><br/>
         <input type="submit" value="Send"/>
-
-</form>
+    </form>
+</div>
 </body>
 </html>

@@ -5,13 +5,6 @@
     <title>Delete Activity</title>
 </head>
 <body>
-    <h1>Du er nu igang med at slette en aktivitet</h1>
-    <h4>Er du sikker på at du vil slette aktivitet</h4>
-    <form action="#" th:action="@{/sletAktivitet}" method="post">
-        <p th:text="${activity.name + ' ' + activity.description}"></p>
-        <input type="hidden" th:field="${activity.id}">
-        <input type="submit" value="JA" class="bottonname">
-        <a href="/visAktivitet" class="bottonname">NEJ</a>
-    </form>
+    <form action="#" th:action="@{/sletAktivitet}" method="post"/>
 </body>
 </html>

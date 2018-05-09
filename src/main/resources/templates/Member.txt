@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 Member{firstName='ddw', lastName='dds', age=2, CPR='ff', id=1, kontingent=508}
 Member{firstName='ff', lastName='fed', age=2, CPR='ff', id=2, kontingent=508}
+=======
+Member{firstName='dhhd', lastName='sss', age=12, CPR='272772', id=1, kontingent=508}
+>>>>>>> dd7b9ba100bbd7acb0ed980cc475c396435820fc
