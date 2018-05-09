@@ -1,33 +1,22 @@
-form.Firkant{
-    border-style: solid;
-    color: #0a0500;
-    margin-top: 10px;
+
+div.menuTop h2 {
+    background-color: #fffefd;
 }
 
-
-div.table {
-    text-align: center;
-    border-style: solid;
-    margin-top: 10px;
+body{
+    margin: 70px;
 }
 
-table.tableLook {
-    border-collapse: collapse;
-    width: 100%;
-}
-td, th {
-    border: 1px solid #dddddd;
-    text-align: center;
-    padding: 5px 8px 5px 8px;
+body{
+    background-color: #fffefd;
 }
 
-a.button1 {
-    border-style: double;
-    background-color: #00dc0b;
+div.menuTop {
+    background-color: #0a0500;
 }
 
-a.button2 {
-    border-style: double;
-    background-color:red;
-    border-radius: 12px;
+h2{
+    font-size: 150%;
+    letter-spacing: 5px;
+    font-family: Tahoma;
 }
