@@ -41,16 +41,16 @@ public class MemberController {
     @GetMapping("/redigerMedlem")
     public String redigerMedlem(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
         for (Member member : memberArray) {
-            if (member.getId()== id)
-                model.addAttribute("member",member);
+            if (member.getId() == id)
+                model.addAttribute("member", member);
 
-            }
-            memberID = id;
-            return "redigerMedlem";
         }
+        memberID = id;
+        return "redigerMedlem";
+    }
 
-        @PostMapping("/redigerMedlem")
-        public String redigerMedlem(@ModelAttribute Member member) throws FileNotFoundException {
+    @PostMapping("/redigerMedlem")
+    public String redigerMedlem(@ModelAttribute Member member) throws FileNotFoundException {
         member.setId(memberID);
         memberArray.set(memberID - 1, member);
         saveMemberToFile(memberArray);
@@ -71,33 +71,34 @@ public class MemberController {
         PrintStream ps = new PrintStream("src/main/resources/templates/Member.txt");
         String s = "";
         for (Member m : memberArray) {
-            s+=m.toString() + "\r\n";
+            s += m.toString() + "\r\n";
 
         }
-            ps.print(s);
-            ps.close();
-        }
+        ps.print(s);
+        ps.close();
     }
-      /* public ArrayList<Member> getMemberArray () throws FileNotFoundException {
-            ArrayList<Member> ArrayMember = new ArrayList<>();
 
-            Scanner readFile = new Scanner(new File("src/main.resources/templates/Member.txt"));
-            while (readFile.hasNextLine()) {
-                String line = readFile.nextLine();
-                Scanner readLine = new Scanner(line).useDelimiter("#");
+    public ArrayList<Member> getMemberArray() throws FileNotFoundException {
+        ArrayList<Member> ArrayMember = new ArrayList<>();
 
-                Member member = new Member();
-                member.setFirstName(readLine.next());
-                member.setLastName(readLine.next());
-                member.setAge(readLine.nextInt());
-                member.setCPR(readLine.next());
-                member.setId(readLine.nextInt());
-                member.setKontingent(readLine.nextDouble());
-                ArrayMember.add(member);
+        Scanner readFile = new Scanner(new File("src/main.resources/templates/Member.txt"));
+        while (readFile.hasNextLine()) {
+            String line = readFile.nextLine();
+            Scanner readLine = new Scanner(line).useDelimiter("#");
+
+            Member member = new Member();
+            member.setFirstName(readLine.next());
+            member.setLastName(readLine.next());
+            member.setAge(readLine.nextInt());
+            member.setCPR(readLine.next());
+            member.setId(readLine.nextInt());
+            member.setKontingent(readLine.nextInt());
+            ArrayMember.add(member);
 
 
-            }
-            return ArrayMember;
-*/
 
+        }
+        return ArrayMember;
+    }
+}
 

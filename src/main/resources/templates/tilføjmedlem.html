@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Tilføj Medlem</title>
-    <link rel="stylesheet" type="text/css" href="../static/style.css"/>
+    <link rel="stylesheet" type="text/css" href="tilføjmedlem.css"/>
 </head>
     <form method="Post" th:action="@{/tilføjmedlem}">
         <label> Fornavn på medlem: </label>
@@ -14,7 +14,7 @@
         <input type="text" th:field="${member.age}" required="true"/>
         <label>CPR på medlem</label>
         <input type="text" th:field="${member.CPR}" required="true"/>
-        <label>kontigent</label>
+        <label>kontingent</label>
         <input type="text" th:field="${member.kontingent}" required="true"/>
 
         <input type="submit" value="Send"/>

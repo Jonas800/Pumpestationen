@@ -1,1 +1,2 @@
-Member{firstName='fkfk', lastName='fkfk', age=2, CPR='fkfk', id=1, kontingent=2}
+Member{firstName='ddw', lastName='dds', age=2, CPR='ff', id=1, kontingent=508}
+Member{firstName='ff', lastName='fed', age=2, CPR='ff', id=2, kontingent=508}
