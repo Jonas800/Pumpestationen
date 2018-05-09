@@ -1,5 +1,6 @@
 package exam.ps;
-
+import java.util.*;
+import org.springframework.format.annotation.DateTimeFormat;
 public class Member {
     private String firstName;
     private String lastName;
@@ -7,19 +8,40 @@ public class Member {
     private String CPR;
     private int id;
     private int kontingent;
-
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date dateOfBirth = new Date();
+    private String address;
+    private int zipcode;
+    private String city;
     public Member(){
 
     }
 
-    public Member(String firstName, String lastName, int age, String CPR, int id, int kontingent){
+    public Member(String firstName, String lastName, int age, String CPR, int id, int kontingent, Date dateOfBirth){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.CPR = CPR;
         this.id = id;
         this.kontingent = kontingent;
+        this.dateOfBirth = dateOfBirth;
 
+    }
+
+    public int getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getFirstName() {
@@ -39,7 +61,18 @@ public class Member {
     }
 
     public int getAge() {
+        Date date = new Date();
+        age = date.getYear() - dateOfBirth.getYear();
+
         return age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setAge(int age) {
@@ -75,6 +108,14 @@ public class Member {
         this.kontingent = kontingent;
     }
 
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -86,4 +127,6 @@ public class Member {
                 ", kontingent=" + kontingent +
                 '}';
     }
+
 }
+

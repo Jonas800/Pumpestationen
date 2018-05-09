@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.io.*;
+import java.sql.*;
 @Controller
 public class MemberController {
     ArrayList<Member> memberArray = new ArrayList<>();
@@ -26,15 +27,14 @@ public class MemberController {
     @GetMapping("/tilføjmedlem")
     public String tilføjmedlem(Model model) {
         model.addAttribute("member", new Member());
+
         return "tilføjmedlem";
     }
 
     @PostMapping("/tilføjmedlem")
     public String tilføjmedlem(@ModelAttribute Member member) throws FileNotFoundException {
-        int ID = memberArray.size() + 1;
-        member.setId(ID);
-        memberArray.add(member);
-        saveMemberToFile(memberArray);
+
+        insertMember(member);
         return "redirect:/vismedlem";
     }
 
@@ -100,5 +100,50 @@ public class MemberController {
         }
         return ArrayMember;
     }
+
+    private void insertMember(Member member){
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
+        try{
+            ps = con.prepareStatement("INSERT INTO members(member_firstName, member_lastName, member_dateOfBirth, member_CPR) VALUES(?,?,?,?)");
+            ps.setString(1,member.getFirstName());
+            ps.setString(2,member.getLastName());
+            ps.setInt(3, member.getAge());
+            ps.setString(4, member.getCPR());
+            ps.setString(5, member.getAddress());
+            ps.setInt(6, member.getZipcode());
+            ps.setString(7, member.getCity());
+            ps.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+    private ArrayList<Member> selectMembers(Member member){
+        ArrayList<Member> memberSelect = new ArrayList<>();
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
+
+        try{
+            con.prepareStatement("SELECT * FROM members(member_firstName, member_lastName, member_age, member_CPR, member_id, member_kontingent) VALUES(?,?,?,?,?,?)");
+
+            ps.setString(1, member.getFirstName());
+            ps.setString(2, member.getLastName());
+            ps.setInt(3, member.getAge());
+            ps.setString(4, member.getCPR());
+            ps.setInt(5, member.getId());
+            ps.setInt(6, member.getKontingent());
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return memberSelect;
+    }
+
 }
 
