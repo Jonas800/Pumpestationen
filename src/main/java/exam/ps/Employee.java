@@ -7,8 +7,9 @@ public class Employee {
     private String lastName;
     private String cpr;
     private String address;
-    private int phoneNumber;
+    private String phoneNumber;
     private String jobPosition;
+    private int zipcode;
 
     public Employee() {
 
@@ -19,7 +20,7 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public Employee(int ID, String firstName, String lastName, String cpr, String address, int phoneNumber, String jobPosition) {
+    public Employee(int ID, String firstName, String lastName, String cpr, String address, String phoneNumber, String jobPosition) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -69,11 +70,11 @@ public class Employee {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -83,6 +84,14 @@ public class Employee {
 
     public void setJobPosition(String jobPosition) {
         this.jobPosition = jobPosition;
+    }
+
+    public int getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
     }
 
     @Override

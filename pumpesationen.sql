@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `pumpestationen`.`employees` (
   `employee_phone` VARCHAR(11) NOT NULL,
   `employee_cpr` VARCHAR(11) NOT NULL,
   `zipcodes_zipcode` INT(11) NOT NULL,
+  `employee_jobposition` varchar (30) NOT NULL,
   PRIMARY KEY (`employee_id`),
   INDEX `fk_employees_zipcodes1_idx` (`zipcodes_zipcode` ASC),
   CONSTRAINT `fk_employees_zipcodes1`

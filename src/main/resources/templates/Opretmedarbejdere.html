@@ -28,13 +28,15 @@
         <label>Efternavn: </label><br/>
         <input type="text" th:field="${employee.lastName}" required="true"/><br/><br/>
         <label>cpr nummer: </label><br/>
-        <input type="int" th:field="${employee.cpr}" required="true"/><br/><br/>
+        <input type="text" th:field="${employee.cpr}" required="true"/><br/><br/>
         <label>adresse: </label><br/>
         <input type="text" th:field="${employee.address}" required="true"/><br/><br/>
         <label>Telefon nr.: </label><br/>
-        <input type="int" th:field="${employee.phoneNumber}" required="true"/><br/><br/>
+        <input type="text" th:field="${employee.phoneNumber}" required="true"/><br/><br/>
         <label>Stilling: </label><br/>
         <input type="text" th:field="${employee.jobPosition}" required="true"/><br/><br/>
+        <label>postnr: </label><br/>
+        <input type="text" th:field="${employee.zipcode}" required="true"/><br/><br/>
         <input type="submit" value="send"/>
     </form>
 </div>

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Controller
@@ -36,13 +39,31 @@ public String VisMedarbejdere(Model model) {
 }
 @PostMapping("/Opretmedarbejdere")
     public String Opretmedarbjedere (@ModelAttribute Employee employee) throws FileNotFoundException {
-    int id=employeeArrayList.size()+1;
-    employee.setID(id);
-     employeeArrayList.add(employee);
-     saveEmployee(employeeArrayList);
-     return "redirect:/VisMedarbejdere";
+    dbConn db = dbConn.getInstance();
 
+        insertEmployee(employee);
 
+    return "redirect:/visMedarbejder";
+}
+
+private void insertEmployee(Employee employee) {
+    dbConn db = dbConn.getInstance();
+    Connection con = db.createConnection();
+    PreparedStatement ps = null;
+    try {
+        ps = con.prepareStatement("INSERT INTO employees (employee_firstName, employee_lastName, employee_address, employee_phone, employee_cpr, zipcodes_zipcode,employee_jobPosition) VALUES(?, ?, ?, ?, ?, ?,?)");
+        ps.setString(1, employee.getFirstName());
+        ps.setString(2, employee.getLastName());
+        ps.setString(3, employee.getAddress());
+        ps.setString(4, employee.getPhoneNumber());
+        ps.setString(5, employee.getCpr());
+        ps.setInt(6, employee.getZipcode());
+        ps.setString(7, employee.getJobPosition());
+
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
 }
 
 
