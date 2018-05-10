@@ -149,7 +149,7 @@ public class MemberController {
         Statement s = null;
         try {
             s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT *  FROM employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
+            ResultSet rs = s.executeQuery("SELECT *  FROM members INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
             while (rs.next()) {
                 try {
                     Member member = new Member();
