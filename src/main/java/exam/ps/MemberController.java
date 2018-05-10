@@ -1,4 +1,5 @@
 package exam.ps;
+import java.sql.Date;
 import java.util.*;
 
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,7 @@ public class MemberController {
 
     @PostMapping("/tilføjmedlem")
     public String tilføjmedlem(@ModelAttribute Member member) throws FileNotFoundException {
-
+        dbConn db = dbConn.getInstance();
         insertMember(member);
         return "redirect:/vismedlem";
     }
@@ -54,14 +55,17 @@ public class MemberController {
         member.setId(memberID);
         memberArray.set(memberID - 1, member);
         saveMemberToFile(memberArray);
+        updateMember(member);
+
         return "redirect:/vismedlem";
     }
 
 
     @GetMapping("/sletmedlem")
-    public String deleteMember(@RequestParam(value = "id", defaultValue = "1") int id) throws FileNotFoundException {
-        memberArray.remove(id - 1);
+    public String deleteMember(@RequestParam(value = "id", defaultValue = "1") int id, Member member) throws FileNotFoundException  {
+        deleteMember(member);
         saveMemberToFile(memberArray);
+
         return "redirect:/vismedlem";
 
     }
@@ -101,19 +105,33 @@ public class MemberController {
         return ArrayMember;
     }
 
-    private void insertMember(Member member){
+    public void insertMember(Member member){
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
+        Statement s = null;
         PreparedStatement ps = null;
-        try{
-            ps = con.prepareStatement("INSERT INTO members(member_firstName, member_lastName, member_dateOfBirth, member_CPR) VALUES(?,?,?,?)");
+        PreparedStatement ps2 = null;
+        try {
+            ps = con.prepareStatement("SELECT COUNT(*) AS count FROM zipcodes WHERE zipcode = ?");
+            ps.setInt(1, member.getZipcode());
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            if(rs.getInt("count") == 0){
+                ps = con.prepareStatement("INSERT INTO zipcodes(zipcode, zipcode_city) VALUES(?,?)");
+                ps.setInt(1, member.getZipcode());
+                ps.setString(2, member.getCity());
+
+                ps.executeUpdate();
+            }
+            ps.close();
+            ps = con.prepareStatement("INSERT INTO members(member_firstName, member_lastName, member_dateOfBirth, member_CPR, member_address, zipcodes_zipcode) VALUES(?,?,?,?,?,?)");
             ps.setString(1,member.getFirstName());
             ps.setString(2,member.getLastName());
-            ps.setInt(3, member.getAge());
+            ps.setDate(3, new java.sql.Date(member.getDateOfBirth().getTime()));
             ps.setString(4, member.getCPR());
             ps.setString(5, member.getAddress());
             ps.setInt(6, member.getZipcode());
-            ps.setString(7, member.getCity());
             ps.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
@@ -143,6 +161,42 @@ public class MemberController {
             e.printStackTrace();
         }
         return memberSelect;
+    }
+
+    public void updateMember(Member member){
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
+        try{
+            ps = con.prepareStatement("UPDATE members INNER JOIN zipcode ON zipcode = zipcodes_zipcodes SET member_firstName =?,member_lastName =?,member_age =?,member_cpr =?,member_id =?,member_kontingent =?, member_dateOfBirth =?,member_address =?,member_zipcode,member_city =? WHERE member_id =?");
+            ps.setInt(5, memberID);
+            ps.setString(1, member.getFirstName());
+            ps.setString(2, member.getLastName());
+            ps.setInt(3, member.getAge());
+            ps.setString(4, member.getCPR());
+            ps.setInt(5, member.getKontingent());
+            ps.setDate(6, (Date) member.getDateOfBirth());
+            ps.setString(7, member.getAddress());
+            ps.setInt(8, member.getZipcode());
+            ps.setString(9, member.getCity());
+
+            ps.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteMember(Member member) {
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement("DELETE FROM members WHERE member_id = ?");
+            ps.setInt(1, member.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

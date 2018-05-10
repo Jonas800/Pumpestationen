@@ -8,7 +8,7 @@ public class Member {
     private String CPR;
     private int id;
     private int kontingent;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth = new Date();
     private String address;
     private int zipcode;
