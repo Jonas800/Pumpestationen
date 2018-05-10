@@ -17,7 +17,7 @@ public class Member {
 
     }
 
-    public Member(String firstName, String lastName, int age, String CPR, int id, int kontingent, Date dateOfBirth){
+    public Member(String firstName, String lastName, int age, String CPR, int id, int kontingent, Date dateOfBirth, int zipcode, String city){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -25,7 +25,8 @@ public class Member {
         this.id = id;
         this.kontingent = kontingent;
         this.dateOfBirth = dateOfBirth;
-
+        this.city = city;
+        this.zipcode = zipcode;
     }
 
     public int getZipcode() {

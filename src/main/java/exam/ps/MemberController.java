@@ -20,6 +20,7 @@ public class MemberController {
 
     @GetMapping("/vismedlem")
     public String showMember(Model model) {
+        model.addAttribute("memberArray", selectMembers());
         return "vismedlem";
     }
 
@@ -31,32 +32,33 @@ public class MemberController {
     }
 
     @PostMapping("/tilføjmedlem")
-    public String tilføjmedlem(@ModelAttribute Member member) throws FileNotFoundException {
+    public String tilføjmedlem(@ModelAttribute Member member)  {
         dbConn db = dbConn.getInstance();
         insertMember(member);
         return "redirect:/tilføjmedlem";
     }
 
-    //@GetMapping("/redigerMedlem")
-    //public String redigerMedlem(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
-        //for (Member member : memberArray) {
-          //  if (member.getId() == id)
-         //       model.addAttribute("member", member);
+    @GetMapping("/redigerMedlem")
+    public String redigerMedlem(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
+        for (Member member : selectMembers()) {
+           if (member.getId() == id)
+                model.addAttribute("member", member);
 
-       // }
-       // memberID = id;
-      //  return "redigerMedlem";
-    //}
+        }
+        memberID = id;
 
-    //@PostMapping("/redigerMedlem")
-    //public String redigerMedlem(@ModelAttribute Member member) throws FileNotFoundException {
-       // member.setId(memberID);
-      //  memberArray.set(memberID - 1, member);
-    //    saveMemberToFile(memberArray);
-  //      updateMember(member);
-//
-    //    return "redirect:/vismedlem";
-   // }
+         return "redigerMedlem";
+    }
+
+    @PostMapping("/redigerMedlem")
+    public String redigerMedlem(Member member) {
+        /*member.setId(memberID);
+        memberArray.set(memberID - 1, member);
+        saveMemberToFile(memberArray);*/
+        updateMember(member);
+
+        return "redirect:/vismedlem";
+    }
 
 
     @GetMapping("/sletmedlem")
@@ -70,7 +72,7 @@ public class MemberController {
     }
 
 
-    public static void saveMemberToFile(ArrayList<Member> memberArray) throws FileNotFoundException {
+    /*public static void saveMemberToFile(ArrayList<Member> memberArray) throws FileNotFoundException {
         PrintStream ps = new PrintStream("src/main/resources/templates/Member.txt");
         String s = "";
         for (Member m : memberArray) {
@@ -80,8 +82,8 @@ public class MemberController {
         ps.print(s);
         ps.close();
     }
-
-    public ArrayList<Member> getMemberArray() throws FileNotFoundException {
+*/
+   /* public ArrayList<Member> getMemberArray() throws FileNotFoundException {
         ArrayList<Member> ArrayMember = new ArrayList<>();
 
         Scanner readFile = new Scanner(new File("src/main.resources/templates/Member.txt"));
@@ -103,8 +105,8 @@ public class MemberController {
         }
         return ArrayMember;
     }
-
-    public void insertMember(Member member){
+*/
+    private void insertMember(Member member){
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         Statement s = null;
@@ -124,14 +126,14 @@ public class MemberController {
                 ps.executeUpdate();
             }
             ps.close();
-            ps = con.prepareStatement("INSERT INTO members(member_firstName, member_lastName, member_dateOfBirth, member_CPR, member_address, zipcodes_zipcode) VALUES(?,?,?,?,?,?)");
-            ps.setString(1,member.getFirstName());
-            ps.setString(2,member.getLastName());
-            ps.setDate(3, new java.sql.Date(member.getDateOfBirth().getTime()));
-            ps.setString(4, member.getCPR());
-            ps.setString(5, member.getAddress());
-            ps.setInt(6, member.getZipcode());
-            ps.executeUpdate();
+            ps2 = con.prepareStatement("INSERT INTO members(member_firstName, member_lastName, member_dateOfBirth, member_CPR, member_address, zipcodes_zipcode) VALUES(?,?,?,?,?,?)");
+            ps2.setString(1,member.getFirstName());
+            ps2.setString(2,member.getLastName());
+            ps2.setDate(3, new java.sql.Date(member.getDateOfBirth().getTime()));
+            ps2.setString(4, member.getCPR());
+            ps2.setString(5, member.getAddress());
+            ps2.setInt(6, member.getZipcode());
+            ps2.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -140,27 +142,38 @@ public class MemberController {
 
     }
 
-    private ArrayList<Member> selectMembers(Member member){
+    public ArrayList<Member> selectMembers() {
         ArrayList<Member> memberSelect = new ArrayList<>();
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
-        PreparedStatement ps = null;
+        Statement s = null;
+        try {
+            s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT *  FROM employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
+            while (rs.next()) {
+                try {
+                    Member member = new Member();
+                    member.setFirstName(rs.getString("member_firstName"));
+                    member.setLastName(rs.getString("member_lastName"));
+                    member.setAge(rs.getInt("member_age"));
+                    member.setCPR(rs.getString("member_CPR"));
+                    member.setId(rs.getInt("member_Id"));
+                    member.setKontingent(rs.getInt("member_kontingent"));
+                    member.setZipcode(rs.getInt("zipcodes_zipcode"));
+                    member.setCity(rs.getString("member_city"));
+                    memberSelect.add(member);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
-        try{
-            con.prepareStatement("SELECT * FROM members(member_firstName, member_lastName, member_age, member_CPR, member_id, member_kontingent) VALUES(?,?,?,?,?,?)");
-
-            ps.setString(1, member.getFirstName());
-            ps.setString(2, member.getLastName());
-            ps.setInt(3, member.getAge());
-            ps.setString(4, member.getCPR());
-            ps.setInt(5, member.getId());
-            ps.setInt(6, member.getKontingent());
-
-        }catch(SQLException e){
+            }
+        }
+        catch(SQLException e){
             e.printStackTrace();
         }
         return memberSelect;
     }
+
 
     public void updateMember(Member member){
         dbConn db = dbConn.getInstance();

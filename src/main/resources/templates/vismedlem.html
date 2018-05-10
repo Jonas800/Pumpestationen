@@ -42,7 +42,8 @@
             <td th:text="${member.CPR}"/>
             <td th:text="${member.id}"/>
             <td th:text="${member.kontingent}"/>
-
+            <td th:text="${member.zipcode}"/>
+            <td th:text="${member.city}"/>
             <td>
                 <a th:href="@{'/redigerMedlem?id='+${member.id}}" class="knap">Rediger</a>
                 <a th:href="@{'/sletmedlem?id='+${member.id}}" onclick="return confirm('sletmedlem?id=')">Slet</a>

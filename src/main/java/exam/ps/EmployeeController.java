@@ -127,7 +127,7 @@ public class EmployeeController {
         try{
             s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT *  FROM employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
-            while(rs.next()){
+                while(rs.next()){
                 try{
                     Employee employee = new Employee();
                     employee.setID(rs.getInt("employee_id"));
