@@ -12,7 +12,6 @@ import java.io.*;
 import java.sql.*;
 @Controller
 public class MemberController {
-    ArrayList<Member> memberArray = new ArrayList<>();
     int memberID = 0;
 
     public MemberController() {
@@ -21,7 +20,6 @@ public class MemberController {
 
     @GetMapping("/vismedlem")
     public String showMember(Model model) {
-        model.addAttribute("memberArray", memberArray);
         return "vismedlem";
     }
 
@@ -36,37 +34,38 @@ public class MemberController {
     public String tilføjmedlem(@ModelAttribute Member member) throws FileNotFoundException {
         dbConn db = dbConn.getInstance();
         insertMember(member);
-        return "redirect:/vismedlem";
+        return "redirect:/tilføjmedlem";
     }
 
-    @GetMapping("/redigerMedlem")
-    public String redigerMedlem(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
-        for (Member member : memberArray) {
-            if (member.getId() == id)
-                model.addAttribute("member", member);
+    //@GetMapping("/redigerMedlem")
+    //public String redigerMedlem(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
+        //for (Member member : memberArray) {
+          //  if (member.getId() == id)
+         //       model.addAttribute("member", member);
 
-        }
-        memberID = id;
-        return "redigerMedlem";
-    }
+       // }
+       // memberID = id;
+      //  return "redigerMedlem";
+    //}
 
-    @PostMapping("/redigerMedlem")
-    public String redigerMedlem(@ModelAttribute Member member) throws FileNotFoundException {
-        member.setId(memberID);
-        memberArray.set(memberID - 1, member);
-        saveMemberToFile(memberArray);
-        updateMember(member);
-
-        return "redirect:/vismedlem";
-    }
+    //@PostMapping("/redigerMedlem")
+    //public String redigerMedlem(@ModelAttribute Member member) throws FileNotFoundException {
+       // member.setId(memberID);
+      //  memberArray.set(memberID - 1, member);
+    //    saveMemberToFile(memberArray);
+  //      updateMember(member);
+//
+    //    return "redirect:/vismedlem";
+   // }
 
 
     @GetMapping("/sletmedlem")
     public String deleteMember(@RequestParam(value = "id", defaultValue = "1") int id, Member member) throws FileNotFoundException  {
         deleteMember(member);
-        saveMemberToFile(memberArray);
 
         return "redirect:/vismedlem";
+
+
 
     }
 
