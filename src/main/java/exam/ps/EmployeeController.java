@@ -33,30 +33,34 @@ public class EmployeeController {
     }
 
     @PostMapping("/Opretmedarbejdere")
-    public String Opretmedarbjedere(@ModelAttribute Employee employee) throws FileNotFoundException {
+    public String Opretmedarbjedere(@ModelAttribute Employee employee)  {
         dbConn db = dbConn.getInstance();
 
         insertEmployee(employee);
 
-        return "redirect:/visMedarbejder";
+        return "redirect:/VisMedarbejdere";
     }
 
 
     @GetMapping("/redigerMedarbejdere")
-    public String redigerAnsat(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model,ArrayList<Employee> allEmployees) {
-
-        for (Employee employee : allEmployees) {
+    public String redigerAnsat(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model) {
+        for (Employee employee:selectAllEmployees()) {
             if (employee.getID() == ID)
                 model.addAttribute("employee", employee);
 
+
         }
-          employeid =ID;
+
+
+
+
+
         return"redigerMedarbejdere";
 }
 
     @PostMapping("/redigerMedarbejdere")
-    public String redigerAnsat(Employee employee) throws FileNotFoundException {
-         updateployee(employee);
+    public String redigerAnsat(Employee employee)   {
+        updateployee(employee);
         return "redirect:/VisMedarbejdere";
    }
 
@@ -151,16 +155,16 @@ public class EmployeeController {
         Connection con = db.createConnection();
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode SET employee_id,employee_firstName,employee_lastName,employee_cpr,employee_address,employee_phone,employee_jobPosition,employee_zipcode,employee_city = ?,?,?,?,?,?,?,?,? WHERE employee_id = ?");
-            ps.setInt(1, employee.getID());
-            ps.setString(2, employee.getFirstName());
-            ps.setString(3, employee.getLastName());
-            ps.setString(4, employee.getCpr());
-            ps.setString(5, employee.getAddress());
-            ps.setString(6, employee.getPhoneNumber());
-            ps.setString(7,employee.getJobPosition());
+            ps = con.prepareStatement("UPDATE employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode SET employee_firstName,employee_lastName,employee_cpr,employee_address,employee_phone,employee_jobPosition,employee_zipcode,employee_city = ?,?,?,?,?,?,?,? WHERE employee_id = ?");
+            ps.setInt(9, employee.getID());
+            ps.setString(1, employee.getFirstName());
+            ps.setString(2, employee.getLastName());
+            ps.setString(3, employee.getCpr());
+            ps.setString(4, employee.getAddress());
+            ps.setString(5, employee.getPhoneNumber());
+            ps.setString(6,employee.getJobPosition());
+            ps.setInt(7,employee.getZipcode());
             ps.setString(8,employee.getCity());
-            ps.setInt(9,employee.getZipcode());
 
 
             ps.executeUpdate();
@@ -169,13 +173,5 @@ public class EmployeeController {
         }
 
     }
-    private int ID;
-    private String firstName;
-    private String lastName;
-    private String cpr;
-    private String address;
-    private String phoneNumber;
-    private String jobPosition;
-    private String city;
-    private int zipcode;
+
 }
