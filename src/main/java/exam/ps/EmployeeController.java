@@ -52,6 +52,7 @@ public class EmployeeController {
         }
 
 
+                    employeid=ID;
 
 
 
