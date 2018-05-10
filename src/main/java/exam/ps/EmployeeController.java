@@ -155,8 +155,8 @@ public class EmployeeController {
         Connection con = db.createConnection();
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode SET employee_firstName,employee_lastName,employee_cpr,employee_address,employee_phone,employee_jobPosition,employee_zipcode,employee_city = ?,?,?,?,?,?,?,? WHERE employee_id = ?");
-            ps.setInt(9, employee.getID());
+            ps = con.prepareStatement("UPDATE employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode SET employee_firstName = ?,employee_lastName=?,employee_cpr=?,employee_address=?,employee_phone=?,employee_jobPosition=?,zipcodes_zipcode=?,zipcode_city=? WHERE employee_id = ?");
+            ps.setInt(9, employeid);
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
             ps.setString(3, employee.getCpr());
