@@ -3,38 +3,29 @@
 <head>
     <meta charset="UTF-8"/>
     <title> Creating new activity</title>
-    <link rel="stylesheet" type="text/css" href=Activity.css />
-    <link rel="stylesheet" type="text/css" href=Format.css/>
 </head>
     <body>
-        <div class="menuTop">
-            <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
-            <a><img src="logo.png" alt="Pumpestationen"></a>
-            <a href="vagtplan">Vagtplan</a>
-            <a href="vismedlem">Medlemmer</a>
-            <a href="VisMedarbejdere">Ansatte</a>
-            <a href="visAktivitet">Aktiviteter</a>
-            <a>Login</a>
-            <a style="float: right">Tilbage</a>
-        </div>
-
-
-        <form class="genericForm" method="Post" th:action="@{/tilføjAktivitet}" class="Firkant">
-            <h1>opret nyt aktivitet</h1>
-            <label>Navn på Aktivitet: </label>
-            <input type="text" th:field="${activity.name}" required="true"/>
-            <label>Beskrivelse af aktivitet: </label>
-            <textarea type="text" th:field="${activity.description}" required="true"></textarea>
-            <label>Start dato og tid på aktivitet:</label>
-            <input type="date" th:field="${activity.startDate}" required="true"/><input type="time" th:field="${activity.startTime}" required="true"/>
-            <label>Slut dato og tid på aktivitet: </label>
-            <input type="date" th:field="${activity.endDate}" required="true"/><input type="time" th:field="${activity.endTime}" required="true"/>
-            <h6>Tilføj nu Ansatte til aktiviteten</h6>
-            <label>Ansatte</label>
-            <h6>Tilføj nu Medlemmer til aktiviteten</h6>
-            <label>Medlemmer</label>
-            <input type="submit" value="Send">
+    <div>
+        <h1>Opret aktivitet</h1>
+        <form class="genericForm" method="Post" th:action="@{/tilføjAktivitet}">
+            <div>
+                <label>Navn på aktivitet: </label>
+                <input type="text" th:field="${activity.name}" required="true"/>
+            </div>
+            <div>
+                <label>Beskrivelse af aktivitet: </label>
+                <textarea type="text" th:field="${activity.description}" required="true"></textarea>
+            </div>
+            <div>
+                <label>Start dato og tid på aktivitet:</label>
+                <input type="date" th:field="${activity.startDatetime}" required="true"/>
+            </div>
+            <div>
+                <label>Slut dato og tid på aktivitet:</label>
+                <input type="date" th:field="${activity.endDateTime}" required="true"/>
+            </div>
+            <input type="submit" value="Send"/>
         </form>
-
+    </div>
     </body>
 </html>
