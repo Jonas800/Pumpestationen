@@ -67,7 +67,7 @@ public class ActivityController {
         ArrayList<Activity> allActivities = new ArrayList<>();
         try{
             s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT *  FROM activities INNER JOIN ??? ON ?? = ??? ");
+            ResultSet rs = s.executeQuery("SELECT *  FROM activities ");
             while(rs.next()){
                 try{
                     Activity activity = new Activity();

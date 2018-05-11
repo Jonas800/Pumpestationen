@@ -107,6 +107,7 @@ public class MemberController {
     }
 */
     private void insertMember(Member member){
+
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;

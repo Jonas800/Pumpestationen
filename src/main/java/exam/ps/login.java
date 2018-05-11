@@ -1,8 +1,8 @@
 package exam.ps;
 
-public class login extends Employee {
-private String userName;
-private String passWord;
+public class login   {
+public String userName;
+public String passWord;
     public login() {
 
     }

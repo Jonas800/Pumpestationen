@@ -1,6 +1,6 @@
 package exam.ps;
 
-public class Employee {
+public class Employee extends login{
 
     private int ID;
     private String firstName;
@@ -15,6 +15,8 @@ public class Employee {
     public Employee() {
 
     }
+
+
     public Employee(int id, String firstName, String lastName){
         this.ID = id;
         this.firstName = firstName;
@@ -29,6 +31,9 @@ public class Employee {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.jobPosition = jobPosition;
+
+
+
 
     }
 

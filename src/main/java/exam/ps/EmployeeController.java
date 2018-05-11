@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 @Controller
-public class EmployeeController {
+public class EmployeeController  {
     int employeid = 0;
 
     @GetMapping("/VisMedarbejdere")
