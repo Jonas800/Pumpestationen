@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 @Controller
-public class LoginController {
+public class LoginController  {
     ArrayList<login> loginArrayList = getlogins();
 
     public LoginController() throws FileNotFoundException {
@@ -63,27 +63,6 @@ public class LoginController {
 
 
 
-    public static void writelogin(ArrayList<login> loginArrayList) throws FileNotFoundException {
-        PrintStream ps = new PrintStream("src/main/resources/templates/password.txt");
-        for (login login : loginArrayList) {
-            ps.print(login.toString() +"\n");
-        }
 
-    }
 
-    public ArrayList<login> getlogins() throws FileNotFoundException {
-        ArrayList<login> loginArrayList = new ArrayList<>();
-        Scanner scan = new Scanner(new File("src/main/resources/templates/password.txt"));
-
-        while(scan.hasNextLine()) {
-            String line = scan.nextLine();
-            Scanner readline = new Scanner(line).useDelimiter("#");
-            login login =new login();
-            login.setUserName(readline.next());
-            login.setPassWord(readline.next());
-            loginArrayList.add(login);
-        }
-        return loginArrayList;
-
-    }
 }

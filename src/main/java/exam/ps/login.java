@@ -1,6 +1,6 @@
 package exam.ps;
 
-public class login {
+public class login extends Employee {
 private String userName;
 private String passWord;
     public login() {
@@ -28,8 +28,5 @@ private String passWord;
     }
 
 
-    public String toString() {
-        return  userName  + "#" + passWord;
-    }
 }
 
