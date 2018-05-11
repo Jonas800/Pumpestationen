@@ -35,7 +35,7 @@ public class MemberController {
     public String tilføjmedlem(@ModelAttribute Member member)  {
         dbConn db = dbConn.getInstance();
         insertMember(member);
-        return "redirect:/tilføjmedlem";
+        return "redirect:/vismedlem";
     }
 
     @GetMapping("/redigerMedlem")
@@ -109,7 +109,6 @@ public class MemberController {
     private void insertMember(Member member){
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
-        Statement s = null;
         PreparedStatement ps = null;
         PreparedStatement ps2 = null;
         try {
@@ -149,18 +148,17 @@ public class MemberController {
         Statement s = null;
         try {
             s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT *  FROM employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
+            ResultSet rs = s.executeQuery("SELECT *  FROM members INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
             while (rs.next()) {
                 try {
                     Member member = new Member();
                     member.setFirstName(rs.getString("member_firstName"));
                     member.setLastName(rs.getString("member_lastName"));
-                    member.setAge(rs.getInt("member_age"));
+                    member.setDateOfBirth(rs.getDate("member_dateOfBirth"));
                     member.setCPR(rs.getString("member_CPR"));
                     member.setId(rs.getInt("member_Id"));
-                    member.setKontingent(rs.getInt("member_kontingent"));
                     member.setZipcode(rs.getInt("zipcodes_zipcode"));
-                    member.setCity(rs.getString("member_city"));
+                    member.setCity(rs.getString("zipcode_city"));
                     memberSelect.add(member);
                 } catch (SQLException e) {
                     e.printStackTrace();
