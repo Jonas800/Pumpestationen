@@ -20,7 +20,7 @@
 </div>
 
 
-    <form method="post" th:action="@{/redigerAktivitet}" class="Firkant">
+    <form method="post" th:action="@{/redigerAktivitet}" class="genericForm">
         <h1>redigere en aktivitet</h1>
         <label>Navn på Aktivitet: </label><br/>
         <input type="text" th:field="${activity.name}" required="true"/><br/><br/>

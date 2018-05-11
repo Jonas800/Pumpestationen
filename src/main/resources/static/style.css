@@ -1,7 +1,85 @@
 body{
-    background-color:silver;
+    background-color: #fffefd;
+    margin:0;
 }
 
+/*Wrap til centrering*/
+.wrap{
+    width:50%;
+    margin:0 auto;
+}
+h2 {
+    text-align: center;
+}
+
+/*header*/
+header {
+    background-color: #0a0500;
+}
+
+h2{
+    font-size: 150%;
+    letter-spacing: 5px;
+    font-family: Tahoma;
+}
+header {
+    background-color: #0a0500;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+header a {
+    display: inline-block;
+    color: #fffefd;
+    text-align: center;
+    padding: 14px;
+    text-decoration: dimgrey;
+}
+
+header a:hover {
+    background-color: #d1d1d1;
+}
+
+header h1 {
+    background-color: #fffefd;
+}
+
+
+
+/*Formular*/
+.genericForm label, input{
+    display:block;
+    width:100%;
+    box-sizing:border-box;
+}
+.genericForm label{
+    margin-top:10px;
+}
+.genericForm{
+    width:100%;
+    margin:0 auto;
+}
+.genericForm div{
+    margin:0;
+    padding:0;
+    width:40%;
+    float:left;
+}
+.genericForm div:nth-of-type(odd){
+    margin:0;
+    padding:0;
+    float:left;
+    margin-right:20%;
+}
+.genericForm input[type="submit"]{
+    float:left;
+    margin-top:20px;
+    width:100px;
+}
+
+
+
+/*Vagtplan*/
 .calendarNavigation{
     border-bottom:1px solid black;
     width:20%;

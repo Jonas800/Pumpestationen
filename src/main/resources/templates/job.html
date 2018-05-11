@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form th:action="@{/job}" method="post">
+<form class="genericForm" th:action="@{/job}" method="post">
     <label>Navn</label>
     <input type="hidden" th:field="${job.id}">
     <input type="text" th:field="${job.title}">

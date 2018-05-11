@@ -34,7 +34,6 @@ public class EmployeeController {
 
     @PostMapping("/Opretmedarbejdere")
     public String Opretmedarbjedere(@ModelAttribute Employee employee)  {
-        dbConn db = dbConn.getInstance();
 
         insertEmployee(employee);
 

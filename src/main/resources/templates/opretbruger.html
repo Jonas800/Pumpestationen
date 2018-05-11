@@ -5,10 +5,13 @@
     <title>Title</title>
 
 
- <h1 tilføj login></h1>
 </head>
 <body>
-<form method="Post" th:action="@{/opretbruger}">
+
+
+<h1 tilføj login></h1>
+
+<form class="genericForm" method="Post" th:action="@{/opretbruger}">
 <label >brugernavn</label>
 <input type="text" th:field="${login.userName}" required="true"/>
 <label >password</label>

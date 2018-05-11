@@ -25,9 +25,8 @@
 </div>
 
 
-<div class="firkantrundtomtabel">
     <h3>Tilføj nyt medlem</h3>
-    <form method="Post" th:action="@{/tilføjmedlem}">
+    <form class="genericForm" method="Post" th:action="@{/tilføjmedlem}">
         <label> Fornavn på medlem: </label><br/>
         <input type="text" th:field="${member.firstName}" required="true"/><br/><br/>
         <label>Efternavn på medlem</label><br/>
@@ -44,6 +43,5 @@
         <input type="text" th:field="${member.city}"/>
         <input type="submit" value="Send"/>
     </form>
-</div>
 </body>
 </html>
