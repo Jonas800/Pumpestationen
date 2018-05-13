@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.FileNotFoundException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -72,12 +74,13 @@ public class EmployeeController  {
 
 
 
-    private void insertEmployee(Employee employee) {
+    private void insertEmployee(Employee employee)  {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         Statement s = null;
         PreparedStatement ps = null;
         PreparedStatement ps2 = null;
+
         try {
             ps = con.prepareStatement("SELECT COUNT(*) AS count FROM zipcodes WHERE zipcode = ?");
             ps.setInt(1, employee.getZipcode());
@@ -139,6 +142,7 @@ public class EmployeeController  {
                     employee.setCity(rs.getString("zipcode_city"));
                     employee.setJobPosition(rs.getString("employee_jobPosition"));
                     allEmployees.add(employee);
+
                 } catch(SQLException e){
                     e.printStackTrace();
                 }

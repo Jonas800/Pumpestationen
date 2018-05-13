@@ -32,9 +32,11 @@ public class Employee extends login{
         this.phoneNumber = phoneNumber;
         this.jobPosition = jobPosition;
 
+        }
 
-
-
+    public Employee(String userName, String passWord,int ID) {
+        super(userName, passWord);
+          this.ID=ID;
     }
 
     public int getID() {
