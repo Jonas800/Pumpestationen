@@ -1,4 +1,5 @@
 package exam.ps;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
@@ -7,18 +8,14 @@ import java.security.spec.InvalidKeySpecException;
 public class passwordvalidation {
 
 
-    static String unhash(String databasepassword,String inputfrauser) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public static boolean validatepassword (String databaselogin, String userinput) throws InvalidKeySpecException, NoSuchAlgorithmException {
 
 
-        String generatedSecuredPasswordHash = passwordhasher.generateStorngPasswordHash(inputfrauser);
-        boolean matched = validatePassword(databasepassword, generatedSecuredPasswordHash);
 
-        String validation = String.valueOf(matched);
+        boolean matched = validatePassword(userinput, databaselogin);
 
-
-        return validation;
+        return matched;
     }
-
 
     private static boolean validatePassword(String originalPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
@@ -47,6 +44,4 @@ public class passwordvalidation {
         }
         return bytes;
     }
-
 }
-

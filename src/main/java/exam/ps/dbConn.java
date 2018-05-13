@@ -20,7 +20,7 @@ public class dbConn {
         con = null;
         try {
             Class.forName(JDBC_DRIVER);
-            return con = DriverManager.getConnection(DATABASE_URL, "root", "mzx53vys");
+            return con = DriverManager.getConnection(DATABASE_URL, "root", "bispeparken");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {

@@ -34,9 +34,12 @@ public class Employee extends login{
 
         }
 
-    public Employee(String userName, String passWord,int ID) {
+    public Employee(String userName, String passWord) {
         super(userName, passWord);
-          this.ID=ID;
+    }
+
+    public Employee(String userName, String passWord, int ID) {
+        super(userName, passWord);
     }
 
     public int getID() {

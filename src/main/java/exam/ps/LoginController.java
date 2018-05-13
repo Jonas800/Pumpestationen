@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.FileNotFoundException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
@@ -38,21 +37,25 @@ public class LoginController  {
 
     }
     @PostMapping("/loginside")
-    public String usernamepassword(@RequestParam("username") String username, @RequestParam("password") String password,Model model) throws FileNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
-       ArrayList<Employee> alllogins=selectAlllogins();
+    public String usernamepassword(@RequestParam("username") String username, @RequestParam("password") String password,Model model) throws InvalidKeySpecException, NoSuchAlgorithmException {
+        ArrayList<Employee>loginArray=selectAlllogins();
+        for (Employee employeelogin:loginArray) {
+            boolean validatepassword=passwordvalidation.validatepassword(password,employeelogin.getPassWord());
+           String validation=String.valueOf(validatepassword);
+            if (employeelogin.getUserName()==username && validation=="true" ) {
+            return "forside";
+            }
+        }
 
-       for (Employee login: alllogins) {
-
-           String validation=passwordvalidation.unhash(login.getPassWord(),password);
-           if (login.getUserName().equals(username) && validation==("true")) {
-           return "Opretmedarbejdere";
-           }
-       }
-
-
-        return "loginside";
-
+return "loginside";
     }
+
+
+
+
+
+
+
 
 
 
