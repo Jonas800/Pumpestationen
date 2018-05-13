@@ -5,6 +5,18 @@
     <title> Creating new activity</title>
 </head>
     <body>
+
+    <div class="menuTop">
+        <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
+        <a><img src="logo.png" alt="Pumpestationen"></a>
+        <a href="vagtplan">Vagtplan</a>
+        <a href="vismedlem">Medlemmer</a>
+        <a href="VisMedarbejdere">Ansatte</a>
+        <a href="visAktivitet">Aktiviteter</a>
+        <a>Login</a>
+        <a style="float: right">Tilbage</a>
+    </div>
+
     <div>
         <h1>Opret aktivitet</h1>
         <form class="genericForm" method="Post" th:action="@{/tilføjAktivitet}">
@@ -18,11 +30,11 @@
             </div>
             <div>
                 <label>Start dato og tid på aktivitet:</label>
-                <input type="date" th:field="${activity.startDateTime}" required="true"/>
+                <input type="datetime-local" th:field="${activity.startDateTime}" required="true"/>
             </div>
             <div>
                 <label>Slut dato og tid på aktivitet:</label>
-                <input type="date" th:field="${activity.endDateTime}" required="true"/>
+                <input type="datetime-local" th:field="${activity.endDateTime}" required="true"/>
             </div>
             <input type="submit" value="Send"/>
         </form>

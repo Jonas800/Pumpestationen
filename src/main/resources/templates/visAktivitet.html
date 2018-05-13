@@ -4,10 +4,8 @@
     <meta charset="UTF-8"/>
     <title>View over activities</title>
     <link rel="stylesheet" type="text/css" href=Activity.css/>
-    <link rel="stylesheet" type="text/css" href=Format.css/>
 </head>
 <body>
-
     <div class="menuTop">
         <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
         <a><img src="logo.png" alt="Pumpestationen"></a>
@@ -22,8 +20,8 @@
     <a href="tilføjAktivitet">Tilføj ny aktivitet</a>
 
     <div class="table">
-        <h2>Velkommen til Pumpestation Fritidscenter</h2>
-        <table class="tableLook">
+        <h2>Oversigt over aktiviteter</h2>
+        <table class="tablelook">
             <thead>
             <tr>
                 <th>ID</th>
@@ -41,8 +39,8 @@
                 <td th:text="${activity.id}"/>
                 <td th:text="${activity.name}"/>
                 <td th:text="${activity.description}"/>
-                <td th:text="${activity.startDateTime + ' ' + activity.startDateTime}"/>
-                <td th:text="${activity.endDateTime + ' ' + activity.endDateTime}"/>
+                <td th:text="${activity.startDateTime}"/>
+                <td th:text="${activity.endDateTime}"/>
                 <td/><td/>
                 <td>
                     <a th:href="@{'/redigerAktivitet?id='+${activity.id}}" class="knap1">Rediger</a>
