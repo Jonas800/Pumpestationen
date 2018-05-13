@@ -109,15 +109,15 @@ public class MemberController {
     private void insertMember(Member member){
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
-        PreparedStatement ps = null;
-        PreparedStatement ps2 = null;
-        try {
+        PreparedStatement ps = null;//subInterface, en parameteriseret forespørgsel
+        PreparedStatement ps2 = null;//samme
+        try { //count returnerer et antal rækker, der matcher et kriterie,
             ps = con.prepareStatement("SELECT COUNT(*) AS count FROM zipcodes WHERE zipcode = ?");
             ps.setInt(1, member.getZipcode());
 
             ResultSet rs = ps.executeQuery();
             rs.next();
-            if(rs.getInt("count") == 0){
+            if(rs.getInt("count") == 0){ // hvis der ikke er nogen rækker, med det man lige har indtastet så indsætter vi postNr og by.
                 ps = con.prepareStatement("INSERT INTO zipcodes(zipcode, zipcode_city) VALUES(?,?)");
                 ps.setInt(1, member.getZipcode());
                 ps.setString(2, member.getCity());
@@ -145,7 +145,7 @@ public class MemberController {
         ArrayList<Member> memberSelect = new ArrayList<>();
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
-        Statement s = null;
+        Statement s = null; // erklærer en tom statement variable
         try {
             s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT *  FROM members INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
@@ -157,9 +157,11 @@ public class MemberController {
                     member.setDateOfBirth(rs.getDate("member_dateOfBirth"));
                     member.setCPR(rs.getString("member_CPR"));
                     member.setId(rs.getInt("member_Id"));
-                    member.setZipcode(rs.getInt("zipcodes_zipcode"));
+                    member.setZipcode(rs.getInt("zipcodes_zipcode"));//for at kunne få fat i tabellen zipcodes og hente by og postnr fra zipcodes
                     member.setCity(rs.getString("zipcode_city"));
-                    memberSelect.add(member);
+
+
+                    memberSelect.add(member);//grunden til vi opretter et member objekt er fordi vi gerne vil ha medlemsobjekterne vist i spring i form af arraylist
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
