@@ -1,8 +1,8 @@
 package exam.ps;
 
-public class login {
-private String userName;
-private String passWord;
+public class login   {
+public String userName;
+public String passWord;
     public login() {
 
     }
@@ -28,8 +28,5 @@ private String passWord;
     }
 
 
-    public String toString() {
-        return  userName  + "#" + passWord;
-    }
 }
 

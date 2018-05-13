@@ -25,25 +25,37 @@
 </div>
 
 
-<div class="firkantrundtomtabel">
     <h3>Tilføj nyt medlem</h3>
-    <form method="Post" th:action="@{/tilføjmedlem}">
-        <label> Fornavn på medlem: </label><br/>
-        <input type="text" th:field="${member.firstName}" required="true"/><br/><br/>
-        <label>Efternavn på medlem</label><br/>
-        <input type="text" th:field="${member.lastName}" required="true"/><br/><br/>
-        <label>Fødselsdato</label><br/>
-        <input type="date" th:field="${member.dateOfBirth}" required="true"/><br/><br/>
-        <label>cpr nummer på medlem</label><br/>
-        <input type="text" th:field="${member.CPR}" required="true"/><br/><br/>
-        <label>Addresse</label>
-        <input type="text" th:field="${member.address}"/>
-        <label>Postnummer</label>
-        <input type="text" th:field="${member.zipcode}"/>
-        <label>By</label>
-        <input type="text" th:field="${member.city}"/>
+    <form class="genericForm" method="Post" th:action="@{/tilføjmedlem}">
+        <div>
+            <label> Fornavn på medlem: </label>
+            <input type="text" th:field="${member.firstName}" required="true"/>
+        </div>
+        <div>
+            <label>Efternavn på medlem</label>
+            <input type="text" th:field="${member.lastName}" required="true"/>
+        </div>
+        <div>
+            <label>Fødselsdato</label>
+            <input type="date" th:field="${member.dateOfBirth}" required="true"/>
+        </div>
+        <div>
+            <label>cpr nummer på medlem</label>
+            <input type="text" th:field="${member.CPR}" required="true"/>
+        </div>
+        <div>
+            <label>Addresse</label>
+            <input type="text" th:field="${member.address}"/>
+        </div>
+        <div>
+            <label>Postnummer</label>
+            <input type="text" th:field="${member.zipcode}"/>
+        </div>
+        <div>
+            <label>By</label>
+            <input type="text" th:field="${member.city}"/>
+        </div>
         <input type="submit" value="Send"/>
     </form>
-</div>
 </body>
 </html>

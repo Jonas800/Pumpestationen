@@ -30,6 +30,9 @@
             <th>Adresse</th>
             <th>Mobil</th>
             <th>Stilling</th>
+            <th>by</by></th>
+            <th>Postnr</th>
+
             <th></th>
         </tr>
         </thead>
@@ -48,6 +51,8 @@
             <td>
                 <a th:href="@{'/redigerMedarbejdere?ID='+${employee.ID}}" class="knap">Rediger</a>
                 <a th:href="@{'/SletMedarbejder?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')">Slet</a>
+                <a th:href="@{'/opretbruger?ID='+${employee.ID}}" class="knap">opret login</a>
+
             </td>
 
         </tr>

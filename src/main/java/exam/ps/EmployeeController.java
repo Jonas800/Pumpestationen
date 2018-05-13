@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.FileNotFoundException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.util.ArrayList;
 
 @Controller
-public class EmployeeController {
+public class EmployeeController  {
     int employeid = 0;
 
     @GetMapping("/VisMedarbejdere")
@@ -34,7 +36,6 @@ public class EmployeeController {
 
     @PostMapping("/Opretmedarbejdere")
     public String Opretmedarbjedere(@ModelAttribute Employee employee)  {
-        dbConn db = dbConn.getInstance();
 
         insertEmployee(employee);
 
@@ -73,12 +74,13 @@ public class EmployeeController {
 
 
 
-    private void insertEmployee(Employee employee) {
+    private void insertEmployee(Employee employee)  {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         Statement s = null;
         PreparedStatement ps = null;
         PreparedStatement ps2 = null;
+
         try {
             ps = con.prepareStatement("SELECT COUNT(*) AS count FROM zipcodes WHERE zipcode = ?");
             ps.setInt(1, employee.getZipcode());
@@ -140,6 +142,7 @@ public class EmployeeController {
                     employee.setCity(rs.getString("zipcode_city"));
                     employee.setJobPosition(rs.getString("employee_jobPosition"));
                     allEmployees.add(employee);
+
                 } catch(SQLException e){
                     e.printStackTrace();
                 }
@@ -156,8 +159,21 @@ public class EmployeeController {
         Connection con = db.createConnection();
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode SET employee_firstName = ?,employee_lastName=?,employee_cpr=?,employee_address=?,employee_phone=?,employee_jobPosition=?,zipcodes_zipcode=?,zipcode_city=? WHERE employee_id = ?");
-            ps.setInt(9, employeid);
+            ps = con.prepareStatement("SELECT COUNT(*) AS count FROM zipcodes WHERE zipcode = ?");
+            ps.setInt(1, employee.getZipcode());
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            if(rs.getInt("count") == 0){
+                ps = con.prepareStatement("INSERT INTO zipcodes(zipcode, zipcode_city) VALUES(?,?)");
+                ps.setInt(1, employee.getZipcode());
+                ps.setString(2, employee.getCity());
+
+                ps.executeUpdate();
+            }
+
+            ps = con.prepareStatement("UPDATE employees SET employee_firstName = ?,employee_lastName=?,employee_cpr=?,employee_address=?,employee_phone=?,employee_jobPosition=?,zipcodes_zipcode=? WHERE employee_id = ?");
+            ps.setInt(8, employeid);
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
             ps.setString(3, employee.getCpr());
@@ -165,7 +181,6 @@ public class EmployeeController {
             ps.setString(5, employee.getPhoneNumber());
             ps.setString(6,employee.getJobPosition());
             ps.setInt(7,employee.getZipcode());
-            ps.setString(8,employee.getCity());
 
 
             ps.executeUpdate();
