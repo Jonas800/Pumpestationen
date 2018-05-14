@@ -110,6 +110,7 @@ public class Member {
     }
 
     public Date getDateOfBirth() {
+
         return dateOfBirth;
     }
 
