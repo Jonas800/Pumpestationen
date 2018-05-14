@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" href=Format.css/>
-    <link rel="stylesheet" type="text/css" href=Member.css/>
+    <link rel="stylesheet" type="text/css" href=Style.css/>
 </head>
 <body>
+<div th:replace="/header"></div>
 
-<div class="menuTop">
-    <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
-    <a><img src="logo.png" alt="Pumpestationen"></a>
-    <a href="vagtplan">Vagtplan</a>
-    <a href="vismedlem">Medlemmer</a>
-    <a href="tilføjmedlem">Tilføj medlem </a>
-    <a href="VisMedarbejdere">Ansatte</a>
-    <a href="visAktivitet">Aktiviteter</a>
-    <a>Login</a>
-    <a style="float: right">Tilbage</a>
-</div>
+<a href="tilføjmedlem">Tilføj medlem </a>
 
 <div class="firkantrundtomtabel">
     <h2>Oversigt over medlemmer</h2>

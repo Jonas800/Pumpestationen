@@ -3,19 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title>View over activities</title>
-    <link rel="stylesheet" type="text/css" href=Activity.css/>
+    <link rel="stylesheet" type="text/css" href=Style.css/>
 </head>
 <body>
-    <div class="menuTop">
-        <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
-        <a><img src="logo.png" alt="Pumpestationen"></a>
-        <a href="vagtplan">Vagtplan</a>
-        <a href="vismedlem">Medlemmer</a>
-        <a href="VisMedarbejdere">Ansatte</a>
-        <a href="visAktivitet">Aktiviteter</a>
-        <a>Login</a>
-        <a style="float: right">Tilbage</a>
-    </div>
+    <div th:replace="/header"></div>
 
     <a href="tilføjAktivitet">Tilføj ny aktivitet</a>
 

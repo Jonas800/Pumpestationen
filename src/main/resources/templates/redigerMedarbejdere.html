@@ -3,45 +3,49 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Rediger ansat</title>
-    <link rel="stylesheet" href="../static/style.css"/>
-    <link rel="stylesheet" type="text/css" href=Format.css/>
+    <link rel="stylesheet" type="text/css" href=Style.css/>
+
 </head>
 <body>
 
-<div class="menuTop">
-    <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
-    <a><img src="logo.png" alt="Pumpestationen"></a>
-    <a href="vagtplan">Vagtplan</a>
-    <a href="vismedlem">Medlemmer</a>
-    <a href="VisMedarbejdere">Ansatte</a>
-    <a href="visAktivitet">Aktiviteter</a>
-    <a>Login</a>
-    <a style="float: right">Tilbage</a>
-</div>
+<div th:replace="/header"></div>
 
+    <form class="genericForm" method="post" th:action="@{/redigerMedarbejdere}">
+        <h1>Redigere Ansatte</h1>
+        <div>
+            <label>Fornavn: </label>
+            <input type="text" th:field="${employee.firstName}" required="true"/>
+        </div>
+        <div>
+            <label>Efternavn: </label>
+            <input type="text" th:field="${employee.lastName}" required="true"/>
+        </div>
+        <div>
+            <label>telefon.nr: </label>
+            <input type="text" th:field="${employee.cpr}" required="true"/>
+        </div>
+        <div>
+            <label>adresse: </label>
+            <input type="date" th:field="${employee.address}" required="true"/>
+        </div>
+        <div>
+            <label>Mobil: </label>
+            <input type="text" th:field="${employee.phoneNumber}" required="true"/>
+        </div>
+        <div>
+            <label>Stilling: </label>
+            <input type="text" th:field="${employee.jobPosition}" required="true"/>
+        </div>
+        <div>
+            <label>postnr: </label>
+            <input type="text" th:field="${employee.zipcode}" required="true"/>
+        </div>
+        <div>
+            <label>by: </label>
+            <input type="text" th:field="${employee.city}" required="true"/>
+        </div>
+        <input type="submit" value="opdater">
 
-<hr/>
-<form class="genericForm" method="post" th:action="@{/redigerMedarbejdere}">
-
-    <label>Fornavn: </label>
-    <input type="text" th:field="${employee.firstName}"/><br/><br/>
-    <label>Efternavn: </label>
-    <input type="text" th:field="${employee.lastName}"/><br/><br/>
-    <label>telefon.nr: </label>
-    <input type="text" th:field="${employee.cpr}"/>
-    <label>adresse: </label>
-    <input type="date" th:field="${employee.address}"/><br/><br/>
-    <label>Mobil: </label>
-    <input type="text" th:field="${employee.phoneNumber}"/><br/><br/>
-    <label>Stilling: </label>
-    <input type="text" th:field="${employee.jobPosition}"/><br/><br/>
-    <label>postnr: </label>
-    <input type="text" th:field="${employee.zipcode}"/><br/><br/>
-    <label>by: </label>
-    <input type="text" th:field="${employee.city}"/><br/><br/>
-    <input type="submit" value="opdater">
-    <hr/>
-
-</form>
+    </form>
 </body>
 </html>
