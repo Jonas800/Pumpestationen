@@ -1,6 +1,6 @@
 package exam.ps;
 
-public class Employee extends login{
+public class Employee extends Login {
 
     private int ID;
     private String firstName;
