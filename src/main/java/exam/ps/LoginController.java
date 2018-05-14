@@ -5,12 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
-import java.util.ArrayList;
 
 @Controller
 public class LoginController {
@@ -27,26 +25,26 @@ public class LoginController {
     @PostMapping("/opretbruger")
     public String opretbruger(@ModelAttribute Login login) throws InvalidKeySpecException, NoSuchAlgorithmException {
         insertLogin(login);
-        return "redirect:/loginside";
+        return "redirect:/login";
     }
 
-    @GetMapping("/loginside")
+    @GetMapping("/login")
     public String usernamepassword(Model model) {
         model.addAttribute("login", new Login());
-        return "loginside";
+        return "login";
 
     }
 
-    @PostMapping("/loginside")
+    @PostMapping("/login")
     public String usernamepassword(@ModelAttribute Login login) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Login user = selectUser(login.getUserName());
 
-        if (passwordvalidation.validatepassword(login.getPassWord(), user.getPassWord())) {
+        if (PasswordMatcher.validatepassword(login.getPassWord(), user.getPassWord())) {
             return "forside";
         }
 
 
-        return "loginside";
+        return "login";
     }
 
 
@@ -54,7 +52,7 @@ public class LoginController {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;
-        String hashed = passwordhasher.generateStorngPasswordHash(login.getPassWord());
+        String hashed = PasswordHasher.generateStorngPasswordHash(login.getPassWord());
 
         try {
             ps = con.prepareStatement("INSERT INTO users(user_email,user_password) VALUES(?, ?)");

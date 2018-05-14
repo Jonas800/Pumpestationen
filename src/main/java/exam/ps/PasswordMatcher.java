@@ -5,7 +5,7 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-public class passwordvalidation {
+public class PasswordMatcher {
 
 
     public static boolean validatepassword (String formInput, String databaseInput) throws InvalidKeySpecException, NoSuchAlgorithmException {
