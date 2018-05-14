@@ -13,14 +13,14 @@ import java.sql.*;
 import java.util.ArrayList;
 
 @Controller
-public class LoginController  {
+public class LoginController {
 
-    public LoginController()  {
+    public LoginController() {
     }
 
     @GetMapping("/opretbruger")
     public String login(Model model) {
-      model.addAttribute("login",new Employee());
+        model.addAttribute("login", new Employee());
         return "opretbruger";
     }
 
@@ -31,39 +31,32 @@ public class LoginController  {
     }
 
     @GetMapping("/loginside")
-    public String usernamepassword () {
-
+    public String usernamepassword(Model model) {
+        model.addAttribute("login", new Login());
         return "loginside";
 
     }
+
     @PostMapping("/loginside")
-    public String usernamepassword(@RequestParam("username") String username, @RequestParam("password") String password,Model model) throws InvalidKeySpecException, NoSuchAlgorithmException {
-        ArrayList<Employee>loginArray=selectAlllogins();
-        for (Employee employeelogin:loginArray) {
-            boolean validatepassword=passwordvalidation.validatepassword(password,employeelogin.getPassWord());
-           String validation=String.valueOf(validatepassword);
-            if (employeelogin.getUserName()==username && validation=="true" ) {
-            return "forside";
+    public String usernamepassword(@ModelAttribute Login login) throws InvalidKeySpecException, NoSuchAlgorithmException {
+        ArrayList<Employee> loginArray = selectAlllogins();
+        for (Employee employeelogin : loginArray) {
+            boolean validatepassword = passwordvalidation.validatepassword(login.getPassWord(), employeelogin.getPassWord());
+            String validation = String.valueOf(validatepassword);
+            if (employeelogin.getUserName() == login.getUserName() && validation == "true") {
+                return "forside";
             }
         }
 
-return "loginside";
+        return "loginside";
     }
-
-
-
-
-
-
-
-
 
 
     public void insertActivity(Employee login) throws InvalidKeySpecException, NoSuchAlgorithmException {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;
-        String hashed =passwordhasher.generateStorngPasswordHash(login.getPassWord());
+        String hashed = passwordhasher.generateStorngPasswordHash(login.getPassWord());
 
         try {
             ps = con.prepareStatement("INSERT INTO login(email,passWord) VALUES(?, ?)");
@@ -76,26 +69,25 @@ return "loginside";
         }
     }
 
-        public ArrayList<Employee> selectAlllogins(){
+    public ArrayList<Employee> selectAlllogins() {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         Statement s = null;
         ArrayList<Employee> allpasswords = new ArrayList<>();
-        try{
+        try {
             s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT *  FROM login ");
-            while(rs.next()){
-                try{
+            while (rs.next()) {
+                try {
                     Employee employee = new Employee();
                     employee.setFirstName(rs.getString("email"));
                     employee.setLastName(rs.getString("passWord"));
                     allpasswords.add(employee);
-                } catch(SQLException e){
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return allpasswords;
