@@ -14,7 +14,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 @Controller
-public class EmployeeController  {
+public class EmployeeController {
     int employeid = 0;
 
     @GetMapping("/VisMedarbejdere")
@@ -35,7 +35,7 @@ public class EmployeeController  {
     }
 
     @PostMapping("/Opretmedarbejdere")
-    public String Opretmedarbjedere(@ModelAttribute Employee employee)  {
+    public String Opretmedarbjedere(@ModelAttribute Employee employee) {
 
         insertEmployee(employee);
 
@@ -45,26 +45,19 @@ public class EmployeeController  {
 
     @GetMapping("/redigerMedarbejdere")
     public String redigerAnsat(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model) {
-        for (Employee employee:selectAllEmployees()) {
+        for (Employee employee : selectAllEmployees()) {
             if (employee.getID() == ID)
                 model.addAttribute("employee", employee);
-
-
         }
-
-
-                    employeid=ID;
-
-
-
-        return"redigerMedarbejdere";
-}
+        employeid = ID;
+        return "redigerMedarbejdere";
+    }
 
     @PostMapping("/redigerMedarbejdere")
-    public String redigerAnsat(Employee employee)   {
+    public String redigerAnsat(Employee employee) {
         updateployee(employee);
         return "redirect:/VisMedarbejdere";
-   }
+    }
 
     @GetMapping("/SletMedarbejder")
     public String SletMedarbejder(@RequestParam(value = "ID", defaultValue = "1") int id, Employee employee) throws FileNotFoundException {
@@ -73,8 +66,7 @@ public class EmployeeController  {
     }
 
 
-
-    private void insertEmployee(Employee employee)  {
+    private void insertEmployee(Employee employee) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         Statement s = null;
@@ -87,7 +79,7 @@ public class EmployeeController  {
 
             ResultSet rs = ps.executeQuery();
             rs.next();
-            if(rs.getInt("count") == 0){
+            if (rs.getInt("count") == 0) {
                 ps = con.prepareStatement("INSERT INTO zipcodes(zipcode, zipcode_city) VALUES(?,?)");
                 ps.setInt(1, employee.getZipcode());
                 ps.setString(2, employee.getCity());
@@ -109,6 +101,7 @@ public class EmployeeController  {
             e.printStackTrace();
         }
     }
+
     public void deleteemployee(Employee employee) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
@@ -121,16 +114,17 @@ public class EmployeeController  {
             e.printStackTrace();
         }
     }
-    public ArrayList<Employee> selectAllEmployees(){
+
+    public ArrayList<Employee> selectAllEmployees() {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         Statement s = null;
         ArrayList<Employee> allEmployees = new ArrayList<>();
-        try{
+        try {
             s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT *  FROM employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
-                while(rs.next()){
-                try{
+            while (rs.next()) {
+                try {
                     Employee employee = new Employee();
                     employee.setID(rs.getInt("employee_id"));
                     employee.setFirstName(rs.getString("employee_firstName"));
@@ -143,12 +137,11 @@ public class EmployeeController  {
                     employee.setJobPosition(rs.getString("employee_jobPosition"));
                     allEmployees.add(employee);
 
-                } catch(SQLException e){
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return allEmployees;
@@ -164,7 +157,7 @@ public class EmployeeController  {
 
             ResultSet rs = ps.executeQuery();
             rs.next();
-            if(rs.getInt("count") == 0){
+            if (rs.getInt("count") == 0) {
                 ps = con.prepareStatement("INSERT INTO zipcodes(zipcode, zipcode_city) VALUES(?,?)");
                 ps.setInt(1, employee.getZipcode());
                 ps.setString(2, employee.getCity());
@@ -179,8 +172,8 @@ public class EmployeeController  {
             ps.setString(3, employee.getCpr());
             ps.setString(4, employee.getAddress());
             ps.setString(5, employee.getPhoneNumber());
-            ps.setString(6,employee.getJobPosition());
-            ps.setInt(7,employee.getZipcode());
+            ps.setString(6, employee.getJobPosition());
+            ps.setInt(7, employee.getZipcode());
 
 
             ps.executeUpdate();

@@ -28,7 +28,8 @@ public class ActivityController {
     }
 
     @PostMapping("/tilføjAktivitet")
-    public String createActivity(@ModelAttribute Activity activity) {
+    public String createActivity(@ModelAttribute Activity activity, @RequestParam(name="test") String test) {
+        System.out.println(test);
         dbConn db = dbConn.getInstance();
         insertActivity(activity);
         return "redirect:/visAktivitet";
