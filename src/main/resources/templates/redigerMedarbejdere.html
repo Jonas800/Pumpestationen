@@ -3,45 +3,53 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Rediger ansat</title>
-    <link rel="stylesheet" href="../static/style.css"/>
-    <link rel="stylesheet" type="text/css" href=Format.css/>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<div class="menuTop">
-    <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
-    <a><img src="logo.png" alt="Pumpestationen"></a>
-    <a href="vagtplan">Vagtplan</a>
-    <a href="vismedlem">Medlemmer</a>
-    <a href="VisMedarbejdere">Ansatte</a>
-    <a href="visAktivitet">Aktiviteter</a>
-    <a>Login</a>
-    <a style="float: right">Tilbage</a>
+<div th:replace="/header"></div>
+
+
+<div class="wrap">
+    <h2>Rediger medarbejder</h2>
+
+    <form class="genericForm" method="post" th:action="@{/redigerMedarbejdere}">
+
+        <div>
+            <label>Fornavn: </label>
+            <input type="text" th:field="${employee.firstName}"/>
+        </div>
+        <div>
+            <label>Efternavn: </label>
+            <input type="text" th:field="${employee.lastName}"/>
+        </div>
+        <div>
+            <label>Telefonnummer</label>
+            <input type="text" th:field="${employee.cpr}"/>
+        </div>
+        <div>
+            <label>Adresse</label>
+            <input type="text" th:field="${employee.address}"/>
+        </div>
+        <div>
+            <label>Mobil</label>
+            <input type="text" th:field="${employee.phoneNumber}"/>
+        </div>
+        <div>
+            <label>Stilling</label>
+            <input type="text" th:field="${employee.jobPosition}"/>
+        </div>
+        <div>
+            <label>Postnummer</label>
+            <input type="text" th:field="${employee.zipcode}"/>
+        </div>
+        <div>
+            <label>By</label>
+            <input type="text" th:field="${employee.city}"/>
+        </div>
+        <input type="submit" value="Gem">
+
+    </form>
 </div>
-
-
-<hr/>
-<form class="genericForm" method="post" th:action="@{/redigerMedarbejdere}">
-
-    <label>Fornavn: </label>
-    <input type="text" th:field="${employee.firstName}"/><br/><br/>
-    <label>Efternavn: </label>
-    <input type="text" th:field="${employee.lastName}"/><br/><br/>
-    <label>telefon.nr: </label>
-    <input type="text" th:field="${employee.cpr}"/>
-    <label>adresse: </label>
-    <input type="text" th:field="${employee.address}"/><br/><br/>
-    <label>Mobil: </label>
-    <input type="text" th:field="${employee.phoneNumber}"/><br/><br/>
-    <label>Stilling: </label>
-    <input type="text" th:field="${employee.jobPosition}"/><br/><br/>
-    <label>postnr: </label>
-    <input type="text" th:field="${employee.zipcode}"/><br/><br/>
-    <label>by: </label>
-    <input type="text" th:field="${employee.city}"/><br/><br/>
-    <input type="submit" value="opdater">
-    <hr/>
-
-</form>
 </body>
 </html>

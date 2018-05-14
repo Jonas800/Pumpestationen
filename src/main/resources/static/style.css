@@ -6,24 +6,24 @@ body{
 /*Wrap til centrering*/
 .wrap{
     width:50%;
-    margin:0 auto;
+    margin:30px auto;
+    padding:0 5% 5% 5%;
+    box-sizing: border-box;
+    background-color:lightblue;
+    overflow:hidden;
 }
 h2 {
     text-align: center;
 }
 
 /*header*/
-header {
-    background-color: #0a0500;
-}
-
 h2{
     font-size: 150%;
     letter-spacing: 5px;
     font-family: Tahoma;
 }
 header {
-    background-color: #0a0500;
+    background-color: darkslateblue;
     overflow: auto;
     white-space: nowrap;
 }
@@ -37,6 +37,7 @@ header a {
 }
 
 header a:hover {
+    border-radius:20px;
     background-color: #d1d1d1;
 }
 
@@ -145,11 +146,6 @@ div.menuTop a:hover {
 
 div.menuTop h1 {
     background-color: #fffefd;
-}
-
-body {
-    margin: 70px;
-    text-align: center;
 }
 
 /*Table look*/

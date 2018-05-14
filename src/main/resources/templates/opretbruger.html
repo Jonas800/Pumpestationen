@@ -12,11 +12,15 @@
 <h1 tilføj login></h1>
 
 <form class="genericForm" method="Post" th:action="@{/opretbruger}">
-<label >brugernavn</label>
-<input type="text" th:field="${login.userName}" required="true"/>
-<label >password</label>
-<input type="text" th:field="${login.passWord}" required="true"/>
-<input type="submit" value="Send"/>
+    <div>
+        <label>brugernavn</label>
+        <input type="text" th:field="${login.userName}" required="true"/>
+    </div>
+    <div>
+        <label>password</label>
+        <input type="text" th:field="${login.passWord}" required="true"/>
+    </div>
+    <input type="submit" value="Send"/>
 </form>
 
 </body>
