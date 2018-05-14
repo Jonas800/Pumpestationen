@@ -39,9 +39,7 @@ public class LoginController {
 
     @PostMapping("/loginside")
     public String usernamepassword(@ModelAttribute Login login) throws InvalidKeySpecException, NoSuchAlgorithmException {
-        System.out.println(login.getUserName() + "" + login.getPassWord());
         Login user = selectUser(login.getUserName());
-        System.out.println(user.getUserName() + " " + user.getPassWord());
 
         if (passwordvalidation.validatepassword(login.getPassWord(), user.getPassWord())) {
             return "forside";

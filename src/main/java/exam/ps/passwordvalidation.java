@@ -10,7 +10,6 @@ public class passwordvalidation {
 
     public static boolean validatepassword (String formInput, String databaseInput) throws InvalidKeySpecException, NoSuchAlgorithmException {
         boolean matched = validatePassword(formInput, databaseInput);
-        System.out.println(matched);
         return matched;
     }
 
