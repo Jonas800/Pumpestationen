@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchAlgorithmException;//Hvis den algoritme man skal bruge til hashe koden med ikke eksisterer så thrower man den exception.
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 
 @Controller
-public class LoginController {
+public class LoginController {//Controllerens formål er at tage imod requests fra hjemmesiden, og sender det man har requestet over til Model
 
     public LoginController() {
     }

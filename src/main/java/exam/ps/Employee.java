@@ -34,9 +34,7 @@ public class Employee extends Login {
 
         }
 
-    public Employee(String userName, String passWord) {
-        super(userName, passWord);
-    }
+  
 
     public Employee(String userName, String passWord, int ID) {
         super(userName, passWord);
