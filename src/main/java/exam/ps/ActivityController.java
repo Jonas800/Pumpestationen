@@ -45,7 +45,7 @@ public class ActivityController {
             ps.setString(2, activity.getDescription());
             ps.setDate(3, new java.sql.Date(activity.getStartDate().getTime()));
             ps.setDate(4, new java.sql.Date(activity.getStartTime().getTime()));
-            ps.setDate(5, new java.sql.Date(activity.getStartTime().getTime()));
+            ps.setDate(5, new java.sql.Date(activity.getEndTime().getTime()));
             ps.setDate(6, new java.sql.Date(activity.getEndTime().getTime()));
 
             ps.executeUpdate();
