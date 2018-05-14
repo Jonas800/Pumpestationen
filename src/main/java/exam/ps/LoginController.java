@@ -40,11 +40,11 @@ public class LoginController {
         Login user = selectUser(login.getUserName());
 
         if (PasswordMatcher.validatepassword(login.getPassWord(), user.getPassWord())) {
-            return "forside";
+            return "vismedlem";
         }
 
 
-        return "login";
+        return "redirect:/";
     }
 
 
