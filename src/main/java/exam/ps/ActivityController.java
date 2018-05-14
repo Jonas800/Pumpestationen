@@ -40,11 +40,13 @@ public class ActivityController {
         Connection con = db.createConnection();
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("INSERT INTO activities (activity_name, activity_description, activity_startDatetime, activity_endDatetime) VALUES(?, ?, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO activities (activity_name, activity_description, activity_startDate, activity_startTime, activity_endDate, activity_endTime) VALUES(?, ?, ?, ?,?,?)");
             ps.setString(1, activity.getName());
             ps.setString(2, activity.getDescription());
-            ps.setDate(3, new java.sql.Date(activity.getStartDateTime().getTime()));
-            ps.setDate(4, new java.sql.Date(activity.getEndDateTime().getTime()));
+            ps.setDate(3, new java.sql.Date(activity.getStartDate().getTime()));
+            ps.setDate(4, new java.sql.Date(activity.getStartTime().getTime()));
+            ps.setDate(5, new java.sql.Date(activity.getStartTime().getTime()));
+            ps.setDate(6, new java.sql.Date(activity.getEndTime().getTime()));
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -76,8 +78,10 @@ public class ActivityController {
                     activity.setId(rs.getInt("activity_id"));
                     activity.setName(rs.getString("activity_name"));
                     activity.setDescription(rs.getString("activity_description"));
-                    activity.setStartDateTime(rs.getTimestamp("activity_startDatetime"));
-                    activity.setEndDateTime(rs.getTimestamp("activity_endDatetime"));
+                    activity.setStartDate(rs.getTimestamp("activity_startDate"));
+                    activity.setStartTime(rs.getTime("activity_endTime"));
+                    activity.setEndDate(rs.getTimestamp("activity_endDate"));
+                    activity.setEndTime(rs.getTime("activity_endTime"));
                     allActivities.add(activity);
                 } catch(SQLException e){
                     e.printStackTrace();
@@ -101,12 +105,15 @@ public class ActivityController {
         Connection con = db.createConnection();
         PreparedStatement ps = null;
         try{
-            ps = con.prepareStatement("UPDATE activities SET activity_name=?, activity_description = ?, activity_startDatetime = ?, activity_endDatetime = ? WHERE activity_id = ?");
-            ps.setInt(4, activityID);
+            ps = con.prepareStatement("UPDATE activities SET activity_name=?, activity_description = ?, activity_startDate = ?,activity_startTime = ?, activity_endDate = ?, activity_endtime = ? WHERE activity_id = ?");
+            ps.setInt(6, activityID);
             ps.setString(1, activity.getName());
             ps.setString(2, activity.getDescription());
-            ps.setDate(3, new java.sql.Date(activity.getStartDateTime().getTime()));
-            ps.setDate(4, new java.sql.Date(activity.getEndDateTime().getTime()));
+            ps.setDate(3, new java.sql.Date(activity.getStartDate().getTime()));
+            ps.setDate(4, new java.sql.Date(activity.getEndTime().getTime()));
+            ps.setDate(5, new java.sql.Date(activity.getEndDate().getTime()));
+            ps.setDate(6, new java.sql.Date(activity.getEndTime().getTime()));
+
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
