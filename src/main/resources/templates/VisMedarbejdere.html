@@ -9,18 +9,17 @@
     <a href="Opretmedarbejdere">Tilføj ny ansat</a>
 
     <div class="firkantrundtomtabel">
-        <h3>Oversigt over ansatte</h3>
+        <h1>Oversigt over ansatte</h1>
         <table class="tableLook">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Fornavn</th>
                 <th>Efternavn</th>
                 <th>Cpr</th>
                 <th>Adresse</th>
                 <th>Mobil</th>
                 <th>Stilling</th>
-                <th>by</by></th>
+                <th>by</th>
                 <th>Postnr</th>
 
                 <th></th>
@@ -28,7 +27,6 @@
             </thead>
             <tbody>
             <tr th:each="employee: ${employeeArrayList}">
-                <td th:text="${employee.ID}"/>
                 <td th:text="${employee.firstName}"/>
                 <td th:text="${employee.lastName}"/>
                 <td th:text="${employee.cpr}"/>
@@ -40,8 +38,8 @@
 
                 <td>
                     <a th:href="@{'/redigerMedarbejdere?ID='+${employee.ID}}" class="knap">Rediger</a>
-                    <a th:href="@{'/SletMedarbejder?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')">Slet</a>
-                    <a th:href="@{'/opretbruger?ID='+${employee.ID}}" class="knap">opret login</a>
+                    <a th:href="@{'/SletMedarbejder?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
+                    <a th:href="@{'/opretbruger?ID='+${employee.ID}}" class="knap">Opret login</a>
 
                 </td>
 

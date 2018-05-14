@@ -123,3 +123,54 @@ select{
     display:inline-block;
     width:100px;
 }
+
+/*Menu i toppen*/
+div.menuTop {
+    background-color: #0a0500;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.menuTop a {
+    display: inline-block;
+    color: #fffefd;
+    text-align: center;
+    padding: 14px;
+    text-decoration: dimgrey;
+}
+
+div.menuTop a:hover {
+    background-color: #d1d1d1;
+}
+
+div.menuTop h1 {
+    background-color: #fffefd;
+}
+
+body {
+    margin: 70px;
+    text-align: center;
+}
+
+/*Table look*/
+table.tableLook {
+    width: 100%;
+    text-align: center;
+}
+td, th {
+    border: solid #dddddd;
+    text-align: center;
+}
+
+/*firkant rundt om*/
+div.firkantrundtomtabel{
+    text-align: center;
+    border-style: solid;
+    margin-top: 10px;
+}
+
+
+/*Knapper*/
+.opretKnap a{
+    padding: 14px;
+}
