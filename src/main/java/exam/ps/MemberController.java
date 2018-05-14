@@ -181,18 +181,17 @@ public class MemberController {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;
-        PreparedStatement ps2 = null;
 
         try {
-            ps2 = con.prepareStatement("SELECT COUNT(*) AS count FROM zipcodes WHERE zipcode = ?");
-            ps2.setInt(1, member.getZipcode());
+            ps = con.prepareStatement("SELECT COUNT(*) AS count FROM zipcodes WHERE zipcode = ?");
+            ps.setInt(1, member.getZipcode());
 
-            ResultSet rs = ps2.executeQuery();
+            ResultSet rs = ps.executeQuery();
             rs.next();
             if (rs.getInt("count") == 0) {
-                ps2 = con.prepareStatement("INSERT INTO zipcodes(zipcode, zipcode_city) VALUES(?,?)");
-                ps2.setInt(1, member.getZipcode());
-                ps2.setString(2, member.getCity());
+                ps = con.prepareStatement("INSERT INTO zipcodes(zipcode, zipcode_city) VALUES(?,?)");
+                ps.setInt(1, member.getZipcode());
+                ps.setString(2, member.getCity());
 
                 ps.executeUpdate();
             }
