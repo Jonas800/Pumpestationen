@@ -161,7 +161,7 @@ public class MemberController {
                     member.setId(rs.getInt("member_Id"));
                     member.setZipcode(rs.getInt("zipcodes_zipcode"));//joiner for at kunne få fat i tabellen zipcodes og hente by og postnr fra zipcodes
                     member.setCity(rs.getString("zipcode_city"));
-
+                    member.setKontingent(member.getAge());
 
                     memberSelect.add(member);//grunden til vi opretter et member objekt er fordi vi gerne vil ha medlemsobjekterne vist i form af arraylist
                 } catch (SQLException e) {
