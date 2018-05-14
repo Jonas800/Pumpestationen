@@ -40,8 +40,8 @@ public class MemberController {
 
     @GetMapping("/redigerMedlem")
     public String redigerMedlem(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
-        for (Member member : selectMembers()) {
-           if (member.getId() == id)
+        for (Member member : selectMembers()) {//requester et id, går arraylist igennem med metodekald og sammenligner id i objektet member med id som er indtastet
+           if (member.getId() == id)//hvis de er ens, printes medlemmet ud på hjemmesiden
                 model.addAttribute("member", member);
 
         }
@@ -118,7 +118,7 @@ public class MemberController {
 
             ResultSet rs = ps.executeQuery();
             rs.next();
-            if(rs.getInt("count") == 0){ // hvis der ikke er nogen rækker, med det man lige har indtastet så indsætter vi postNr og by.
+            if(rs.getInt("count") == 0){ // hvis der ikke er nogen rækker med det man lige har indtastet så indsætter vi postNr og by.
                 ps = con.prepareStatement("INSERT INTO zipcodes(zipcode, zipcode_city) VALUES(?,?)");
                 ps.setInt(1, member.getZipcode());
                 ps.setString(2, member.getCity());
@@ -158,11 +158,11 @@ public class MemberController {
                     member.setDateOfBirth(rs.getDate("member_dateOfBirth"));
                     member.setCPR(rs.getString("member_CPR"));
                     member.setId(rs.getInt("member_Id"));
-                    member.setZipcode(rs.getInt("zipcodes_zipcode"));//for at kunne få fat i tabellen zipcodes og hente by og postnr fra zipcodes
+                    member.setZipcode(rs.getInt("zipcodes_zipcode"));//joiner for at kunne få fat i tabellen zipcodes og hente by og postnr fra zipcodes
                     member.setCity(rs.getString("zipcode_city"));
 
 
-                    memberSelect.add(member);//grunden til vi opretter et member objekt er fordi vi gerne vil ha medlemsobjekterne vist i spring i form af arraylist
+                    memberSelect.add(member);//grunden til vi opretter et member objekt er fordi vi gerne vil ha medlemsobjekterne vist i form af arraylist
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -181,17 +181,16 @@ public class MemberController {
         Connection con = db.createConnection();
         PreparedStatement ps = null;
         try{
-            ps = con.prepareStatement("UPDATE members INNER JOIN zipcode ON zipcode = zipcodes_zipcodes SET member_firstName =?,member_lastName =?,member_age =?,member_cpr =?,member_id =?,member_kontingent =?, member_dateOfBirth =?,member_address =?,member_zipcode,member_city =? WHERE member_id =?");
-            ps.setInt(5, memberID);
+            ps = con.prepareStatement("UPDATE members INNER JOIN zipcode ON zipcode = zipcodes_zipcodes SET member_firstName =?,member_lastName =?,member_cpr =?,member_kontingent =?, member_dateOfBirth =?,member_address =?,member_zipcode=?,member_city =? WHERE member_id =?");
+            ps.setInt(9, memberID);//får det ID som er blevet requestet fra hjemmesiden, og den viser rækken hvis id'et eksisterer i tabellen
             ps.setString(1, member.getFirstName());
             ps.setString(2, member.getLastName());
-            ps.setInt(3, member.getAge());
-            ps.setString(4, member.getCPR());
-            ps.setInt(5, member.getKontingent());
-            ps.setDate(6, (Date) member.getDateOfBirth());
-            ps.setString(7, member.getAddress());
-            ps.setInt(8, member.getZipcode());
-            ps.setString(9, member.getCity());
+            ps.setString(3, member.getCPR());
+            ps.setInt(4, member.getKontingent());
+            ps.setDate(5, new java.sql.Date(member.getDateOfBirth().getTime()));
+            ps.setString(6, member.getAddress());
+            ps.setInt(7, member.getZipcode());
+            ps.setString(8, member.getCity());
 
             ps.executeUpdate();
         }catch(SQLException e){

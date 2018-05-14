@@ -3,45 +3,46 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Tilføj Medlem</title>
-    <link rel="stylesheet" type="text/css" href=Style.css/>
-
+    <link rel="stylesheet" type="text/css" href=style.css/>
 </head>
 <body>
-    <div th:replace="/header"></div>
 
-    <div>
-        <form class="genericForm" method="Post" th:action="@{/tilføjmedlem}">
-            <h1>Tilføj medlem</h1>
-                <div>
-                    <label> Fornavn på medlem: </label>
-                    <input type="text" th:field="${member.firstName}" required="true"/>
-                </div>
-                <div>
-                    <label>Efternavn på medlem</label>
-                    <input type="text" th:field="${member.lastName}" required="true"/>
-                </div>
-                <div>
-                    <label>Fødselsdato</label>
-                    <input type="date" th:field="${member.dateOfBirth}" required="true"/>
-                </div>
-                <div>
-                    <label>cpr nummer på medlem</label>
-                    <input type="text" th:field="${member.CPR}" required="true"/>
-                </div>
-                <div>
-                    <label>Addresse</label>
-                    <input type="text" th:field="${member.address}" required="true"/>
-                </div>
-                <div>
-                    <label>Postnummer</label>
-                    <input type="text" th:field="${member.zipcode}" required="true"/>
-                </div>
-                <div>
-                    <label>By</label>
-                    <input type="text" th:field="${member.city}" required="true"/>
-                </div>
-                <input type="submit" value="Send"/>
-        </form>
-    </div>
+<div th:replace="/header"></div>
+
+
+<div class="wrap">
+    <h3>Tilføj nyt medlem</h3>
+    <form class="genericForm" method="Post" th:action="@{/tilføjmedlem}">
+        <div>
+            <label> Fornavn på medlem: </label>
+            <input type="text" th:field="${member.firstName}" required="true"/>
+        </div>
+        <div>
+            <label>Efternavn på medlem</label>
+            <input type="text" th:field="${member.lastName}" required="true"/>
+        </div>
+        <div>
+            <label>Fødselsdato</label>
+            <input type="date" th:field="${member.dateOfBirth}" required="true"/>
+        </div>
+        <div>
+            <label>cpr nummer på medlem</label>
+            <input type="text" th:field="${member.CPR}" required="true"/>
+        </div>
+        <div>
+            <label>Adresse</label>
+            <input type="text" th:field="${member.address}"required="true"/>
+        </div>
+        <div>
+            <label>Postnummer</label>
+            <input type="text" th:field="${member.zipcode}"required="true"/>
+        </div>
+        <div>
+            <label>By</label>
+            <input type="text" th:field="${member.city}"required="true"/>
+        </div>
+        <input type="submit" value="Send"/>
+    </form>
+</div>
 </body>
 </html>

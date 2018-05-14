@@ -8,29 +8,32 @@
 
 <div th:replace="/header"></div>
 
+<div class="wrap">
     <form class="genericForm" method="Post" th:action="@{/redigerMedlem}">
-        <h1>Redigere medlem</h1>
+
         <div>
-        <label> Fornavn på medlem: </label>
-        <input type="text" th:field="${member.firstName} "required="true"/>
+            <label> Fornavn på medlem: </label>
+            <input type="text" th:field="${member.firstName}" required="true"/>
         </div>
         <div>
-        <label>Efternavn på medlem</label>
-        <input type="text" th:field="${member.lastName}"required="true"/>
+
+            <label>Efternavn på medlem</label>
+            <input type="text" th:field="${member.lastName}" required="true"/>
         </div>
         <div>
-        <label>Alder på medlem</label>
-        <input type="text" th:field="${member.age}"required="true"/>
+            <label>Alder på medlem</label>
+            <input type="date" th:field="${member.dateOfBirth}" required="true"/>
         </div>
         <div>
-        <label>CPR på medlem</label>
-        <input type="text" th:field="${member.CPR}" required="true"/>
+            <label>CPR på medlem</label>
+            <input type="text" th:field="${member.CPR}" required="true"/>
         </div>
         <div>
-        <label>Kontingent</label>
-        <input type="text" th:field="${member.kontingent}" required="true"/>
+            <label>Kontingent</label>
+            <input type="text" th:field="${member.kontingent}" required="true"/>
         </div>
         <input type="submit" value="send">
-    </form>
+</div>
+</form>
 </body>
 </html>

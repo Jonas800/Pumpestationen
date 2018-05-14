@@ -3,49 +3,53 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Rediger ansat</title>
-    <link rel="stylesheet" type="text/css" href=Style.css/>
-
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
 <div th:replace="/header"></div>
 
+
+<div class="wrap">
+    <h2>Rediger medarbejder</h2>
+
     <form class="genericForm" method="post" th:action="@{/redigerMedarbejdere}">
-        <h1>Redigere Ansatte</h1>
+
         <div>
             <label>Fornavn: </label>
-            <input type="text" th:field="${employee.firstName}" required="true"/>
+            <input type="text" th:field="${employee.firstName}"/>
         </div>
         <div>
             <label>Efternavn: </label>
-            <input type="text" th:field="${employee.lastName}" required="true"/>
+            <input type="text" th:field="${employee.lastName}"/>
         </div>
         <div>
-            <label>telefon.nr: </label>
-            <input type="text" th:field="${employee.cpr}" required="true"/>
+            <label>Telefonnummer</label>
+            <input type="text" th:field="${employee.cpr}"/>
         </div>
         <div>
-            <label>adresse: </label>
-            <input type="date" th:field="${employee.address}" required="true"/>
+            <label>Adresse</label>
+            <input type="text" th:field="${employee.address}"/>
         </div>
         <div>
-            <label>Mobil: </label>
-            <input type="text" th:field="${employee.phoneNumber}" required="true"/>
+            <label>Mobil</label>
+            <input type="text" th:field="${employee.phoneNumber}"/>
         </div>
         <div>
-            <label>Stilling: </label>
-            <input type="text" th:field="${employee.jobPosition}" required="true"/>
+            <label>Stilling</label>
+            <input type="text" th:field="${employee.jobPosition}"/>
         </div>
         <div>
-            <label>postnr: </label>
-            <input type="text" th:field="${employee.zipcode}" required="true"/>
+            <label>Postnummer</label>
+            <input type="text" th:field="${employee.zipcode}"/>
         </div>
         <div>
-            <label>by: </label>
-            <input type="text" th:field="${employee.city}" required="true"/>
+            <label>By</label>
+            <input type="text" th:field="${employee.city}"/>
         </div>
-        <input type="submit" value="opdater">
+        <input type="submit" value="Gem">
 
     </form>
+</div>
 </body>
 </html>

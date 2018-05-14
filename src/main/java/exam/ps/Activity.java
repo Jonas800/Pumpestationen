@@ -2,6 +2,7 @@ package exam.ps;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Time;
 import java.util.Date;
 
 
@@ -9,20 +10,26 @@ public class Activity {
     private int id;
     private String name;
     private String description;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss.SSSZ")
-    private Date startDateTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss.SSSZ")
-    private Date endDateTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endDate;
+    @DateTimeFormat(pattern = "HH:mm")
+    private Time startTime;
+    @DateTimeFormat(pattern = "HH:mm")
+    private Time endTime;
 
     public Activity() {
     }
 
-    public Activity(int id, String name, String description, Date startDateTime, Date endDateTime) {
+    public Activity(int id, String name, String description, Date startDate, Date endDate, Time startTime, Time endTime) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public int getId() { return id; }
@@ -37,15 +44,23 @@ public class Activity {
 
     public String getName() { return name; }
 
-    public Date getStartDateTime() { return startDateTime; }
+    public Date getStartDate() { return startDate; }
 
-    public void setStartDateTime(Date startDateTime) { this.startDateTime = startDateTime; }
+    public void setStartDate(Date startDate) { this.startDate = startDate; }
 
-    public Date getEndDateTime() { return endDateTime; }
+    public Date getEndDate() { return endDate; }
 
-    public void setEndDateTime(Date endDateTime) { this.endDateTime = endDateTime; }
+    public void setEndDate(Date endDate) { this.endDate = endDate; }
+
+    public Time getStartTime() { return startTime; }
+
+    public void setStartTime(Time startTime) { this.startTime = startTime; }
+
+    public Time getEndTime() { return endTime; }
+
+    public void setEndTime(Time endTime) { this.endTime = endTime; }
 
     public String toString() {
-        return id + "#" + name + "#" + description + "#" + startDateTime+ "#" + endDateTime;
+        return id + "#" + name + "#" + description + "#" + startDate+ "#" + endDate +"#" + startTime+ "#" + endTime;
     }
 }
