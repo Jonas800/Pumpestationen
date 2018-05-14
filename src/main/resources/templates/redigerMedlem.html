@@ -29,11 +29,22 @@
             <input type="text" th:field="${member.CPR}" required="true"/>
         </div>
         <div>
-            <label>Kontingent</label>
-            <input type="text" th:field="${member.kontingent}" required="true"/>
+            <label>adresse på medlem</label>
+            <input type="text" th:field="${member.address}" required="true"/>
         </div>
+        <div>
+            <label>by på medlem</label>
+            <input type="text" th:field="${member.city}" required="true"/>
+        </div>
+        <div>
+            <label>postnr på medlem</label>
+            <input type="text" th:field="${member.zipcode}" required="true"/>
         <input type="submit" value="send">
-</div>
-</form>
+
+    </form>
+
+        </div>
+
+
 </body>
 </html>

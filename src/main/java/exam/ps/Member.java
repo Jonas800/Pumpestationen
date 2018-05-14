@@ -17,7 +17,7 @@ public class Member {
 
     }
 
-    public Member(String firstName, String lastName, int age, String CPR, int id, int kontingent, Date dateOfBirth, int zipcode, String city){
+    public Member(String firstName, String lastName, int age, String CPR, int id,String address, int kontingent, Date dateOfBirth, int zipcode, String city){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -25,8 +25,10 @@ public class Member {
         this.id = id;
         this.kontingent = kontingent;
         this.dateOfBirth = dateOfBirth;
+        this.address=address;
         this.city = city;
         this.zipcode = zipcode;
+
     }
 
     public int getZipcode() {
@@ -75,7 +77,6 @@ public class Member {
     public void setAddress(String address) {
         this.address = address;
     }
-
     public void setAge(int age) {
         this.age = age;
     }

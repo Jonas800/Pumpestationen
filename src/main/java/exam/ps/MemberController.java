@@ -157,6 +157,7 @@ public class MemberController {
                     member.setLastName(rs.getString("member_lastName"));
                     member.setDateOfBirth(rs.getDate("member_dateOfBirth"));
                     member.setCPR(rs.getString("member_CPR"));
+                    member.setAddress(rs.getString("member_address"));
                     member.setId(rs.getInt("member_Id"));
                     member.setZipcode(rs.getInt("zipcodes_zipcode"));//joiner for at kunne få fat i tabellen zipcodes og hente by og postnr fra zipcodes
                     member.setCity(rs.getString("zipcode_city"));
@@ -180,17 +181,30 @@ public class MemberController {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;
-        try{
-            ps = con.prepareStatement("UPDATE members INNER JOIN zipcode ON zipcode = zipcodes_zipcodes SET member_firstName =?,member_lastName =?,member_cpr =?,member_kontingent =?, member_dateOfBirth =?,member_address =?,member_zipcode=?,member_city =? WHERE member_id =?");
-            ps.setInt(9, memberID);//får det ID som er blevet requestet fra hjemmesiden, og den viser rækken hvis id'et eksisterer i tabellen
+        PreparedStatement ps2 = null;
+
+        try {
+            ps2 = con.prepareStatement("SELECT COUNT(*) AS count FROM zipcodes WHERE zipcode = ?");
+            ps2.setInt(1, member.getZipcode());
+
+            ResultSet rs = ps2.executeQuery();
+            rs.next();
+            if (rs.getInt("count") == 0) {
+                ps2 = con.prepareStatement("INSERT INTO zipcodes(zipcode, zipcode_city) VALUES(?,?)");
+                ps2.setInt(1, member.getZipcode());
+                ps2.setString(2, member.getCity());
+
+                ps.executeUpdate();
+            }
+
+            ps = con.prepareStatement("UPDATE members INNER JOIN zipcodes ON zipcode = zipcodes_zipcode SET member_firstName =?,member_lastName =?,member_dateOfBirth =?,member_cpr =? ,member_address =?,zipcodes_zipcode=? WHERE member_id =?");
+            ps.setInt(7, memberID);//får det ID som er blevet requestet fra hjemmesiden, og den viser rækken hvis id'et eksisterer i tabellen
             ps.setString(1, member.getFirstName());
             ps.setString(2, member.getLastName());
-            ps.setString(3, member.getCPR());
-            ps.setInt(4, member.getKontingent());
-            ps.setDate(5, new java.sql.Date(member.getDateOfBirth().getTime()));
-            ps.setString(6, member.getAddress());
-            ps.setInt(7, member.getZipcode());
-            ps.setString(8, member.getCity());
+            ps.setDate(3, new java.sql.Date(member.getDateOfBirth().getTime()));
+            ps.setString(4, member.getCPR());
+            ps.setString(5, member.getAddress());
+            ps.setInt(6, member.getZipcode());
 
             ps.executeUpdate();
         }catch(SQLException e){
@@ -202,6 +216,7 @@ public class MemberController {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;
+
         try {
             ps = con.prepareStatement("DELETE FROM members WHERE member_id = ?");
             ps.setInt(1, member.getId());
