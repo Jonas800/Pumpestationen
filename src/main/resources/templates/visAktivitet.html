@@ -24,7 +24,6 @@
         <table class="tablelook">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Navn</th>
                 <th>Beskrivelse</th>
                 <th>Start dato og tid</th>
@@ -36,7 +35,6 @@
             </thead>
             <tbody>
             <tr th:each="activity: ${activityArrayList}" >
-                <td th:text="${activity.id}"/>
                 <td th:text="${activity.name}"/>
                 <td th:text="${activity.description}"/>
                 <td th:text="${activity.startDateTime}"/>

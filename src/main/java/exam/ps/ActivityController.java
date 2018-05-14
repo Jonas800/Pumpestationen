@@ -68,15 +68,15 @@ public class ActivityController {
         ArrayList<Activity> allActivities = new ArrayList<>();
         try{
             s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT *  FROM activities ");
+            ResultSet rs = s.executeQuery("SELECT * FROM activities");
             while(rs.next()){
                 try{
                     Activity activity = new Activity();
                     activity.setId(rs.getInt("activity_id"));
                     activity.setName(rs.getString("activity_name"));
                     activity.setDescription(rs.getString("activity_description"));
-                    activity.setStartDateTime(rs.getTime("activity_startDatetime"));
-                    activity.setEndDateTime(rs.getTime("activity_endDatetime"));
+                    activity.setStartDateTime(rs.getTimestamp("activity_startDatetime"));
+                    activity.setEndDateTime(rs.getTimestamp("activity_endDatetime"));
                     allActivities.add(activity);
                 } catch(SQLException e){
                     e.printStackTrace();
@@ -100,7 +100,7 @@ public class ActivityController {
         Connection con = db.createConnection();
         PreparedStatement ps = null;
         try{
-            ps = con.prepareStatement("UPDATE activities SET activity_name = ?, activity_description = ?, activity_startDatetime = ?, activity_endDatetime = ? WHERE activity_id = ? ");
+            ps = con.prepareStatement("UPDATE activities SET activity_name=?, activity_description = ?, activity_startDatetime = ?, activity_endDatetime = ? WHERE activity_id = ?");
             ps.setInt(4, activityID);
             ps.setString(1, activity.getName());
             ps.setString(2, activity.getDescription());
