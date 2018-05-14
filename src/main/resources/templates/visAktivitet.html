@@ -17,8 +17,10 @@
                 <tr>
                     <th>Navn</th>
                     <th>Beskrivelse</th>
-                    <th>Start dato og tid</th>
-                    <th>Slut dato og tid</th>
+                    <th>Start dato</th>
+                    <th>Start tid</th>
+                    <th>Slut dato</th>
+                    <th>Slut tid</th>
                     <th>Ansatte</th>
                     <th>Medlemmer</th>
                     <th></th>
@@ -28,8 +30,10 @@
                 <tr th:each="activity: ${activityArrayList}" >
                     <td th:text="${activity.name}"/>
                     <td th:text="${activity.description}"/>
-                    <td th:text="${activity.startDateTime}"/>
-                    <td th:text="${activity.endDateTime}"/>
+                    <td th:text="${activity.startDate}"/>
+                    <td th:text="${activity.startTime}"/>
+                    <td th:text="${activity.endDate}"/>
+                    <td th:text="${activity.endTime}"/>
                     <td/><td/>
                     <td>
                         <a th:href="@{'/redigerAktivitet?id='+${activity.id}}" class="knap">Rediger</a>
