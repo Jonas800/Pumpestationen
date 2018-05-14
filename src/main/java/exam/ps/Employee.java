@@ -34,11 +34,11 @@ public class Employee extends Login {
 
         }
 
-  
-
-    public Employee(String userName, String passWord, int ID) {
+    public Employee(String userName, String passWord) {
         super(userName, passWord);
     }
+
+
 
     public int getID() {
         return ID;
