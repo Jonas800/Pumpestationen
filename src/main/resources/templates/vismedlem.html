@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" href=Format.css/>
-    <link rel="stylesheet" type="text/css" href=Member.css/>
+    <link rel="stylesheet" type="text/css" href=Style.css/>
 </head>
 <body>
+<div th:replace="/header"></div>
 
-<div class="menuTop">
-    <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
-    <a><img src="logo.png" alt="Pumpestationen"></a>
-    <a href="vagtplan">Vagtplan</a>
-    <a href="vismedlem">Medlemmer</a>
-    <a href="tilføjmedlem">Tilføj medlem </a>
-    <a href="VisMedarbejdere">Ansatte</a>
-    <a href="visAktivitet">Aktiviteter</a>
-    <a>Login</a>
-    <a style="float: right">Tilbage</a>
-</div>
+<a href="tilføjmedlem" class="opretKnap">Tilføj ny medlem </a>
 
 <div class="firkantrundtomtabel">
-    <h2>Oversigt over medlemmer</h2>
+    <h1>Oversigt over medlemmer</h1>
     <table class="tableLook">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Fornavn</th>
             <th>Efternavn</th>
             <th>Alder</th>
-            <th>Cpr nummer</th>
-            <th>post nr.</th>
+            <th>Cpr nr.</th>
+            <th>Post nr.</th>
             <th>By</th>
             <th></th>
-
         </tr>
         </thead>
         <tbody>
 
         <tr th:each="member: ${memberArray}">
-            <td th:text="${member.id}"/>
             <td th:text="${member.firstName}"/>
             <td th:text="${member.lastName}"/>
             <td th:text="${member.age}"/>
@@ -46,7 +33,7 @@
             <td th:text="${member.city}"/>
             <td>
                 <a th:href="@{'/redigerMedlem?id='+${member.id}}" class="knap">Rediger</a>
-                <a th:href="@{'/sletmedlem?id='+${member.id}}" onclick="return confirm('sletmedlem?id=')">Slet</a>
+                <a th:href="@{'/sletmedlem?id='+${member.id}}" onclick="return confirm('sletmedlem?id=')" class="knap">Slet</a>
 
             </td>
 

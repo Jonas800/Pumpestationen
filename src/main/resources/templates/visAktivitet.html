@@ -3,50 +3,39 @@
 <head>
     <meta charset="UTF-8"/>
     <title>View over activities</title>
-    <link rel="stylesheet" type="text/css" href=Activity.css/>
+    <link rel="stylesheet" type="text/css" href=Style.css/>
 </head>
 <body>
-    <div class="menuTop">
-        <h1>Pumpestationen<sub>Fritidscenter</sub></h1>
-        <a><img src="logo.png" alt="Pumpestationen"></a>
-        <a href="vagtplan">Vagtplan</a>
-        <a href="vismedlem">Medlemmer</a>
-        <a href="VisMedarbejdere">Ansatte</a>
-        <a href="visAktivitet">Aktiviteter</a>
-        <a>Login</a>
-        <a style="float: right">Tilbage</a>
-    </div>
+    <div th:replace="/header"></div>
 
     <a href="tilføjAktivitet">Tilføj ny aktivitet</a>
 
-    <div class="table">
-        <h2>Oversigt over aktiviteter</h2>
+    <div class="firkantrundtomtabel">
+        <h1>Oversigt over aktiviteter</h1>
         <table class="tablelook">
             <thead>
-            <tr>
-                <th>ID</th>
-                <th>Navn</th>
-                <th>Beskrivelse</th>
-                <th>Start dato og tid</th>
-                <th>Slut dato og tid</th>
-                <th>Ansatte</th>
-                <th>Medlemmer</th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th>Navn</th>
+                    <th>Beskrivelse</th>
+                    <th>Start dato og tid</th>
+                    <th>Slut dato og tid</th>
+                    <th>Ansatte</th>
+                    <th>Medlemmer</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            <tr th:each="activity: ${activityArrayList}" >
-                <td th:text="${activity.id}"/>
-                <td th:text="${activity.name}"/>
-                <td th:text="${activity.description}"/>
-                <td th:text="${activity.startDateTime}"/>
-                <td th:text="${activity.endDateTime}"/>
-                <td/><td/>
-                <td>
-                    <a th:href="@{'/redigerAktivitet?id='+${activity.id}}" class="knap1">Rediger</a>
-                    <a th:href="@{'/sletAktivitet?id='+${activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap2">Slet</a>
-                </td>
-            </tr>
+                <tr th:each="activity: ${activityArrayList}" >
+                    <td th:text="${activity.name}"/>
+                    <td th:text="${activity.description}"/>
+                    <td th:text="${activity.startDateTime}"/>
+                    <td th:text="${activity.endDateTime}"/>
+                    <td/><td/>
+                    <td>
+                        <a th:href="@{'/redigerAktivitet?id='+${activity.id}}" class="knap">Rediger</a>
+                        <a th:href="@{'/sletAktivitet?id='+${activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

@@ -9,9 +9,9 @@ public class Activity {
     private int id;
     private String name;
     private String description;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss.SSSZ")
     private Date startDateTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss.SSSZ")
     private Date endDateTime;
 
     public Activity() {
