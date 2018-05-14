@@ -8,12 +8,9 @@ import java.security.spec.InvalidKeySpecException;
 public class passwordvalidation {
 
 
-    public static boolean validatepassword (String databaselogin, String userinput) throws InvalidKeySpecException, NoSuchAlgorithmException {
-
-
-
-        boolean matched = validatePassword(userinput, databaselogin);
-
+    public static boolean validatepassword (String formInput, String databaseInput) throws InvalidKeySpecException, NoSuchAlgorithmException {
+        boolean matched = validatePassword(formInput, databaseInput);
+        System.out.println(matched);
         return matched;
     }
 

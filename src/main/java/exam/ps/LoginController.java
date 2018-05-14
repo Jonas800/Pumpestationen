@@ -25,8 +25,8 @@ public class LoginController {
     }
 
     @PostMapping("/opretbruger")
-    public String opretbruger(@ModelAttribute Employee login) throws InvalidKeySpecException, NoSuchAlgorithmException {
-        insertActivity(login);
+    public String opretbruger(@ModelAttribute Login login) throws InvalidKeySpecException, NoSuchAlgorithmException {
+        insertLogin(login);
         return "redirect:/loginside";
     }
 
@@ -39,27 +39,27 @@ public class LoginController {
 
     @PostMapping("/loginside")
     public String usernamepassword(@ModelAttribute Login login) throws InvalidKeySpecException, NoSuchAlgorithmException {
-        ArrayList<Employee> loginArray = selectAlllogins();
-        for (Employee employeelogin : loginArray) {
-            boolean validatepassword = passwordvalidation.validatepassword(login.getPassWord(), employeelogin.getPassWord());
-            String validation = String.valueOf(validatepassword);
-            if (employeelogin.getUserName() == login.getUserName() && validation == "true") {
-                return "forside";
-            }
+        System.out.println(login.getUserName() + "" + login.getPassWord());
+        Login user = selectUser(login.getUserName());
+        System.out.println(user.getUserName() + " " + user.getPassWord());
+
+        if (passwordvalidation.validatepassword(login.getPassWord(), user.getPassWord())) {
+            return "forside";
         }
+
 
         return "loginside";
     }
 
 
-    public void insertActivity(Employee login) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public void insertLogin(Login login) throws InvalidKeySpecException, NoSuchAlgorithmException {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;
         String hashed = passwordhasher.generateStorngPasswordHash(login.getPassWord());
 
         try {
-            ps = con.prepareStatement("INSERT INTO login(email,passWord) VALUES(?, ?)");
+            ps = con.prepareStatement("INSERT INTO users(user_email,user_password) VALUES(?, ?)");
             ps.setString(1, login.getUserName());
             ps.setString(2, hashed);
 
@@ -69,20 +69,22 @@ public class LoginController {
         }
     }
 
-    public ArrayList<Employee> selectAlllogins() {
+    public Login selectUser(String email) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
-        Statement s = null;
-        ArrayList<Employee> allpasswords = new ArrayList<>();
+        PreparedStatement ps = null;
+        Login user = new Login();
+
         try {
-            s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT *  FROM login ");
-            while (rs.next()) {
+            ps = con.prepareStatement("SELECT * FROM users WHERE user_email = ?");
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
                 try {
-                    Employee employee = new Employee();
-                    employee.setFirstName(rs.getString("email"));
-                    employee.setLastName(rs.getString("passWord"));
-                    allpasswords.add(employee);
+                    user.setUserName(rs.getString("user_email"));
+                    user.setPassWord(rs.getString("user_password"));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -90,7 +92,7 @@ public class LoginController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return allpasswords;
+        return user;
     }
 
 }
