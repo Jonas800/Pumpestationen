@@ -44,9 +44,9 @@ public class ActivityController {
             ps.setString(1, activity.getName());
             ps.setString(2, activity.getDescription());
             ps.setDate(3, new java.sql.Date(activity.getStartDate().getTime()));
-            ps.setDate(4, new java.sql.Date(activity.getStartTime().getTime()));
-            ps.setDate(5, new java.sql.Date(activity.getEndTime().getTime()));
-            ps.setDate(6, new java.sql.Date(activity.getEndTime().getTime()));
+            //ps.setDate(4, new java.sql.Time() = java.sql.Time.valueOf(activity.getStartTime());
+            //ps.setDate(5, new java.sql.Date(activity.getEndTime().getTime()));
+            //ps.setDate(6, new java.sql.Date(activity.getEndTime().getTime()));
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -79,9 +79,9 @@ public class ActivityController {
                     activity.setName(rs.getString("activity_name"));
                     activity.setDescription(rs.getString("activity_description"));
                     activity.setStartDate(rs.getTimestamp("activity_startDate"));
-                    activity.setStartTime(rs.getTime("activity_endTime"));
+                    //activity.setStartTime(rs.getTime("activity_endTime"));
                     activity.setEndDate(rs.getTimestamp("activity_endDate"));
-                    activity.setEndTime(rs.getTime("activity_endTime"));
+                    //activity.setEndTime(rs.getTime("activity_endTime"));
                     allActivities.add(activity);
                 } catch(SQLException e){
                     e.printStackTrace();
@@ -110,9 +110,9 @@ public class ActivityController {
             ps.setString(1, activity.getName());
             ps.setString(2, activity.getDescription());
             ps.setDate(3, new java.sql.Date(activity.getStartDate().getTime()));
-            ps.setDate(4, new java.sql.Date(activity.getEndTime().getTime()));
+            //ps.setDate(4, new java.sql.Date(activity.getEndTime().getTime()));
             ps.setDate(5, new java.sql.Date(activity.getEndDate().getTime()));
-            ps.setDate(6, new java.sql.Date(activity.getEndTime().getTime()));
+            //ps.setDate(6, new java.sql.Date(activity.getEndTime().getTime()));
 
             ps.executeUpdate();
         } catch (SQLException e) {

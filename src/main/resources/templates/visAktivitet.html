@@ -21,8 +21,6 @@
                     <th>Start tid</th>
                     <th>Slut dato</th>
                     <th>Slut tid</th>
-                    <th>Ansatte</th>
-                    <th>Medlemmer</th>
                     <th></th>
                 </tr>
             </thead>
@@ -38,6 +36,8 @@
                     <td>
                         <a th:href="@{'/redigerAktivitet?id='+${activity.id}}" class="knap">Rediger</a>
                         <a th:href="@{'/sletAktivitet?id='+${activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
+                        <a th:href="@{'/}" class="knap">Tilføj medlemmer</a>
+                        <a th:href="@{'/}" class="knap">Tilføj medarbejder</a>
                     </td>
                 </tr>
             </tbody>

@@ -1,8 +1,9 @@
 package exam.ps;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.datetime.joda.DateTimeFormatterFactoryBean;
 
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -14,15 +15,15 @@ public class Activity {
     private Date startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
-    @DateTimeFormat(pattern = "HH:mm")
-    private Time startTime;
-    @DateTimeFormat(pattern = "HH:mm")
-    private Time endTime;
+    @DateTimeFormat(pattern = "HH:mm:ss.SSSZ")
+    private LocalTime startTime;
+    @DateTimeFormat(pattern = "HH:mm:ss.SSSZ")
+    private LocalTime endTime;
 
     public Activity() {
     }
 
-    public Activity(int id, String name, String description, Date startDate, Date endDate, Time startTime, Time endTime) {
+    public Activity(int id, String name, String description, Date startDate, Date endDate, LocalTime startTime, LocalTime endTime) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -52,13 +53,13 @@ public class Activity {
 
     public void setEndDate(Date endDate) { this.endDate = endDate; }
 
-    public Time getStartTime() { return startTime; }
+    public LocalTime getStartTime() { return startTime; }
 
-    public void setStartTime(Time startTime) { this.startTime = startTime; }
+    public void setStartTime(LocalTime startTime) { this.startTime = startTime; }
 
-    public Time getEndTime() { return endTime; }
+    public LocalTime getEndTime() { return endTime; }
 
-    public void setEndTime(Time endTime) { this.endTime = endTime; }
+    public void setEndTime(LocalTime endTime) { this.endTime = endTime; }
 
     public String toString() {
         return id + "#" + name + "#" + description + "#" + startDate+ "#" + endDate +"#" + startTime+ "#" + endTime;

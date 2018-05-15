@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href=Style.css/>
+</head>
+<body>
+    <div th:replace="/header"></div>
+
+    <div class="firkantrundtomtabel">
+        <h1>Tilføj Medlemmer</h1>
+        <table class="tablelook">
+            <thead>
+            <tr>
+                <th>Medlemmer Navn</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="activity: ${activityArrayList}" >
+                <td th:text="${member.firstName}"/>
+                <td><td/>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
