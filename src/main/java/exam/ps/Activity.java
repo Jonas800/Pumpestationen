@@ -15,9 +15,9 @@ public class Activity {
     private Date startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
-    @DateTimeFormat(pattern = "HH:mm:ss.SSSZ")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime startTime;
-    @DateTimeFormat(pattern = "HH:mm:ss.SSSZ")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime endTime;
 
     public Activity() {

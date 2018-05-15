@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
     <title>View over activities</title>
@@ -28,9 +28,9 @@
                 <tr th:each="activity: ${activityArrayList}" >
                     <td th:text="${activity.name}"/>
                     <td th:text="${activity.description}"/>
-                    <td th:text="${activity.startDate}"/>
+                    <td th:text="${#dates.format(activity.startDate, 'dd-MM-yyyy')}"/>
                     <td th:text="${activity.startTime}"/>
-                    <td th:text="${activity.endDate}"/>
+                    <td th:text="${#dates.format(activity.endDate, 'dd-MM-yyyy')}"/>
                     <td th:text="${activity.endTime}"/>
                     <td/><td/>
                     <td>
