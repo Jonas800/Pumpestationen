@@ -36,8 +36,8 @@
                     <td>
                         <a th:href="@{'/redigerAktivitet?id='+${activity.id}}" class="knap">Rediger</a>
                         <a th:href="@{'/sletAktivitet?id='+${activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
-                        <a th:href="@{'/}" class="knap">Tilføj medlemmer</a>
-                        <a th:href="@{'/}" class="knap">Tilføj medarbejder</a>
+                        <a th:href="@{'/tilføjMedAkt?id='+${activity.id}}" class="knap">Tilføj medarbeder</a>
+                        <a th:href="@{'/tilføjMemAKt?id='+${activity.id}}" class="knap">Tilføj medlemmmer</a>
                     </td>
                 </tr>
             </tbody>

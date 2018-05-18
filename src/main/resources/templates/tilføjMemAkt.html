@@ -1,31 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
     <link rel="stylesheet" type="text/css" href=Style.css/>
 </head>
 <body>
-    <div th:replace="/header"></div>
+<div th:replace="/header"></div>
 
-    <div class="firkantrundtomtabel">
-        <h1>Tilføj Medlemmer</h1>
-        <table class="tablelook">
-            <thead>
-            <tr>
-                <th>Medlemmer Navn</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="activity: ${activityArrayList}" >
-                <td th:text="${member.firstName}"/>
-                <td><td/>
+<a href="tilføjmedlem" class="opretKnap">Tilføj ny medlem </a>
 
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="firkantrundtomtabel">
+    <h1>Oversigt over medlemmer</h1>
+    <form action="/tilføjMemAkt" method="Post">
+
+    <table class="tableLook">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Fornavn</th>
+            <th>Efternavn</th>
+            <th>Alder</th>
+            <th>Cpr nr.</th>
+            <th>kontingent</th>
+            <th>adresse</th>
+            <th>Post nr.</th>
+            <th>By</th>
+            <th>vælg   </th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="member: ${memberArray}">
+            <td th:text="${member.id}"/>
+            <td th:text="${member.firstName}"/>
+            <td th:text="${member.lastName}"/>
+            <td th:text="${member.age}"/>
+            <td th:text="${member.CPR}"/>
+            <td th:text="${member.kontingent}"/>
+            <td th:text="${member.address}"/>
+            <td th:text="${member.zipcode}"/>
+            <td th:text="${member.city}"/>
+            <td>
+                    <input type="checkbox" name="ID[]" th:value=${member.id}"/>
+
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+        <input type="submit" value="Submit">
+
+    </form>
+</div>
 
 </body>
-</html>

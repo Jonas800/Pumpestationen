@@ -1,15 +1,14 @@
 package exam.ps;
-import java.sql.Date;
-import java.util.*;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.io.*;
+
+import java.io.FileNotFoundException;
 import java.sql.*;
+import java.util.ArrayList;
 @Controller
 public class MemberController {
     int memberID = 0;
@@ -142,7 +141,7 @@ public class MemberController {
 
     }
 
-    public ArrayList<Member> selectMembers() {
+    public static ArrayList<Member> selectMembers() {
         ArrayList<Member> memberSelect = new ArrayList<>();
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
@@ -153,6 +152,7 @@ public class MemberController {
             while (rs.next()) {
                 try {
                     Member member = new Member();
+                    member.setId(rs.getInt("member_id"));
                     member.setFirstName(rs.getString("member_firstName"));
                     member.setLastName(rs.getString("member_lastName"));
                     member.setDateOfBirth(rs.getDate("member_dateOfBirth"));

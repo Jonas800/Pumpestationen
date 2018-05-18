@@ -35,12 +35,10 @@
                 <td th:text="${employee.jobPosition}"/>
                 <td th:text="${employee.city}"/>
                 <td th:text="${employee.zipcode}"/>
-
                 <td>
                     <a th:href="@{'/redigerMedarbejdere?ID='+${employee.ID}}" class="knap">Rediger</a>
                     <a th:href="@{'/SletMedarbejder?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
                     <a th:href="@{'/opretbruger?ID='+${employee.ID}}" class="knap">Opret login</a>
-
                 </td>
 
             </tr>
