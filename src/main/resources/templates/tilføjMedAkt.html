@@ -1,14 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
     <link rel="stylesheet" type="text/css" href=Style.css/>
 </head>
 <body>
-    <div th:replace="/header"></div>
+<div th:replace="/header"></div>
+
+<a href="Opretmedarbejdere">Tilføj ny ansat</a>
+
+<div class="firkantrundtomtabel">
+    <h1>Oversigt over ansatte</h1>
+    <form action="/tilføjMedAkt" method="Post">
+
+    <table class="tableLook">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fornavn</th>
+            <th>Efternavn</th>
+            <th>Cpr</th>
+            <th>Adresse</th>
+            <th>Mobil</th>
+            <th>Stilling</th>
+            <th>by</th>
+            <th>Postnr</th>
+            <th>vælg id</th>
+
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee: ${employeeArrayList}">
+            <td th:text="${employee.ID}"/>
+            <td th:text="${employee.firstName}"/>
+            <td th:text="${employee.lastName}"/>
+            <td th:text="${employee.cpr}"/>
+            <td th:text="${employee.address}"/>
+            <td th:text="${employee.phoneNumber}"/>
+            <td th:text="${employee.jobPosition}"/>
+            <td th:text="${employee.city}"/>
+            <td th:text="${employee.zipcode}"/>
+
+            <td>
+                    <input type="checkbox" name="ID" th:value="${employee.ID}" />
 
 
+            </td>
 
+        </tr>
+        </tbody>
+    </table>
+        <input type="submit" value="Submit">
+
+    </form>
+
+</div>
 </body>
 </html>

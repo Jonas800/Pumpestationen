@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
+
+import static exam.ps.EmployeeController.selectAllEmployees;
 
 @Controller
 public class ActivityController {
@@ -30,31 +31,46 @@ public class ActivityController {
     @PostMapping("/tilføjAktivitet")
     public String createActivity(@ModelAttribute Activity activity) {
         insertActivity(activity);
+        return "redirect:/tilføjMedAkt";
+    }
+
+
+    @GetMapping("/tilføjMedAkt")
+    public String tilføjMedAkt(@RequestParam(value = "id", defaultValue = "0") int urlID, Model model) {
+        model.addAttribute("employeeArrayList", selectAllEmployees());
+        activityID = urlID;
+        return ("tilføjMedAkt");
+    }
+    @PostMapping("/tilføjMedAkt")
+    public String vælgmedarbejdere (@RequestParam(value = "ID") int[] ids) {
+
+        for (int i = 0;  i<ids.length ; i++) {
+            int id=ids[i];
+            addEmployeeToActivty(id, activityID);
+        }
+
+
         return "redirect:/visAktivitet";
     }
 
-    public void insertActivity(Activity activity) {
-        dbConn db = dbConn.getInstance();
-        Connection con = db.createConnection();
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement("INSERT INTO activities (activity_name, activity_description, activity_startDate, activity_endDate, activity_startTime,  activity_endTime) VALUES(?, ?, ?, ?,?,?)");
-            ps.setString(1, activity.getName());
-            ps.setString(2, activity.getDescription());
-            ps.setDate(3, new java.sql.Date(activity.getStartDate().getTime()));
-            ps.setDate(4, new java.sql.Date(activity.getEndDate().getTime()));
-            Time startTime = Time.valueOf(activity.getStartTime());
-            ps.setTime(5, startTime);
-            Time endTime = Time.valueOf(activity.getEndTime());
-            ps.setTime(6, endTime);
+    @GetMapping("/tilføjMemAkt")
+    public String vælgmedlem(Model model) {
+        model.addAttribute("memberArray", MemberController.selectMembers());
 
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return ("tilføjMemAkt");
     }
 
-    @GetMapping("/redigerAktivitet")
+    @PostMapping("/tilføjMemAkt")
+    public String vælgmedlem (@RequestParam("Id") int[] ids) {
+
+        for (int i = 0; i < ids.length; i++) {
+            int id = ids[i];
+            addmemerTOActivity(id,activityID);
+
+        }
+         return "redirect:visAktivitet";
+    }
+        @GetMapping("/redigerAktivitet")
     public String editActivity(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
         for(Activity activity:selectAllActivities()) {
             if(activity.getId() == id)
@@ -63,6 +79,23 @@ public class ActivityController {
         activityID = id;
         return "redigerAktivitet";
     }
+    @GetMapping("/sletAktivitet")
+    public String deleteActivity(@RequestParam(value = "id", defaultValue = "0") int id, Activity activity)  {
+        deleteActivity(activity);
+        return "redirect:/visAktivitet";
+    }
+    @PostMapping("/redigerAktivitet")
+    public String editActivity(Activity activity) {
+        updateActivity(activity);
+        return "redirect:/visAktivitet";
+
+
+
+        }
+
+
+
+
 
     public ArrayList<Activity> selectAllActivities(){
         dbConn db = dbConn.getInstance();
@@ -94,11 +127,7 @@ public class ActivityController {
         return allActivities;
     }
 
-    @PostMapping("/redigerAktivitet")
-    public String editActivity(Activity activity) {
-        updateActivity(activity);
-        return "redirect:/visAktivitet";
-    }
+
 
     public void updateActivity(Activity activity) {
         dbConn db = dbConn.getInstance();
@@ -122,12 +151,59 @@ public class ActivityController {
         }
     }
 
-    @GetMapping("/sletAktivitet")
-    public String deleteActivity(@RequestParam(value = "id", defaultValue = "0") int id, Activity activity) throws FileNotFoundException {
-        deleteActivity(activity);
-        return "redirect:/visAktivitet";
+    public void insertActivity(Activity activity) {
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement("INSERT INTO activities (activity_name, activity_description, activity_startDate, activity_endDate, activity_startTime,  activity_endTime) VALUES(?, ?, ?, ?,?,?)");
+            ps.setString(1, activity.getName());
+            ps.setString(2, activity.getDescription());
+            ps.setDate(3, new java.sql.Date(activity.getStartDate().getTime()));
+            ps.setDate(4, new java.sql.Date(activity.getEndDate().getTime()));
+            Time startTime = Time.valueOf(activity.getStartTime());
+            ps.setTime(5, startTime);
+            Time endTime = Time.valueOf(activity.getEndTime());
+            ps.setTime(6, endTime);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+    private void addEmployeeToActivty(int employeeId, int activityId) {
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement("INSERT INTO organizers (employees_employee_id, activities_activity_id) VALUES(?, ?)");
+            ps.setInt(1, employeeId);
+            ps.setInt(2, activityId);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void addmemerTOActivity(int medlemId, int activityID) {
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement("INSERT INTO participants (activities_activity_id, members_member_id ) VALUES(?,?)");
+            ps.setInt(1,medlemId);
+            ps.setInt(2,activityID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
     public void deleteActivity(Activity activity) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
