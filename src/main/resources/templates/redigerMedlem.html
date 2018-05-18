@@ -10,7 +10,7 @@
 
 <div class="wrap">
     <form class="genericForm" method="Post" th:action="@{/redigerMedlem}">
-
+        <h2>Rediger medlem</h2>
         <div>
             <label> Fornavn på medlem: </label>
             <input type="text" th:field="${member.firstName}" required="true"/>
@@ -39,11 +39,11 @@
         <div>
             <label>postnr på medlem</label>
             <input type="text" th:field="${member.zipcode}" required="true"/>
-        <input type="submit" value="send">
+            <input type="submit" value="send">
 
     </form>
 
-        </div>
+</div>
 
 
 </body>

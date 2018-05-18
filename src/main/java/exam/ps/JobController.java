@@ -21,7 +21,7 @@ public class JobController {
 
         edit = editParam;
 
-        ArrayList<Job> allJobs = selectAllJobs();
+        ArrayList<Job> allJobs = Job.selectAllJobs();
         if (id != 0) {
             for (Job job : allJobs) {
                 if (job.getId() == id) {
@@ -54,30 +54,7 @@ public class JobController {
         return "redirect:/job";
     }
 
-    public ArrayList<Job> selectAllJobs(){
-        dbConn db = dbConn.getInstance();
-        Connection con = db.createConnection();
-        Statement s = null;
-        ArrayList<Job> allJobs = new ArrayList<>();
-        try{
-            s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM jobs");
-            while(rs.next()){
-                try{
-                    Job job = new Job();
-                    job.setId(rs.getInt("job_id"));
-                    job.setTitle(rs.getString("job_title"));
-                    allJobs.add(job);
-                } catch(SQLException e){
-                    e.printStackTrace();
-                }
-            }
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
-        return allJobs;
-    }
+
     public void insertJob(Job job) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();

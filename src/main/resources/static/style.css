@@ -56,12 +56,12 @@ header h1 {
 
 
 /*Formular*/
-.genericForm label, input{
+.genericForm label, input, textarea{
     display:block;
     width:100%;
     box-sizing:border-box;
 }
-.genericForm input{
+.genericForm input, textarea{
     border-radius:10px;
     padding:2px 5px 2px 5px;
 }

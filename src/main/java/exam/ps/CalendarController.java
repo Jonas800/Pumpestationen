@@ -1,12 +1,17 @@
 package exam.ps;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Array;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,7 +23,7 @@ public class CalendarController {
 
     //TO DO: IMPLEMENT secondary Model from DB //Week navigation//
     @GetMapping("/vagtplan")
-    public static String vagtplan(@RequestParam(value = "year", defaultValue = "-1") int year, @RequestParam(value = "weekNumber", defaultValue = "-1") int weekNumber,  Model model, Model model2, Model model3, Model model4, Model model5) {
+    public static String vagtplan(@RequestParam(value = "year", defaultValue = "-1") int year, @RequestParam(value = "weekNumber", defaultValue = "-1") int weekNumber,  Model model) {
         ArrayList<Day> days = new ArrayList<>();
         ArrayList<Day> weekNavigation = new ArrayList<>();
         Day currentWeek = new Day();
@@ -65,10 +70,10 @@ public class CalendarController {
             cal.add(Calendar.DAY_OF_WEEK, 1);
         }
         model.addAttribute("weekDays", days);
-        model2.addAttribute("weekNavigation", weekNavigation);
-        model3.addAttribute("currentWeek", currentWeek);
-        //model4.addAttribute("jobs", dummyJobs());
-        //model5.addAttribute("employees", dummyEmployees());
+        model.addAttribute("weekNavigation", weekNavigation);
+        model.addAttribute("currentWeek", currentWeek);
+        //model.addAttribute("jobs", dummyJobs());
+        //model.addAttribute("employees", dummyEmployees());
         return "vagtplan";
     }
 
@@ -78,7 +83,7 @@ public class CalendarController {
             @RequestParam(value = "måned", defaultValue = "-1") int month,
             @RequestParam(value = "dag", defaultValue = "-1") int day,
             @RequestParam(value = "tid", defaultValue = "") String time,
-            Model model){
+            Model model, @ModelAttribute("selectedWrapper") ScheduleWrapper selectedWrapper){
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -89,17 +94,51 @@ public class CalendarController {
 
         }
 
-        ArrayList<EmployeeAndJob> eaj = dummyEmployees(date, time);
+        ScheduleWrapper wrapper = new ScheduleWrapper();
+        wrapper.setEmployees(selectAllEmployees());
+        wrapper.setJobs(Job.selectAllJobs());
 
-        model.addAttribute("employeeAndJobs", eaj);
+        model.addAttribute("wrapper", wrapper);
+        //model.addAttribute("wrapper2", new ScheduleWrapper());
+        //model.addAttribute("employees", selectAllEmployees());
+
+        //ArrayList<EmployeeAndJob> eaj = dummyEmployees(date, time);
+
+        //model.addAttribute("employees", selectAllEmployees());
+        //model.addAttribute("jobs", Job.selectAllJobs());
+        //model.addAttribute("employeeAndJobs", eaj);
         return "tilføjVagtplan";
     }
-
+//@ModelAttribute("selectedWrapper") ScheduleWrapper wrapper, @ModelAttribute ArrayList<Employee> employees, BindingResult bindingResult
     @PostMapping("/createDaySchedule")
-    public String createDaySchedule(){
+    public String createDaySchedule(@ModelAttribute ScheduleWrapper wrapper, @RequestParam("job[][]") int[][] id){
+        System.out.println(Arrays.deepToString(id));
+        System.out.println("FirstHey");
 
+        if(wrapper.getJobs().size() != 0){
+            System.out.println("JobTest");
+            for(Job job : wrapper.getJobs()) {
+                System.out.println("" + job.getId());
+            }
+        }
 
-        return "vagtplan";
+        /*if(wrapper.getEmployees().size() != 0) {
+            System.out.println("empTest");
+            for (Employee employee : wrapper.getEmployees()) {
+                System.out.println("ThirdHey");
+
+                System.out.println("" + employee.getID());
+            }
+        }
+        if(employees.size() != 0) {
+            System.out.println("empTestSUPER");
+            for (Employee employee : employees) {
+                System.out.println("ThirdHeySUPER");
+
+                System.out.println("" + employee.getID());
+            }
+        }*/
+        return "redirect:/vismedlem";
     }
 
     private static Calendar getCal(int year, int weekNumber) {
@@ -118,6 +157,38 @@ public class CalendarController {
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
 
         return cal;
+    }
+
+    public ArrayList<Employee> selectAllEmployees() {
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        Statement s = null;
+        ArrayList<Employee> allEmployees = new ArrayList<>();
+        try {
+            s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT *  FROM employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
+            while (rs.next()) {
+                try {
+                    Employee employee = new Employee();
+                    employee.setID(rs.getInt("employee_id"));
+                    employee.setFirstName(rs.getString("employee_firstName"));
+                    employee.setLastName(rs.getString("employee_lastName"));
+                    employee.setAddress(rs.getString("employee_address"));
+                    employee.setPhoneNumber(rs.getString("employee_phone"));
+                    employee.setCpr(rs.getString("employee_cpr"));
+                    employee.setZipcode(rs.getInt("zipcodes_zipcode"));
+                    employee.setCity(rs.getString("zipcode_city"));
+                    employee.setJobPosition(rs.getString("employee_jobPosition"));
+                    allEmployees.add(employee);
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allEmployees;
     }
 /*
     public static ArrayList<EmployeeAndJob> dummyEmployeeAndJob(){

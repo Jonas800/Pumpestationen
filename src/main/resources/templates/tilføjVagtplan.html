@@ -5,20 +5,27 @@
     <title>Tilføj til vagtplan</title>
 </head>
 <body>
-<form method="post" th:action="@{/vagtplan}">
+<form method="post" th:action="@{/createDaySchedule}" th:object="${wrapper}">
 
-    <ul name="eaj" th:each="eaj : ${employeeAndJobs}" id="">
+    <div th:each="job, stat : ${wrapper.jobs}">
 
-        <li th:value="${eaj.getJob().id}" th:text="${eaj.job.title}"></li>
-        <select th:value="${eaj.job.id}">
-            <option selected disabled hidden>Vælg job</option>
-            <option th:each="employee:${eaj.getEmployee()}" th:value="${employee.ID}"
-                    th:text="${employee.firstName}"></option>
+        <input type="hidden"
+               th:value="${job.id}"
+               th:field="*{jobs[__${stat.index}__].id}"
+               th:text="${job.title}"/>
+
+        <select th:name="'job[][]'" required>
+            <option   selected="true" disabled="disabled" value="0">Vælg job</option>
+            <option
+                    th:each="employee, empStat:${wrapper.employees}"
+                    th:value="${employee.ID}"
+                    th:text="${employee.firstName} + ' ' + ${employee.lastName}">
+            </option>
         </select>
-    </ul>
+        </div>
 
     <input type="submit" value="Gem"/>
 </form>
-
+<!--th:field="*{employees[__${stat.index}__].ID}"-->
 </body>
 </html>

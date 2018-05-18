@@ -11,9 +11,9 @@
 <div th:replace="/header"></div>
 
 
-<div>
+<div class="wrap">
     <form method="post" th:action="@{/redigerAktivitet}" class="genericForm">
-        <h1>redigere en aktivitet</h1>
+        <h2>Rediger aktivitet</h2>
         <div>
             <label>Navn på aktivitet: </label>
             <input type="text" th:field="${activity.name}" required="true"/>

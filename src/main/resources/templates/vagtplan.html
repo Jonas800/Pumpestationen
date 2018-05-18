@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+<div th:replace="/header"></div>
+
 <!--<div class="calendarNavigation">
     <a th:each="weekNavigation, iterStat:${weekNavigation}"
        th:href="@{/vagtplan/(year=${weekNavigation.year},weekNumber=${weekNavigation.weekNumber})}"
