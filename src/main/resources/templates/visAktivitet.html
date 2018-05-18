@@ -21,7 +21,7 @@
                     <th>Start tid</th>
                     <th>Slut dato</th>
                     <th>Slut tid</th>
-                    <th></th>
+                    <th>Håndter</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,12 +32,11 @@
                     <td th:text="${activity.startTime}"/>
                     <td th:text="${#dates.format(activity.endDate, 'dd-MM-yyyy')}"/>
                     <td th:text="${activity.endTime}"/>
-                    <td/><td/>
                     <td>
                         <a th:href="@{'/redigerAktivitet?id='+${activity.id}}" class="knap">Rediger</a>
                         <a th:href="@{'/sletAktivitet?id='+${activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
                         <a th:href="@{'/tilføjMedAkt?id='+${activity.id}}" class="knap">Tilføj medarbeder</a>
-                        <a th:href="@{'/tilføjMemAKt?id='+${activity.id}}" class="knap">Tilføj medlemmmer</a>
+                        <a th:href="@{'/tilføjMemAkt?id='+${activity.id}}" class="knap">Tilføj medlemmmer</a>
                     </td>
                 </tr>
             </tbody>

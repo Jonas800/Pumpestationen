@@ -54,7 +54,7 @@ public class ActivityController {
     }
 
     @GetMapping("/tilføjMemAkt")
-    public String vælgmedlem(Model model) {
+    public String vælgmedlem(@RequestParam(value = "id", defaultValue = "0") int urlID, Model model) {
         model.addAttribute("memberArray", MemberController.selectMembers());
 
         return ("tilføjMemAkt");

@@ -12,42 +12,27 @@
     <h1>Oversigt over medlemmer</h1>
     <form action="/tilføjMemAkt" method="Post">
 
-    <table class="tableLook">
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>Fornavn</th>
-            <th>Efternavn</th>
-            <th>Alder</th>
-            <th>Cpr nr.</th>
-            <th>kontingent</th>
-            <th>adresse</th>
-            <th>Post nr.</th>
-            <th>By</th>
-            <th>vælg   </th>
+        <table class="tableLook">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fornavn</th>
+                <th>Efternavn</th>
+                <th>Tilføj</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr th:each="member: ${memberArray}">
-            <td th:text="${member.id}"/>
-            <td th:text="${member.firstName}"/>
-            <td th:text="${member.lastName}"/>
-            <td th:text="${member.age}"/>
-            <td th:text="${member.CPR}"/>
-            <td th:text="${member.kontingent}"/>
-            <td th:text="${member.address}"/>
-            <td th:text="${member.zipcode}"/>
-            <td th:text="${member.city}"/>
-            <td>
-                    <input type="checkbox" name="ID[]" th:value=${member.id}"/>
-
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
+            <tr th:each="member: ${memberArray}">
+                <td th:text="${member.id}"/>
+                <td th:text="${member.firstName}"/>
+                <td th:text="${member.lastName}"/>
+                <td>
+                    <input type="checkbox" name="ID" th:value=${member.id}"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
         <input type="submit" value="Submit">
 
     </form>

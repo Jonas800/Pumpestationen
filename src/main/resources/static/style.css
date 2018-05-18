@@ -179,13 +179,28 @@ div.menuTop h1 {
 }
 
 /*Table look*/
-table.tableLook {
-    width: 100%;
+table {
+    margin:0 auto;
     text-align: center;
+    border-collapse: collapse;
+    margin-bottom: 100px;
+}
+table, td, th{
+    border:1px solid #dddddd;
+
 }
 td, th {
-    border: solid #dddddd;
     text-align: center;
+    padding:2px 4px 2px 4px;
+}
+tr{
+    background-color:#dbedff;
+}
+th{
+    background-color:#b9c0ff;
+}
+tr:nth-of-type(odd){
+    background-color:white;
 }
 
 /*firkant rundt om*/
