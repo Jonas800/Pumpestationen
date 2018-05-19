@@ -1,16 +1,13 @@
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <link rel="stylesheet" type="text/css" href=Style.css/>
 </head>
 <body>
-<div th:replace="/header"></div>
-
-<a href="tilføjmedlem" class="opretKnap">Tilføj ny medlem </a>
-
 <div class="firkantrundtomtabel">
     <h1>Oversigt over medlemmer</h1>
-    <form action="/tilføjMemAkt" method="Post">
+    <form action="/tilføjMedAkt" method="Post">
 
         <table class="tableLook">
             <thead>
@@ -22,13 +19,12 @@
             </tr>
             </thead>
             <tbody>
-
             <tr th:each="member: ${memberArray}">
                 <td th:text="${member.id}"/>
                 <td th:text="${member.firstName}"/>
                 <td th:text="${member.lastName}"/>
                 <td>
-                    <input type="checkbox" name="ID" th:value=${member.id}"/>
+                    <input type="checkbox" name="id" th:value="${member.id}"/>
                 </td>
             </tr>
             </tbody>
@@ -36,6 +32,7 @@
         <input type="submit" value="Submit">
 
     </form>
-</div>
 
+</div>
 </body>
+</html>

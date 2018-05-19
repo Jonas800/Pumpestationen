@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import static exam.ps.EmployeeController.selectAllEmployees;
+import static exam.ps.MemberController.selectMembers;
 
 @Controller
 public class ActivityController {
@@ -31,7 +32,7 @@ public class ActivityController {
     @PostMapping("/tilføjAktivitet")
     public String createActivity(@ModelAttribute Activity activity) {
         insertActivity(activity);
-        return "redirect:/tilføjMedAkt";
+        return "redirect:/visAktivitet";
     }
 
 
@@ -42,10 +43,11 @@ public class ActivityController {
         return ("tilføjMedAkt");
     }
     @PostMapping("/tilføjMedAkt")
-    public String vælgmedarbejdere (@RequestParam(value = "ID") int[] ids) {
+    public String vælgmedarbejdere (@RequestParam(value = "id") int[] ids) {
 
         for (int i = 0;  i<ids.length ; i++) {
             int id=ids[i];
+            System.out.println(id);
             addEmployeeToActivty(id, activityID);
         }
 
@@ -54,17 +56,19 @@ public class ActivityController {
     }
 
     @GetMapping("/tilføjMemAkt")
-    public String vælgmedlem(@RequestParam(value = "id", defaultValue = "0") int urlID, Model model) {
-        model.addAttribute("memberArray", MemberController.selectMembers());
-
+    public String vælgmedlem(@RequestParam(value = "id") int urlID, Model model) {
+        model.addAttribute("memberArray",selectMembers());
+        activityID = urlID;
         return ("tilføjMemAkt");
     }
 
+
     @PostMapping("/tilføjMemAkt")
-    public String vælgmedlem (@RequestParam("Id") int[] ids) {
+    public String vælgmedlem (@RequestParam(value="id") int[] ids) {
 
         for (int i = 0; i < ids.length; i++) {
             int id = ids[i];
+            System.out.println(id);
             addmemerTOActivity(id,activityID);
 
         }
@@ -195,7 +199,7 @@ public class ActivityController {
         PreparedStatement ps = null;
 
         try {
-            ps = con.prepareStatement("INSERT INTO participants (activities_activity_id, members_member_id ) VALUES(?,?)");
+            ps = con.prepareStatement("INSERT INTO participants (members_member_id,activities_activity_id) VALUES(?,?)");
             ps.setInt(1,medlemId);
             ps.setInt(2,activityID);
             ps.executeUpdate();
@@ -215,5 +219,7 @@ public class ActivityController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
+
 }
