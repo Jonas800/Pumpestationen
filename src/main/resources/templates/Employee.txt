@@ -1,1 +1,0 @@
-Employee{ID=1, firstName='Handhd', lastName='dhfh', cpr='null', address='djdhdhd', phoneNumber=0, jobPosition='hshshd'}

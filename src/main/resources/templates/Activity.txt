@@ -1,3 +1,0 @@
-ID = 1, Aktivitet = eggd, Beskrivelse = shshshs, Startstidspunkt = 14.0, Sluttidspunkt = 15.0
-ID = 2, Aktivitet = skssjs, Beskrivelse = ssshs, Startstidspunkt = 13.0, Sluttidspunkt = 14.0
-ID = 3, Aktivitet = snshs, Beskrivelse = shshsh, Startstidspunkt = 17.0, Sluttidspunkt = 16.0
