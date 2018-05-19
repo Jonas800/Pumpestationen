@@ -11,18 +11,13 @@
 <body>
 
 <form method="Post" th:action="@{/login}">
-    <div class="imgcontainer">
-        <img src="loginfoto.jpg" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-        <input type="text" placeholder="Enter Username" th:field="${login.userName}" required="true">
-        <input type="text" placeholder="Enter password" th:field="${login.passWord}" required="true">
-        <input type="submit" value="login" class="button">
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-        <a type="button" class="cancelbtn" href="forside.html">Cancel</a>
+    <div class="login">
+    <h1>Pumpestationen</h1>
+        <label>Email</label>
+        <input type="email" placeholder="Indtast email" th:field="${login.userName}" required="true">
+        <label>Kodeord</label>
+        <input type="password" placeholder="Indtast kodeord" th:field="${login.passWord}" required="true">
+        <input type="submit" value="Login">
     </div>
 </form>
 

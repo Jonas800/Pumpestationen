@@ -40,7 +40,7 @@ public class LoginController {//Controllerens formål er at tage imod requests f
         Login user = selectUser(login.getUserName());
 
         if (PasswordMatcher.validatepassword(login.getPassWord(), user.getPassWord())) {
-            return "redirect:/vismedlem";
+            return "redirect:/forside";
         }
 
 
