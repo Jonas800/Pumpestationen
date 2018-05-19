@@ -24,7 +24,7 @@
                 <td th:text="${member.firstName}"/>
                 <td th:text="${member.lastName}"/>
                 <td>
-                    <input type="checkbox" name="id" th:value="${member.id}"/>
+                    <input type="checkbox" name="id[]" th:value="${member.id}"/>
                 </td>
             </tr>
             </tbody>

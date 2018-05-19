@@ -37,13 +37,13 @@ public class ActivityController {
 
 
     @GetMapping("/tilføjMedAkt")
-    public String tilføjMedAkt(@RequestParam(value = "id", defaultValue = "0") int urlID, Model model) {
+    public String tilføjMedAkt(@RequestParam(value = "id[]", defaultValue = "0") int urlID, Model model) {
         model.addAttribute("employeeArrayList", selectAllEmployees());
         activityID = urlID;
         return ("tilføjMedAkt");
     }
     @PostMapping("/tilføjMedAkt")
-    public String vælgmedarbejdere (@RequestParam(value = "id") int[] ids) {
+    public String vælgmedarbejdere (@RequestParam(value = "id[]") int[] ids) {
 
         for (int i = 0;  i<ids.length ; i++) {
             int id=ids[i];
@@ -69,7 +69,7 @@ public class ActivityController {
         for (int i = 0; i < ids.length; i++) {
             int id = ids[i];
             System.out.println(id);
-            addmemerTOActivity(id,activityID);
+            addMemberToActivity(id,activityID);
 
         }
          return "redirect:visAktivitet";
@@ -193,14 +193,14 @@ public class ActivityController {
 
     }
 
-    private void addmemerTOActivity(int medlemId, int activityID) {
+    private void addMemberToActivity(int memberId, int activityID) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;
 
         try {
             ps = con.prepareStatement("INSERT INTO participants (members_member_id,activities_activity_id) VALUES(?,?)");
-            ps.setInt(1,medlemId);
+            ps.setInt(1,memberId);
             ps.setInt(2,activityID);
             ps.executeUpdate();
         } catch (SQLException e) {
