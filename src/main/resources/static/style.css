@@ -155,29 +155,6 @@ select{
     width:100px;
 }
 
-/*Menu i toppen*/
-div.menuTop {
-    background-color: #0a0500;
-    overflow: auto;
-    white-space: nowrap;
-}
-
-div.menuTop a {
-    display: inline-block;
-    color: #fffefd;
-    text-align: center;
-    padding: 14px;
-    text-decoration: dimgrey;
-}
-
-div.menuTop a:hover {
-    background-color: #d1d1d1;
-}
-
-div.menuTop h1 {
-    background-color: #fffefd;
-}
-
 /*Table look*/
 table {
     margin:0 auto;
@@ -206,12 +183,17 @@ tr:nth-of-type(odd){
 /*firkant rundt om*/
 div.firkantrundtomtabel{
     text-align: center;
-    border-style: solid;
+    border: 4px solid #b9c0ff;
     margin-top: 10px;
 }
 
-
 /*Knapper*/
-.opretKnap a{
-    padding: 14px;
+
+a.tilføjKnap{
+    background-color: white;
+    color: black;
+    border: 4px solid #b9c0ff;
+    border-radius: 12px;
+    padding: 10px;
+    float:left;
 }

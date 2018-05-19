@@ -6,10 +6,9 @@
 <body>
 <div th:replace="/header"></div>
 
-<a href="tilføjmedlem" class="opretKnap">Tilføj ny medlem </a>
-
 <div class="firkantrundtomtabel">
     <h1>Oversigt over medlemmer</h1>
+    <a class="tilføjKnap" href="tilføjmedlem">Tilføj ny medlem </a>
     <table class="tableLook">
         <thead>
         <tr>
@@ -21,6 +20,7 @@
             <th>adresse</th>
             <th>Post nr.</th>
             <th>By</th>
+            <th>Håndter</th>
         </tr>
         </thead>
         <tbody>
