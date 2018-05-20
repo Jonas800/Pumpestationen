@@ -38,40 +38,39 @@ public class ActivityController {
 
     @GetMapping("/tilføjMedarbejderTilAktivitet")
     public String tilføjMedAkt(@RequestParam(value = "id", defaultValue = "0") int urlID, Model model) {
-        model.addAttribute("employeeArrayList", selectAllEmployees());
         activityID = urlID;
+        model.addAttribute("employeeArrayList", selectAllEmployees());
+        model.addAttribute("fkEmployeeId", getOrganizers(activityID));
         return ("tilføjMedarbejderTilAktivitet");
     }
 
     @PostMapping("/tilføjMedarbejderTilAktivitet")
-    public String vælgmedarbejdere(@RequestParam(value = "memberId[]") int[] employeeIds) {
-
-        for (int i = 0; i < employeeIds.length; i++) {
-            int id = employeeIds[i];
-            addEmployeeToActivty(id, activityID);
+    public String vælgmedarbejdere(@RequestParam(value = "employeeId[]", required = false) int[] employeeIds) {
+        if (employeeIds != null) {
+            addEmployeesToActivity(employeeIds, activityID);
+        } else {
+            deleteParticipantsOrOrganizers(activityID, "organizers");
         }
-
-
         return "redirect:/visAktivitet";
     }
 
     @GetMapping("/tilføjMedlemTilAktivitet")
     public String vælgmedlem(@RequestParam(value = "id") int urlID, Model model) {
-        model.addAttribute("memberArray", selectMembers());
         activityID = urlID;
+        model.addAttribute("memberArray", selectMembers());
+        model.addAttribute("fkMemberId", getParticipants(activityID));
         return ("tilføjMedlemTilAktivitet");
     }
 
 
     @PostMapping("/tilføjMedlemTilAktivitet")
-    public String vælgmedlem(@RequestParam(value = "memberId[]") int[] memberIds) {
-
-        for (int i = 0; i < memberIds.length; i++) {
-            int id = memberIds[i];
-            addMemberToActivity(id, activityID);
-
+    public String vælgmedlem(@RequestParam(value = "memberId[]", required = false) int[] memberIds) {
+        if (memberIds != null) {
+            addMembersToActivity(memberIds, activityID);
+        } else {
+            deleteParticipantsOrOrganizers(activityID, "participants");
         }
-        return "redirect:visAktivitet";
+        return "redirect:/visAktivitet";
     }
 
     @GetMapping("/redigerAktivitet")
@@ -172,31 +171,37 @@ public class ActivityController {
         }
     }
 
-    private void addEmployeeToActivty(int employeeId, int activityId) {
+    private void addEmployeesToActivity(int[] employeeIds, int activityId) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("INSERT INTO organizers (activities_activity_id, employees_employee_id) VALUES(?, ?)");
-            ps.setInt(1, activityId);
-            ps.setInt(2, employeeId);
-            ps.executeUpdate();
-            ps.close();
+            deleteParticipantsOrOrganizers(activityId, "organizers");
+
+            for (int i = 0; employeeIds.length > i; i++) {
+                ps = con.prepareStatement("INSERT INTO organizers (activities_activity_id, employees_employee_id) VALUES(?, ?)");
+                ps.setInt(1, activityId);
+                ps.setInt(2, employeeIds[i]);
+                ps.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void addMemberToActivity(int memberId, int activityID) {
+    private void addMembersToActivity(int[] memberIds, int activityID) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("INSERT INTO participants (activities_activity_id, members_member_id) VALUES(?,?)");
-            ps.setInt(1, activityID);
-            ps.setInt(2, memberId);
-            ps.executeUpdate();
-            ps.close();
+            deleteParticipantsOrOrganizers(activityID, "participants");
+
+            for (int i = 0; memberIds.length > i; i++) {
+                ps = con.prepareStatement("INSERT INTO participants (activities_activity_id, members_member_id) VALUES(?,?)");
+                ps.setInt(1, activityID);
+                ps.setInt(2, memberIds[i]);
+                ps.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -216,28 +221,19 @@ public class ActivityController {
 
     }
 
-    public static ArrayList<Employee> selectAllEmployees() {
+    public static ArrayList<Integer> getOrganizers(int activityID) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
-        Statement s = null;
-        ArrayList<Employee> allEmployees = new ArrayList<>();
+        PreparedStatement ps = null;
+        ArrayList<Integer> intList = new ArrayList<>();
         try {
-            s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT *  FROM employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
+            ps = con.prepareStatement("SELECT employee_id, activities_activity_id FROM employees INNER JOIN organizers ON employee_id = employees_employee_id WHERE activities_activity_id = ?");
+            ps.setInt(1, activityID);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 try {
-                    Employee employee = new Employee();
-                    employee.setID(rs.getInt("employee_id"));
-                    employee.setFirstName(rs.getString("employee_firstName"));
-                    employee.setLastName(rs.getString("employee_lastName"));
-                    employee.setAddress(rs.getString("employee_address"));
-                    employee.setPhoneNumber(rs.getString("employee_phone"));
-                    employee.setCpr(rs.getString("employee_cpr"));
-                    employee.setZipcode(rs.getInt("zipcodes_zipcode"));
-                    employee.setCity(rs.getString("zipcode_city"));
-                    employee.setJobPosition(rs.getString("employee_jobPosition"));
-                    allEmployees.add(employee);
-
+                    int employeeId = rs.getInt("employee_id");
+                    intList.add(employeeId);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -245,7 +241,41 @@ public class ActivityController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return allEmployees;
+        return intList;
     }
 
+    public static ArrayList<Integer> getParticipants(int activityID) {
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        PreparedStatement ps = null;
+        ArrayList<Integer> intList = new ArrayList<>();
+        try {
+            ps = con.prepareStatement("SELECT member_id, activities_activity_id FROM members INNER JOIN participants ON member_id = members_member_id WHERE activities_activity_id = ?");
+            ps.setInt(1, activityID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                try {
+                    int member_id = rs.getInt("member_id");
+                    intList.add(member_id);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return intList;
+    }
+
+    public static void deleteParticipantsOrOrganizers(int activityID, String table) {
+        dbConn db = dbConn.getInstance();
+        Connection con = db.createConnection();
+        Statement s = null;
+        try {
+            s = con.createStatement();
+            s.executeUpdate("DELETE FROM " + table + " WHERE activities_activity_id = " + activityID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

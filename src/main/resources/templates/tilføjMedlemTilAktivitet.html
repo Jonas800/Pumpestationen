@@ -27,7 +27,7 @@
                 <td th:text="${member.firstName}"/>
                 <td th:text="${member.lastName}"/>
                 <td>
-                    <input type="checkbox" name="memberId[]" th:value="${member.id}"/>
+                    <input type="checkbox" name="memberId[]" th:value="${member.id}" th:checked="${#lists.contains(fkMemberId, member.id)}"/>
                 </td>
             </tr>
             </tbody>
