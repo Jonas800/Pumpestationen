@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
@@ -6,11 +7,10 @@
 <body>
 <div th:replace="/header"></div>
 
-<a href="Opretmedarbejdere">Tilføj ny ansat</a>
-
 <div class="firkantrundtomtabel">
-    <h2>Tilføj medarbejder til aktivitet</h2>
-    <form action="/tilføjMedAkt" method="Post">
+
+    <h2>Tilføj medlemmer til aktivitet</h2>
+    <form action="/tilføjMedlemTilAktivitet" method="Post">
 
         <table class="tableLook">
             <thead>
@@ -22,12 +22,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="employee: ${employeeArrayList}">
-                <td th:text="${employee.ID}"/>
-                <td th:text="${employee.firstName}"/>
-                <td th:text="${employee.lastName}"/>
+            <tr th:each="member: ${memberArray}">
+                <td th:text="${member.id}"/>
+                <td th:text="${member.firstName}"/>
+                <td th:text="${member.lastName}"/>
                 <td>
-                    <input type="checkbox" name="id[]" th:value="${employee.ID}"/>
+                    <input type="checkbox" name="memberId[]" th:value="${member.id}"/>
                 </td>
             </tr>
             </tbody>

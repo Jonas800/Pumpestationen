@@ -34,8 +34,8 @@
                     <td>
                         <a th:href="@{'/redigerAktivitet?id='+${activity.id}}" class="knap">Rediger</a>
                         <a th:href="@{'/sletAktivitet?id='+${activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
-                        <a th:href="@{'/tilføjMedAkt?id='+${activity.id}}" class="knap">Tilføj medarbeder</a>
-                        <a th:href="@{'/tilføjMemAkt?id='+${activity.id}}" class="knap">Tilføj medlemmmer</a>
+                        <a th:href="@{'/tilføjMedarbejderTilAktivitet?id='+${activity.id}}" class="knap">Arrangører</a>
+                        <a th:href="@{'/tilføjMedlemTilAktivitet?id='+${activity.id}}" class="knap">Deltagere</a>
                     </td>
                 </tr>
             </tbody>
