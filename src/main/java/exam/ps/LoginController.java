@@ -15,6 +15,8 @@ import java.sql.*;
 @Controller
 public class LoginController {//Controllerens formål er at tage imod requests fra hjemmesiden, og sender det man har requestet over til Model
 
+    String error = "";
+
     public LoginController() {
     }
 
@@ -33,6 +35,9 @@ public class LoginController {//Controllerens formål er at tage imod requests f
     @GetMapping("/login")
     public String usernamepassword(Model model) {
         model.addAttribute("login", new Login());
+        model.addAttribute("error", error);
+
+        error = "";
         return "login";
 
     }
@@ -41,15 +46,17 @@ public class LoginController {//Controllerens formål er at tage imod requests f
     public String usernamepassword(@ModelAttribute Login login, HttpServletRequest request) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Login user = selectUser(login.getUserName());
 
-        HttpSession session = request.getSession();
-        session.setAttribute("user", user);
+        if(login.getUserName().isEmpty()) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
 
-        if (PasswordMatcher.validatepassword(login.getPassWord(), user.getPassWord())) {
-            return "redirect:/forside";
+            if (PasswordMatcher.validatepassword(login.getPassWord(), user.getPassWord())) {
+                return "redirect:/forside";
+            }
         }
+        error = "Ugyldigt login";
 
-
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @GetMapping("/logaf")

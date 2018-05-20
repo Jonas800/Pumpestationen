@@ -18,6 +18,7 @@
         <label>Kodeord</label>
         <input type="password" placeholder="Indtast kodeord" th:field="${login.passWord}" required="true">
         <input type="submit" value="Login">
+        <p th:if="${!error.isEmpty()}" class="error" th:text="${error}"></p>
     </div>
 </form>
 
