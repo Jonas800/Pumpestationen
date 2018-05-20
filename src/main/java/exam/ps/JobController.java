@@ -17,7 +17,11 @@ public class JobController {
     public String job(@RequestParam(value = "ret", defaultValue = "false") boolean editParam,
                       @RequestParam(value = "slet", defaultValue = "false") boolean delete,
                       @RequestParam(value = "id", defaultValue = "0") int id,
-                      Model model) {
+                      Model model,
+                      HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
 
         edit = editParam;
 

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;//Hvis den algoritme man skal bruge til hashe koden med ikke eksisterer så thrower man den exception.
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
@@ -17,7 +19,7 @@ public class LoginController {//Controllerens formål er at tage imod requests f
     }
 
     @GetMapping("/opretbruger")
-    public String login(Model model) {
+    public String login(Model model, HttpServletRequest request) {
         model.addAttribute("login", new Employee());
         return "opretbruger";
     }
@@ -36,8 +38,11 @@ public class LoginController {//Controllerens formål er at tage imod requests f
     }
 
     @PostMapping("/login")
-    public String usernamepassword(@ModelAttribute Login login) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public String usernamepassword(@ModelAttribute Login login, HttpServletRequest request) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Login user = selectUser(login.getUserName());
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
 
         if (PasswordMatcher.validatepassword(login.getPassWord(), user.getPassWord())) {
             return "redirect:/forside";
@@ -45,6 +50,13 @@ public class LoginController {//Controllerens formål er at tage imod requests f
 
 
         return "redirect:/";
+    }
+
+    @GetMapping("/logaf")
+    public String logaf(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "redirect:/login";
     }
 
 

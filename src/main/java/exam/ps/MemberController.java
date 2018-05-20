@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,13 +19,19 @@ public class MemberController {
     }
 
     @GetMapping("/vismedlem")
-    public String showMember(Model model) {
+    public String showMember(Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         model.addAttribute("memberArray", selectMembers());
         return "vismedlem";
     }
 
     @GetMapping("/tilføjmedlem")
-    public String tilføjmedlem(Model model) {
+    public String tilføjmedlem(Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         model.addAttribute("member", new Member());
 
         return "tilføjmedlem";
@@ -38,7 +45,10 @@ public class MemberController {
     }
 
     @GetMapping("/redigerMedlem")
-    public String redigerMedlem(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
+    public String redigerMedlem(@RequestParam(value = "id", defaultValue = "1") int id, Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         for (Member member : selectMembers()) {//requester et id, går arraylist igennem med metodekald og sammenligner id i objektet member med id som er indtastet
            if (member.getId() == id)//hvis de er ens, printes medlemmet ud på hjemmesiden
                 model.addAttribute("member", member);
@@ -61,50 +71,17 @@ public class MemberController {
 
 
     @GetMapping("/sletmedlem")
-    public String deleteMember(@RequestParam(value = "id", defaultValue = "1") int id, Member member) throws FileNotFoundException  {
+    public String deleteMember(@RequestParam(value = "id", defaultValue = "1") int id, Member member, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         deleteMember(member);
-
         return "redirect:/vismedlem";
 
 
 
     }
 
-
-    /*public static void saveMemberToFile(ArrayList<Member> memberArray) throws FileNotFoundException {
-        PrintStream ps = new PrintStream("src/main/resources/templates/Member.txt");
-        String s = "";
-        for (Member m : memberArray) {
-            s += m.toString() + "\r\n";
-
-        }
-        ps.print(s);
-        ps.close();
-    }
-*/
-   /* public ArrayList<Member> getMemberArray() throws FileNotFoundException {
-        ArrayList<Member> ArrayMember = new ArrayList<>();
-
-        Scanner readFile = new Scanner(new File("src/main.resources/templates/Member.txt"));
-        while (readFile.hasNextLine()) {
-            String line = readFile.nextLine();
-            Scanner readLine = new Scanner(line).useDelimiter("#");
-
-            Member member = new Member();
-            member.setFirstName(readLine.next());
-            member.setLastName(readLine.next());
-            member.setAge(readLine.nextInt());
-            member.setCPR(readLine.next());
-            member.setId(readLine.nextInt());
-            member.setKontingent(readLine.nextInt());
-            ArrayMember.add(member);
-
-
-
-        }
-        return ArrayMember;
-    }
-*/
     private void insertMember(Member member){
 
         dbConn db = dbConn.getInstance();

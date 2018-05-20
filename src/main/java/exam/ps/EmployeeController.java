@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,19 +17,20 @@ public class EmployeeController {
     int employeid = 0;
 
     @GetMapping("/VisMedarbejdere")
-    public String VisMedarbejdere(Model model) {
+    public String VisMedarbejdere(Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         model.addAttribute("employeeArrayList", selectAllEmployees());
-
-
         return "VisMedarbejdere";
-
     }
 
     @GetMapping("/Opretmedarbejdere")
-    public String Opretmedarbjedere(Model model) {
+    public String Opretmedarbjedere(Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         model.addAttribute("employee", new Employee());
-
-
         return "Opretmedarbejdere";
     }
 
@@ -42,7 +44,10 @@ public class EmployeeController {
 
 
     @GetMapping("/redigerMedarbejdere")
-    public String redigerAnsat(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model) {
+    public String redigerAnsat(@RequestParam(value = "ID", defaultValue = "1") int ID, Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         for (Employee employee : selectAllEmployees()) {
             if (employee.getID() == ID)
                 model.addAttribute("employee", employee);
@@ -58,7 +63,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/SletMedarbejder")
-    public String SletMedarbejder(@RequestParam(value = "ID", defaultValue = "1") int id, Employee employee) throws FileNotFoundException {
+    public String SletMedarbejder(@RequestParam(value = "ID", defaultValue = "1") int id, Employee employee, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         deleteemployee(employee);
         return "redirect:/VisMedarbejdere";
     }

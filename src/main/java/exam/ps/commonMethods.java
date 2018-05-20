@@ -1,5 +1,7 @@
 package exam.ps;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 public class commonMethods {
@@ -16,4 +18,9 @@ public class commonMethods {
         return false;
     }
 
+    public static boolean isSessionInvalid(HttpServletRequest request){
+        HttpSession session = request.getSession();
+
+        return session.getAttribute("user") == null;
+    }
 }

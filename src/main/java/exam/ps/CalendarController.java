@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,7 +24,13 @@ public class CalendarController {
 
     //TO DO: IMPLEMENT secondary Model from DB //Week navigation//
     @GetMapping("/vagtplan")
-    public static String vagtplan(@RequestParam(value = "year", defaultValue = "-1") int year, @RequestParam(value = "weekNumber", defaultValue = "-1") int weekNumber,  Model model) {
+    public static String vagtplan(@RequestParam(value = "year", defaultValue = "-1") int year,
+                                  @RequestParam(value = "weekNumber", defaultValue = "-1") int weekNumber,
+                                  Model model,
+                                  HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         ArrayList<Day> days = new ArrayList<>();
         ArrayList<Day> weekNavigation = new ArrayList<>();
         Day currentWeek = new Day();
@@ -83,8 +90,12 @@ public class CalendarController {
             @RequestParam(value = "måned", defaultValue = "-1") int month,
             @RequestParam(value = "dag", defaultValue = "-1") int day,
             @RequestParam(value = "tid", defaultValue = "") String time,
-            Model model, @ModelAttribute("selectedWrapper") ScheduleWrapper selectedWrapper){
-
+            Model model, @ModelAttribute("selectedWrapper") ScheduleWrapper selectedWrapper,
+            HttpServletRequest request){
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
+        
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         try {

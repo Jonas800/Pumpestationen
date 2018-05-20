@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -18,13 +19,19 @@ public class ActivityController {
     int activityID = 0;
 
     @GetMapping("/visAktivitet")
-    public String ShowActivities(Model model) {
+    public String ShowActivities(Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         model.addAttribute("activityArrayList", selectAllActivities());
         return "visAktivitet";
     }
 
     @GetMapping("/tilføjAktivitet")
-    public String createActivity(Model model) {
+    public String createActivity(Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         model.addAttribute("activity", new Activity());
         return "tilføjAktivitet";
     }
@@ -37,7 +44,10 @@ public class ActivityController {
 
 
     @GetMapping("/tilføjMedarbejderTilAktivitet")
-    public String tilføjMedAkt(@RequestParam(value = "id", defaultValue = "0") int urlID, Model model) {
+    public String tilføjMedAkt(@RequestParam(value = "id", defaultValue = "0") int urlID, Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         activityID = urlID;
         model.addAttribute("employeeArrayList", selectAllEmployees());
         model.addAttribute("fkEmployeeId", getOrganizers(activityID));
@@ -55,7 +65,10 @@ public class ActivityController {
     }
 
     @GetMapping("/tilføjMedlemTilAktivitet")
-    public String vælgmedlem(@RequestParam(value = "id") int urlID, Model model) {
+    public String vælgmedlem(@RequestParam(value = "id") int urlID, Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         activityID = urlID;
         model.addAttribute("memberArray", selectMembers());
         model.addAttribute("fkMemberId", getParticipants(activityID));
@@ -74,7 +87,10 @@ public class ActivityController {
     }
 
     @GetMapping("/redigerAktivitet")
-    public String editActivity(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
+    public String editActivity(@RequestParam(value = "id", defaultValue = "1") int id, Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         for (Activity activity : selectAllActivities()) {
             if (activity.getId() == id)
                 model.addAttribute("activity", activity);
@@ -84,7 +100,10 @@ public class ActivityController {
     }
 
     @GetMapping("/sletAktivitet")
-    public String deleteActivity(@RequestParam(value = "id", defaultValue = "0") int id, Activity activity) {
+    public String deleteActivity(@RequestParam(value = "id", defaultValue = "0") int id, Activity activity, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }
         deleteActivity(activity);
         return "redirect:/visAktivitet";
     }
