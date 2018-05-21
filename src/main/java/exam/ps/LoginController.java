@@ -46,21 +46,23 @@ public class LoginController {//Controllerens formål er at tage imod requests f
     public String usernamepassword(@ModelAttribute Login login, HttpServletRequest request) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Login user = selectUser(login.getUserName());
 
-        if(login.getUserName().isEmpty()) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+        if (!user.getUserName().isEmpty()) {
 
             if (PasswordMatcher.validatepassword(login.getPassWord(), user.getPassWord())) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
                 return "redirect:/forside";
             }
         }
+
         error = "Ugyldigt login";
 
         return "redirect:/login";
+
     }
 
     @GetMapping("/logaf")
-    public String logaf(HttpServletRequest request){
+    public String logaf(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
         return "redirect:/login";

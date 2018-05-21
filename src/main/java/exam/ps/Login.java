@@ -1,12 +1,13 @@
 package exam.ps;
 
 public class Login {
-public String userName;
-public String passWord;
+    public String userName;
+    public String passWord;
 
-public Login(){
+    public Login() {
+        this.userName = "";
+    }
 
-}
 
     public Login(String userName, String passWord) {
 
