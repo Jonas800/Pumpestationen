@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" type="text/css" href=Style.css/>
 </head>
@@ -12,6 +12,7 @@
         <table class="tableLook">
             <thead>
             <tr>
+                <th>Email</th>
                 <th>Fornavn</th>
                 <th>Efternavn</th>
                 <th>Cpr</th>
@@ -25,6 +26,7 @@
             </thead>
             <tbody>
             <tr th:each="employee: ${employeeArrayList}">
+                <td th:text="${employee.email}"/>
                 <td th:text="${employee.firstName}"/>
                 <td th:text="${employee.lastName}"/>
                 <td th:text="${employee.cpr}"/>
@@ -34,9 +36,9 @@
                 <td th:text="${employee.city}"/>
                 <td th:text="${employee.zipcode}"/>
                 <td>
-                    <a th:href="@{'/redigerMedarbejdere?ID='+${employee.ID}}" class="knap">Rediger</a>
-                    <a th:href="@{'/SletMedarbejder?ID='+${employee.ID}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
-                    <a th:href="@{'/opretbruger?ID='+${employee.ID}}" class="knap">Opret login</a>
+                    <a th:href="@{'/redigerMedarbejdere?ID='+${employee.getID()}}" class="knap">Rediger</a>
+                    <a th:href="@{'/SletMedarbejder?ID='+${employee.getID()}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>
+                    <a th:href="@{'/opretbruger?ID='+${employee.getID()}}" class="knap">Logininfo</a>
                 </td>
 
             </tr>

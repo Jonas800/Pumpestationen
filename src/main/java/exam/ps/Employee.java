@@ -1,91 +1,32 @@
 package exam.ps;
 
-public class Employee extends Login {
+public class Employee extends Person {
 
-    private int ID;
-    private String firstName;
-    private String lastName;
-    private String cpr;
-    private String address;
-    private String phoneNumber;
+    public String email;
+    public String password;
     private String jobPosition;
-    private String city;
-    private int zipcode;
+    private boolean hasUser;
 
     public Employee() {
-
+        super.setID(0);
+        this.email = "";
+        this.password = "";
     }
 
-
-    public Employee(int id, String firstName, String lastName){
-        this.ID = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public String getEmail() {
+        return email;
     }
 
-    public Employee(int ID, String firstName, String lastName, String cpr, String address, String phoneNumber, String jobPosition, String city) {
-        this.ID = ID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.cpr = cpr;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.jobPosition = jobPosition;
-
-        }
-
-    public Employee(String userName, String passWord) {
-        super(userName, passWord);
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-
-
-    public int getID() {
-        return ID;
+    public String getPassword() {
+        return password;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getCpr() {
-        return cpr;
-    }
-
-    public void setCpr(String cpr) {
-        this.cpr = cpr;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getJobPosition() {
@@ -96,32 +37,12 @@ public class Employee extends Login {
         this.jobPosition = jobPosition;
     }
 
-    public int getZipcode() {
-        return zipcode;
+    public boolean getHasUser() {
+        return hasUser;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" + "ID=" + ID +
-                ", firstName" + "='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", cpr='" + cpr + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", jobPosition='" + jobPosition + '\'' +
-                '}';
+    public void setHasUser(boolean hasUser) {
+        this.hasUser = hasUser;
     }
 }
 

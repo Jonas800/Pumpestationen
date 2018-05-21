@@ -201,42 +201,5 @@ public class CalendarController {
         }
         return allEmployees;
     }
-/*
-    public static ArrayList<EmployeeAndJob> dummyEmployeeAndJob(){
-        ArrayList<EmployeeAndJob> eaj = new ArrayList<>();
 
-        eaj.add(new EmployeeAndJob(new Job(1, "Kok"),new Employee(1, "Jens", "Jensen"), "2018-04-30"));
-        eaj.add(new EmployeeAndJob(new Job(2, "Vagt"),new Employee(5, "Hans", "Jensen"), "2018-04-29"));
-        eaj.add(new EmployeeAndJob(new Job(3, "Vagt3"),new Employee(2, "Bent", "Jensen"), "2018-05-02"));
-        eaj.add(new EmployeeAndJob(new Job(4, "Vagt4"),new Employee(3, "Ole", "Jensen"), "2018-04-30"));
-
-
-        return eaj;
-    }
-*/
-
-    public static ArrayList<Job> dummyJobs(){
-        ArrayList<Job> jobs = new ArrayList<>();
-
-        jobs.add(new Job(1, "Kok"));
-        jobs.add(new Job(2, "Vagt"));
-        jobs.add(new Job(3, "Job3"));
-
-        return jobs;
-    }
-    public static ArrayList<EmployeeAndJob> dummyEmployees(Date date, String timeOfDay) {
-        ArrayList<EmployeeAndJob> firstArray = new ArrayList<>();
-        ArrayList<EmployeeAndJob> secondArray = new ArrayList<>();
-
-        firstArray.add(new EmployeeAndJob(new Job(1, "Kok"), new Employee(1, "Jens", "Jensen"), "2018-04-30", "Formiddag"));
-        firstArray.add(new EmployeeAndJob(new Job(2, "Vagt"), new Employee(5, "Hans", "Jensen"), "2018-04-29", "Eftermiddag"));
-        firstArray.add(new EmployeeAndJob(new Job(3, "Vagt3"), new Employee(2, "Bent", "Jensen"), "2018-05-02", "Formiddag"));
-
-        for (EmployeeAndJob eaj : firstArray) {
-            //if(commonMethods.dateEquals(eaj.getDate(), date) && eaj.getTimeOfDay().equals(timeOfDay)){
-            secondArray.add(eaj);
-            //}
-        }
-        return secondArray;
-    }
 }

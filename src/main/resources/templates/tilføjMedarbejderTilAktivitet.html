@@ -23,11 +23,11 @@
             </thead>
             <tbody>
             <tr th:each="employee: ${employeeArrayList}">
-                <td th:text="${employee.ID}"/>
+                <td th:text="${employee.id}"/>
                 <td th:text="${employee.firstName}"/>
                 <td th:text="${employee.lastName}"/>
                 <td>
-                    <input type="checkbox" name="employeeId[]" th:checked="${#lists.contains(fkEmployeeId, employee.ID)}" th:value="${employee.ID}"/>
+                    <input type="checkbox" name="employeeId[]" th:checked="${#lists.contains(fkEmployeeId, employee.id)}" th:value="${employee.id}"/>
                 </td>
             </tr>
             </tbody>

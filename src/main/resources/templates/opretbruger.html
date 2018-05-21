@@ -1,27 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Bruger</title>
+    <link rel="stylesheet" href="style.css">
 
 
 </head>
 <body>
 <div th:replace="/header"></div>
 
-<h2>Tilføj login til medarbejder</h2>
+<div class="wrap">
+    <h2>Tilføj login til medarbejder</h2>
 
-<form class="genericForm" method="Post" th:action="@{/opretbruger}">
-    <div>
-        <label>brugernavn</label>
-        <input type="text" th:field="${login.userName}" required="true"/>
-    </div>
-    <div>
-        <label>password</label>
-        <input type="text" th:field="${login.passWord}" required="true"/>
-    </div>
-    <input type="submit" value="Send"/>
-</form>
-
+    <form class="genericForm" method="Post" th:action="@{/opretbruger}">
+        <div>
+            <label>Email</label>
+            <input type="text" th:field="${employee.email}" required="true"/>
+        </div>
+        <div>
+            <label>Kodeord</label>
+            <input type="password" th:field="${employee.password}" th:required="${!employee.hasUser}"/>
+        </div>
+        <input type="hidden" th:field="${employee.ID}"/>
+        <input type="hidden" th:field="${employee.hasUser}">
+        <input type="submit" value="Send"/>
+    </form>
+</div>
 </body>
 </html>

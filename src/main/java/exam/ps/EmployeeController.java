@@ -127,10 +127,11 @@ public class EmployeeController {
         ArrayList<Employee> allEmployees = new ArrayList<>();
         try {
             s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT *  FROM employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode ");
+            ResultSet rs = s.executeQuery("SELECT *  FROM employees INNER JOIN zipcodes ON zipcode = zipcodes_zipcode LEFT OUTER JOIN users ON employee_id = users.employees_employee_id ORDER BY employee_lastName ASC");
             while (rs.next()) {
                 try {
                     Employee employee = new Employee();
+                    employee.setEmail(rs.getString("user_email"));
                     employee.setID(rs.getInt("employee_id"));
                     employee.setFirstName(rs.getString("employee_firstName"));
                     employee.setLastName(rs.getString("employee_lastName"));
