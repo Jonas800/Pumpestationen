@@ -116,26 +116,26 @@ public class ActivityController {
 
     }
 
-
+    /*metode til at hente alle aktiviter fra databasen*/
     public ArrayList<Activity> selectAllActivities() {
-        dbConn db = dbConn.getInstance();
-        Connection con = db.createConnection();
-        Statement s = null;
+        dbConn db = dbConn.getInstance(); //dbConn objekt som laver metode kald til dbConn klassen og metoden getInstance()
+        Connection con = db.createConnection();//connection objekt til at oprette forbindelse til databasen
+        Statement s = null; // en tom statement varible
         ArrayList<Activity> allActivities = new ArrayList<>();
         try {
             s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM activities");
             while (rs.next()) {
                 try {
-                    Activity activity = new Activity();
-                    activity.setId(rs.getInt("activity_id"));
+                    Activity activity = new Activity(); // Activity objekt
+                    activity.setId(rs.getInt("activity_id")); // sæt activity id ligmed hvad den finder på pladsen fra databasen
                     activity.setName(rs.getString("activity_name"));
                     activity.setDescription(rs.getString("activity_description"));
                     activity.setStartDate(rs.getTimestamp("activity_startDate"));
                     activity.setStartTime(rs.getTime("activity_startTime").toLocalTime());
                     activity.setEndDate(rs.getTimestamp("activity_endDate"));
                     activity.setEndTime(rs.getTime("activity_endTime").toLocalTime());
-                    allActivities.add(activity);
+                    allActivities.add(activity); // gemmer alle værdier i en vores arraylist som vi har kaldt allActivities
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -146,14 +146,14 @@ public class ActivityController {
         return allActivities;
     }
 
-
+    /*metode til at opdatere en række i tabellen aktivities i databasen*/
     public void updateActivity(Activity activity) {
-        dbConn db = dbConn.getInstance();
-        Connection con = db.createConnection();
-        PreparedStatement ps = null;
+        dbConn db = dbConn.getInstance(); //dbConn objekt som laver metode kald til dbConn klassen og metoden getInstance()
+        Connection con = db.createConnection(); //connection objekt til at oprette forbindelse til databasen
+        PreparedStatement ps = null; // en tom statement varible
         try {
             ps = con.prepareStatement("UPDATE activities SET activity_name = ?, activity_description = ?, activity_startDate = ?, activity_endDate = ?,activity_startTime = ?, activity_endtime = ? WHERE activity_id = ?");
-            ps.setString(1, activity.getName());
+            ps.setString(1, activity.getName()); // sæt ps til hvad den finder på pladsen ?.
             ps.setString(2, activity.getDescription());
             ps.setDate(3, new java.sql.Date(activity.getStartDate().getTime()));
             ps.setDate(4, new java.sql.Date(activity.getEndDate().getTime()));
@@ -163,7 +163,7 @@ public class ActivityController {
             ps.setTime(6, endTime);
             ps.setInt(7, activityID);
 
-            ps.executeUpdate();
+            ps.executeUpdate(); // beder ps om at opdatere oplysningerne
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -175,11 +175,11 @@ public class ActivityController {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement("INSERT INTO activities (activity_name, activity_description, activity_startDate, activity_endDate, activity_startTime,  activity_endTime) VALUES(?, ?, ?, ?,?,?)");
-            ps.setString(1, activity.getName());
+            ps.setString(1, activity.getName()); // sæt ps lig med hvad den finder på activity.getName() pladsen
             ps.setString(2, activity.getDescription());
             ps.setDate(3, new java.sql.Date(activity.getStartDate().getTime()));
             ps.setDate(4, new java.sql.Date(activity.getEndDate().getTime()));
-            Time startTime = Time.valueOf(activity.getStartTime());
+            Time startTime = Time.valueOf(activity.getStartTime()); //
             ps.setTime(5, startTime);
             Time endTime = Time.valueOf(activity.getEndTime());
             ps.setTime(6, endTime);
@@ -226,6 +226,7 @@ public class ActivityController {
         }
     }
 
+    /*Metode til at slette en aktivitet fra databasen*/
     public void deleteActivity(Activity activity) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
