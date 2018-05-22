@@ -50,7 +50,7 @@ public class MemberController {
             return "redirect:/login";
         }
         for (Member member : selectMembers()) {//requester et id, går arraylist igennem med metodekald og sammenligner id i objektet member med id som er indtastet
-           if (member.getId() == id)//hvis de er ens, printes medlemmet ud på hjemmesiden
+           if (member.getID() == id)//hvis de er ens, printes medlemmet ud på hjemmesiden
                 model.addAttribute("member", member);
 
         }
@@ -106,7 +106,7 @@ public class MemberController {
             ps2.setString(1,member.getFirstName());
             ps2.setString(2,member.getLastName());
             ps2.setDate(3, new java.sql.Date(member.getDateOfBirth().getTime()));
-            ps2.setString(4, member.getCPR());
+            ps2.setString(4, member.getCpr());
             ps2.setString(5, member.getAddress());
             ps2.setInt(6, member.getZipcode());
             ps2.executeUpdate();
@@ -129,13 +129,13 @@ public class MemberController {
             while (rs.next()) {
                 try {
                     Member member = new Member();
-                    member.setId(rs.getInt("member_id"));
+                    member.setID(rs.getInt("member_id"));
                     member.setFirstName(rs.getString("member_firstName"));
                     member.setLastName(rs.getString("member_lastName"));
                     member.setDateOfBirth(rs.getDate("member_dateOfBirth"));
-                    member.setCPR(rs.getString("member_CPR"));
+                    member.setCpr(rs.getString("member_CPR"));
                     member.setAddress(rs.getString("member_address"));
-                    member.setId(rs.getInt("member_Id"));
+                    member.setID(rs.getInt("member_Id"));
                     member.setZipcode(rs.getInt("zipcodes_zipcode"));//joiner for at kunne få fat i tabellen zipcodes og hente by og postnr fra zipcodes
                     member.setCity(rs.getString("zipcode_city"));
                     member.setKontingent(member.getAge());
@@ -178,7 +178,7 @@ public class MemberController {
             ps.setString(1, member.getFirstName());
             ps.setString(2, member.getLastName());
             ps.setDate(3, new java.sql.Date(member.getDateOfBirth().getTime()));
-            ps.setString(4, member.getCPR());
+            ps.setString(4, member.getCpr());
             ps.setString(5, member.getAddress());
             ps.setInt(6, member.getZipcode());
 
@@ -195,7 +195,7 @@ public class MemberController {
 
         try {
             ps = con.prepareStatement("DELETE FROM members WHERE member_id = ?");
-            ps.setInt(1, member.getId());
+            ps.setInt(1, member.getID());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

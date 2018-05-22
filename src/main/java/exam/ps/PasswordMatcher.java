@@ -1,3 +1,11 @@
+/******
+ * Alt kode i klassen, undtagen validatepassword metoden, er fra
+ * https://howtodoinjava.com/security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
+ * Sektion: "Advanced password security using PBKDF2WithHmacSHA1 algorithm"
+ * Udgivet af Lokesh Gupta, den 22. Juli 2013
+ ******/
+
+
 package exam.ps;
 
 import javax.crypto.SecretKeyFactory;
@@ -6,7 +14,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
 public class PasswordMatcher {
-
 
     public static boolean validatepassword (String formInput, String databaseInput) throws InvalidKeySpecException, NoSuchAlgorithmException {
         boolean matched = validatePassword(formInput, databaseInput);

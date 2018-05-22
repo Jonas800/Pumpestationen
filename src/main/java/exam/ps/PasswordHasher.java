@@ -1,5 +1,11 @@
-package exam.ps;
+/******
+ * Alt kode i klassen er fra
+ * https://howtodoinjava.com/security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
+ * Sektion: "Advanced password security using PBKDF2WithHmacSHA1 algorithm"
+ * Udgivet af Lokesh Gupta, den 22. Juli 2013
+ ******/
 
+package exam.ps;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -9,10 +15,6 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
 public class PasswordHasher {
-
-
-
-
 
     public static String generateStorngPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException
     {

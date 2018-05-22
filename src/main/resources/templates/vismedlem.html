@@ -29,14 +29,14 @@
             <td th:text="${member.firstName}"/>
             <td th:text="${member.lastName}"/>
             <td th:text="${member.age}"/>
-            <td th:text="${member.CPR}"/>
+            <td th:text="${member.cpr}"/>
             <td th:text="${member.kontingent}"/>
             <td th:text="${member.address}"/>
             <td th:text="${member.zipcode}"/>
             <td th:text="${member.city}"/>
             <td>
-                <a th:href="@{'/redigerMedlem?id='+${member.id}}" class="knap">Rediger</a>
-                <a th:href="@{'/sletmedlem?id='+${member.id}}" onclick="return confirm('Sletning er permanent. Er du sikker?')" class="knap">Slet</a>
+                <a th:href="@{'/redigerMedlem?id='+${member.ID}}" class="knap">Rediger</a>
+                <a th:href="@{'/sletmedlem?id='+${member.ID}}" onclick="return confirm('Sletning er permanent. Er du sikker?')" class="knap">Slet</a>
 
             </td>
 
