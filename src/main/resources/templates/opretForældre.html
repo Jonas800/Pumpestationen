@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Tilføj forældre</title>
+    <link rel="stylesheet" type="text/css" href=Style.css/>
+</head>
+
+<body>
+<div th:replace="/header"></div>
+
+<div class="wrap">
+    <h2> tilføj forældre</h2>
+    <form class="genericForm" method="Post" th:action="@{/opretForældre}">
+
+        <div>
+            <label>forældre Fornavn: </label>
+            <input type="text" th:field="${parent.firstName}" required="true"/>
+        </div>
+        <div>
+            <label>forældre Efternavn: </label>
+            <input type="text" th:field="${parent.lastName}" required="true"/>
+        </div>
+        <div>
+            <label> adresse </label>
+            <input type="text" th:field="${parent.address}" required="true"/>
+        </div>
+
+        <div>
+            <label>cpr: </label>
+            <input type="text" th:field="${parent.cpr}" required="true"/>
+        </div>
+        <div>
+            <label>adresse: </label>
+            <input type="text" th:field="${parent.address}" required="true"/>
+        </div>
+        <div>
+            <label>forældre teleFon: </label>
+            <input type="text" th:field="${parent.phoneNumber}" required="true"/>
+        </div>
+        <div>
+            <label>postnr;: </label>
+            <input type="text" th:field="${parent.zipcode}" required="true"/>
+        </div>
+        <div>
+            <label>by;: </label>
+            <input type="text" th:field="${parent.city}" required="true"/>
+        </div>
+        <div>
+        </div>
+        <input type="submit" value="Gem"/>
+    </form>
+</div>
+
+<div th:replace="/footer"></div>
+
+</body>
+</html>

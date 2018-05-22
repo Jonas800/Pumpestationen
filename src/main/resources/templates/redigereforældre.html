@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Rediger forældre</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+
+<div th:replace="/header"></div>
+
+<div class="wrap">
+    <form class="genericForm" method="Post" th:action="@{/redigerMedlem}">
+        <h2>Rediger forældre</h2>
+        <div>
+            <label> Fornavn på medlem: </label>
+            <input type="text" th:field="${parent.firstName}" required="true"/>
+        </div>
+        <div>
+
+            <label>Efternavn</label>
+            <input type="text" th:field="${parent.lastName}" required="true"/>
+        </div>
+        <div>
+            <label>Cpr</label>
+            <input type="date" th:field="${parent.cpr}" required="true"/>
+        </div>
+        <div>
+            <label>adresse</label>
+            <input type="text" th:field="${parent.address}" required="true"/>
+        </div>
+        <div>
+            <label>Mobil </label>
+            <input type="text" th:field="${parent.phoneNumber}" required="true"/>
+        </div>
+        <div>
+            <label>postnr</label>
+            <input type="text" th:field="${parent.zipcode}" required="true"/>
+        </div>
+        <div>
+            <label>by:</label>
+            <input type="text" th:field="${parent.city}" required="true"/>
+
+            <input type="submit" value="send">
+
+    </form>
+
+</div>
+
+
+</body>
+</html>

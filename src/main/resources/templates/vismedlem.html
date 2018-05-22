@@ -37,6 +37,7 @@
             <td>
                 <a th:href="@{'/redigerMedlem?id='+${member.ID}}" class="knap">Rediger</a>
                 <a th:href="@{'/sletmedlem?id='+${member.ID}}" onclick="return confirm('Sletning er permanent. Er du sikker?')" class="knap">Slet</a>
+                <a th:href="@{'/visforældre?id='+${member.ID}}" class="knap">Visforældre</a>
 
             </td>
 

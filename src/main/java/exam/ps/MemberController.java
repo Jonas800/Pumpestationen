@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 @Controller
@@ -41,7 +40,7 @@ public class MemberController {
     public String tilføjmedlem(@ModelAttribute Member member)  {
         dbConn db = dbConn.getInstance();
         insertMember(member);
-        return "redirect:/vismedlem";
+        return "redirect:/opretForældre";
     }
 
     @GetMapping("/redigerMedlem")
