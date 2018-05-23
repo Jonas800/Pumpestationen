@@ -48,8 +48,8 @@ public class ActivityController {
         if (commonMethods.isSessionInvalid(request)) {
             return "redirect:/login";
         }
-        activityID = urlID;
-        model.addAttribute("employeeArrayList", selectAllEmployees());
+        activityID = urlID; //Vi erhverver os en værdi fra hjemmesiden, som så bliver gemt i variablen UrlID, som vi sætter sim activityID
+        model.addAttribute("employeeArrayList", selectAllEmployees()); //
         model.addAttribute("fkEmployeeId", getOrganizers(activityID));
         return ("tilføjMedarbejderTilAktivitet");
     }
@@ -98,6 +98,14 @@ public class ActivityController {
         activityID = id;
         return "redigerAktivitet";
     }
+    @PostMapping("/redigerAktivitet")
+    public String editActivity(Activity activity) {
+        updateActivity(activity);
+        return "redirect:/visAktivitet";
+
+
+    }
+
 
     @GetMapping("/sletAktivitet")
     public String deleteActivity(@RequestParam(value = "id", defaultValue = "0") int id, Activity activity, HttpServletRequest request) {
@@ -108,13 +116,6 @@ public class ActivityController {
         return "redirect:/visAktivitet";
     }
 
-    @PostMapping("/redigerAktivitet")
-    public String editActivity(Activity activity) {
-        updateActivity(activity);
-        return "redirect:/visAktivitet";
-
-
-    }
 
     /*metode til at hente alle aktiviter fra databasen*/
     public ArrayList<Activity> selectAllActivities() {

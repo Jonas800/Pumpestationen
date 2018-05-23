@@ -9,20 +9,16 @@
 <div th:replace="/header"></div>
 
 <div class="wrap">
-    <form class="genericForm" method="Post" th:action="@{/redigerMedlem}">
+    <form class="genericForm" method="Post" th:action="@{/redigereforaeldre}">
         <h2>Rediger forældre</h2>
         <div>
-            <label> Fornavn på medlem: </label>
+            <label> Fornavn på forældre: </label>
             <input type="text" th:field="${parent.firstName}" required="true"/>
         </div>
         <div>
 
             <label>Efternavn</label>
             <input type="text" th:field="${parent.lastName}" required="true"/>
-        </div>
-        <div>
-            <label>Cpr</label>
-            <input type="date" th:field="${parent.cpr}" required="true"/>
         </div>
         <div>
             <label>adresse</label>

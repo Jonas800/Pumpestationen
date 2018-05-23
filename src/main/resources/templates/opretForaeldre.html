@@ -10,7 +10,7 @@
 
 <div class="wrap">
     <h2> tilføj forældre</h2>
-    <form class="genericForm" method="Post" th:action="@{/opretForældre}">
+    <form class="genericForm" method="Post" th:action="@{/opretForaeldre}">
 
         <div>
             <label>forældre Fornavn: </label>
@@ -28,10 +28,6 @@
         <div>
             <label>cpr: </label>
             <input type="text" th:field="${parent.cpr}" required="true"/>
-        </div>
-        <div>
-            <label>adresse: </label>
-            <input type="text" th:field="${parent.address}" required="true"/>
         </div>
         <div>
             <label>forældre teleFon: </label>

@@ -5,32 +5,29 @@
 </head>
 <body>
 <div th:replace="/header"></div>
-<a class="tilføjKnap" href="Opretmedarbejdere">Tilføj ny medarbejder</a>
+<a th:href="@{'/opretForaeldre?id='+${medlemid}}" class="tilføjKnap" >Tilføj Forældre </a>
 
 <div class="firkantrundtomtabel">
     <h2>Oversigt over ansatte</h2>
+
     <table class="tableLook">
         <thead>
         <tr>
-            <th>Email</th>
+            <th>ID</th>
             <th>Fornavn</th>
             <th>Efternavn</th>
-            <th>Cpr</th>
             <th>Adresse</th>
             <th>Mobil</th>
-            <th>Stilling</th>
-            <th>by</th>
             <th>Postnr</th>
-            <th>Håndter</th>
+            <th>by</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:field="employee: ${employeeArrayList}">
+        <tr th:each="parent: ${parents}">
+            <td th:text="${parent.ID}"/>
             <td th:text="${parent.firstName}"/>
             <td th:text="${parent.lastName}"/>
-            <td th:text="${parent.cpr}"/>
             <td th:text="${parent.address}"/>
-            <td th:text="${parent.phoneNumber}"/>
             <td th:text="${parent.phoneNumber}"/>
             <td th:text="${parent.zipcode}"/>
             <td th:text="${parent.city}"/>
@@ -38,7 +35,8 @@
 
 
             <td>
-                <a th:href="@{'/redigereforældre?id='+${parent.getID()}}" class="knap">Rediger oplysninger</a>
+                <a th:href="@{'/redigereforaeldre?id='+${parent.ID}}" class="knap">Rediger oplysninger</a>
+
             </td>
 
         </tr>

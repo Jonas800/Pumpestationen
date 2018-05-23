@@ -40,7 +40,7 @@ public class MemberController {
     public String tilføjmedlem(@ModelAttribute Member member)  {
         dbConn db = dbConn.getInstance();
         insertMember(member);
-        return "redirect:/opretForældre";
+        return "redirect:/vismedlem";
     }
 
     @GetMapping("/redigerMedlem")
