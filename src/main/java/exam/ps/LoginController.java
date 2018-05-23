@@ -39,7 +39,7 @@ public class LoginController {//Controllerens formål er at tage imod requests f
     @PostMapping("/opretbruger")
     public String opretbruger(@ModelAttribute Employee login) throws InvalidKeySpecException, NoSuchAlgorithmException {
         insertLogin(login);
-        return "redirect:/vismedlem";
+        return "redirect:/VisMedarbejdere";
     }
 
     @GetMapping("/login")
