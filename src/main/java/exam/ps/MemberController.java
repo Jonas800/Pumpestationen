@@ -70,11 +70,11 @@ public class MemberController {
 
 
     @GetMapping("/sletmedlem")
-    public String deleteMember(@RequestParam(value = "id", defaultValue = "1") int id, Member member, HttpServletRequest request) {
+    public String deleteMember(@RequestParam(value = "id", defaultValue = "-1") int id, HttpServletRequest request) {
         if (commonMethods.isSessionInvalid(request)) {
             return "redirect:/login";
         }
-        deleteMember(member);
+        deleteMember(id);
         return "redirect:/vismedlem";
 
 
@@ -187,14 +187,14 @@ public class MemberController {
         }
     }
 
-    public void deleteMember(Member member) {
+    public void deleteMember(int id) {
         dbConn db = dbConn.getInstance();
         Connection con = db.createConnection();
         PreparedStatement ps = null;
 
         try {
             ps = con.prepareStatement("DELETE FROM members WHERE member_id = ?");
-            ps.setInt(1, member.getID());
+            ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
