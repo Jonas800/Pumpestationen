@@ -84,11 +84,9 @@ public class LoginController {//Controllerens formål er at tage imod requests f
             dbConn db = dbConn.getInstance();
             Connection con = db.createConnection();
             PreparedStatement ps = null;
-            String hashed = PasswordHasher.generateStorngPasswordHash(login.getPassword());
-            System.out.println("hey");
+            String hashed = PasswordHasher.generateStrongPasswordHash(login.getPassword());
             if (login.getHasUser() == false) {
                 try {
-                    System.out.println("Hey2");
                     ps = con.prepareStatement("INSERT INTO users(user_email,user_password,employees_employee_id) VALUES(?, ?, ?)");
                     ps.setString(1, login.getEmail());
                     ps.setString(2, hashed);
@@ -99,7 +97,6 @@ public class LoginController {//Controllerens formål er at tage imod requests f
                 }
             } else {
                 try {
-                    System.out.println("Hey3");
                     if (login.getPassword().isEmpty()) {
                         ps = con.prepareStatement("UPDATE users SET user_email=? WHERE employees_employee_id=?");
                         ps.setString(1, login.getEmail());
