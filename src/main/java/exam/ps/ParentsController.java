@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -16,16 +17,20 @@ public class ParentsController {
     int medlemsID = 0;
 
     @GetMapping("visforaeldre")
-    public String visforældre(Model model, @RequestParam(value = "id", defaultValue = "1") int id) {
-        medlemsID = id;
+    public String visforældre(Model model, @RequestParam(value = "id", defaultValue = "1") int id, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        } medlemsID = id;
         model.addAttribute("parents", selectparents(medlemsID));
         model.addAttribute("medlemid",medlemsID);
         return "visforaeldre";
     }
 
     @GetMapping("/opretForaeldre")
-    public String opretForældre(Model model, @RequestParam(value = "id", defaultValue = "1") int id) {
-        medlemsID = id;
+    public String opretForældre(Model model, @RequestParam(value = "id", defaultValue = "1") int id, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }  medlemsID = id;
         model.addAttribute("parent", new Parent());
         return ("opretForaeldre");
     }
@@ -38,8 +43,10 @@ public class ParentsController {
 
 
     @GetMapping("/redigereforaeldre")
-    public String redigereforældre(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
-        ParentID = id;
+    public String redigereforældre(@RequestParam(value = "id", defaultValue = "1") int id, Model model, HttpServletRequest request) {
+        if (commonMethods.isSessionInvalid(request)) {
+            return "redirect:/login";
+        }ParentID = id;
         for (Parent parent: selectparents(medlemsID)) {
             if(parent.getID()==ParentID);
             model.addAttribute("parent", parent);
