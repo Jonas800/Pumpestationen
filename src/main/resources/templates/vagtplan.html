@@ -16,7 +16,7 @@
 <a th:href="@{/vagtplan/(year=${weekNavigation[0].year},weekNumber=${weekNavigation[0].weekNumber})}">Forrige</a>
 <div th:text="'Uge ' + ${currentWeek.weekNumber} + ' ' + ${currentWeek.year}"></div>
 <a th:href="@{/vagtplan/(year=${weekNavigation[1].year},weekNumber=${weekNavigation[1].weekNumber})}">Næste</a>
-
+<a class="jobKnap" href="/job">Tilføj ansvarsområder til vagtplan</a>
 <!--<div class="day" th:each="weekDay : ${weekDays}">
     <h4>dag</h4>
     <div th:text="${weekDay.nameOfMonth}"></div>
