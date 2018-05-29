@@ -19,7 +19,7 @@ public class commonMethods {
     }
 
     public static boolean isSessionInvalid(HttpServletRequest request){
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();//
 
         return session.getAttribute("user") == null;
     }

@@ -43,12 +43,12 @@ public class ActivityController {
     }
 
 
-    @GetMapping("/tilføjMedarbejderTilAktivitet")
+    @GetMapping("/tilføjMedarbejderTilAktivitet")//id = aktivity id
     public String tilføjMedAkt(@RequestParam(value = "id", defaultValue = "0") int urlID, Model model, HttpServletRequest request) {
         if (commonMethods.isSessionInvalid(request)) {
             return "redirect:/login";
         }
-        activityID = urlID; //Vi erhverver os en værdi fra hjemmesiden, som så bliver gemt i variablen UrlID, som vi sætter sim activityID
+        activityID = urlID; //Vi erhverver os en værdi fra hjemmesiden, som så bliver gemt i variablen UrlID, som vi sætter som activityID
         model.addAttribute("employeeArrayList", selectAllEmployees()); //
         model.addAttribute("fkEmployeeId", getOrganizers(activityID));
         return ("tilføjMedarbejderTilAktivitet");
@@ -129,14 +129,14 @@ public class ActivityController {
             while (rs.next()) {
                 try {
                     Activity activity = new Activity(); // Activity objekt
-                    activity.setId(rs.getInt("activity_id")); // sæt activity id ligmed hvad den finder på pladsen fra databasen
+                    activity.setId(rs.getInt("activity_id")); // sæt activity id lig med hvad den finder på pladsen fra tabellen
                     activity.setName(rs.getString("activity_name"));
                     activity.setDescription(rs.getString("activity_description"));
                     activity.setStartDate(rs.getTimestamp("activity_startDate"));
                     activity.setStartTime(rs.getTime("activity_startTime").toLocalTime());
                     activity.setEndDate(rs.getTimestamp("activity_endDate"));
                     activity.setEndTime(rs.getTime("activity_endTime").toLocalTime());
-                    allActivities.add(activity); // gemmer alle værdier i en vores arraylist som vi har kaldt allActivities
+                    allActivities.add(activity); // gemmer alle værdier i en arraylist som vi har kaldt allActivities
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -271,7 +271,7 @@ public class ActivityController {
         PreparedStatement ps = null;
         ArrayList<Integer> intList = new ArrayList<>();
         try {
-            ps = con.prepareStatement("SELECT member_id, activities_activity_id FROM members INNER JOIN participants ON member_id = members_member_id WHERE activities_activity_id = ?");
+            ps = con.prepareStatement("SELECT member_id, activities_activity_id FROM members INNER JOIN participants ON member_id = members_member_id WHERE activities_activity_id = ?");//activityId kommer fra når man trykker på aktivitet i hjemmesiden, vi gemmer det ID som aktivitet har og gemmer medlem og ansat på ID'et
             ps.setInt(1, activityID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
