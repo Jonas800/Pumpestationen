@@ -89,7 +89,7 @@ CREATE TABLE `jobs` (
   `job_id` int(11) NOT NULL AUTO_INCREMENT,
   `job_title` varchar(15) NOT NULL,
   PRIMARY KEY (`job_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `jobs` (
 
 LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
-INSERT INTO `jobs` VALUES (13,'kok'),(14,'kok2'),(16,'kfgkf'),(17,'hghgb'),(18,'jgjdfg');
+INSERT INTO `jobs` VALUES (13,'Kok'),(14,'Rengøring'),(16,'Gårdvagt'),(17,'Pædagog'),(19,'Vagt');
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,8 +147,8 @@ CREATE TABLE `organizers` (
   PRIMARY KEY (`organizer_id`,`activities_activity_id`,`employees_employee_id`),
   KEY `fk_activities_has_employees_employees1_idx` (`employees_employee_id`),
   KEY `fk_activities_has_employees_activities1_idx` (`activities_activity_id`),
-  CONSTRAINT `fk_activities_has_employees_activities1` FOREIGN KEY (`activities_activity_id`) REFERENCES `activities` (`activity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_activities_has_employees_employees1` FOREIGN KEY (`employees_employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_activities_has_employees_activities1` FOREIGN KEY (`activities_activity_id`) REFERENCES `activities` (`activity_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_activities_has_employees_employees1` FOREIGN KEY (`employees_employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -209,8 +209,8 @@ CREATE TABLE `participants` (
   PRIMARY KEY (`participant_id`,`activities_activity_id`,`members_member_id`),
   KEY `fk_activities_has_members_members1_idx` (`members_member_id`),
   KEY `fk_activities_has_members_activities1_idx` (`activities_activity_id`),
-  CONSTRAINT `fk_activities_has_members_activities1` FOREIGN KEY (`activities_activity_id`) REFERENCES `activities` (`activity_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_activities_has_members_members1` FOREIGN KEY (`members_member_id`) REFERENCES `members` (`member_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_activities_has_members_activities1` FOREIGN KEY (`activities_activity_id`) REFERENCES `activities` (`activity_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_activities_has_members_members1` FOREIGN KEY (`members_member_id`) REFERENCES `members` (`member_id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -286,4 +286,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-24 15:20:28
+-- Dump completed on 2018-05-25  9:54:32
